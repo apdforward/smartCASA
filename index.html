@@ -5,10 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>SmartCASA</title>
   </head>
 
   <body>
-    <script src="./dist/bundle.js"></script>
+    <nav class="navigation">
+      <a href="/" class="navigation__title">SmartCASA</a>
+    </nav>
+    <div class="container">
+      <div class="container__paragraph">
+        <div class="paragraph">
+          <div class="topic"><span class="topic__chip">Use of Force</span></div>
+          <div class="topic"><span class="topic__chip">Use of Force</span></div>
+          <select
+            name="paragraph-select"
+            id="paragraph-select"
+            class="paragraph__select"
+          >
+            <option value="lorem">Lorem</option>
+            <option value="ipsum">Ipsum</option>
+          </select>
+          <h1 class="paragraph__title">Paragraph 14</h1>
+          <div class="paragraph__body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+            vel voluptatibus! Rem beatae molestias facilis incidunt reiciendis,
+            unde, quo ipsum voluptatibus delectus similique expedita numquam
+            obcaecati nemo dignissimos, voluptate laborum? Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Molestiae, vel voluptatibus! Rem
+            beatae molestias facilis incidunt reiciendis, unde, quo ipsum
+            voluptatibus delectus similique expedita numquam obcaecati nemo
+            dignissimos, voluptate laborum?
+          </div>
+          <div class="paragraph__term paragraph__term--hidden"></div>
+          <div class="paragraph__help">?</div>
+          <div class="paragraph__copy-btn">Copy</div>
+        </div>
+      </div>
+      <div class="container__compliance">
+        <div class="compliance">
+          <div class="compliance__title"></div>
+          <div class="compliance__chart"></div>
+          <div class="compliance__detail"></div>
+        </div>
+      </div>
+    </div>
+    <div class="snack snack--hidden">Paragraph copied to clipboard</div>
+
+    <script src="./bundle.js"></script>
   </body>
 </html>
