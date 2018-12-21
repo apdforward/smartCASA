@@ -1,10 +1,18 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["google", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error"]
+    "prettier/prettier": ["error"],
+    "require-jsdoc": 0
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
   }
 }
