@@ -3,10 +3,11 @@
   color: #212121;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  height: 100%;
 }
 
 h1,
@@ -193,7 +194,7 @@ select {
   padding: 5px 7px;
   margin: 5px;
   box-shadow: 1px 1px 3px #aaa;
-  transition: 0.3 ease-in;
+  transition: all 0.3s ease-in;
 }
 
 .topic__chip:hover {
@@ -205,14 +206,12 @@ select {
   background-color: #7b1fa2;
   box-shadow: none;
   color: white;
-  transition: 0.3s;
 }
 
 .topic__chip--active:hover {
   background-color: #690d90;
   box-shadow: 1px 1px 3px #aaa;
   color: white;
-  transition: 0.5s;
 }
 
 .topic__chip--hidden {
@@ -229,22 +228,22 @@ select {
 }
 
 .snack {
-  position: absolute;
-  left: calc(50% - 100px);
+  text-align: center;
+  position: fixed;
+  left: calc(50% - 140px);
   height: 30px;
   padding: 15px;
-  min-width: 200px;
+  width: 280px;
   background-color: #333;
   color: white;
   line-height: 30px;
   opacity: 0.7;
-  transition: 0.7s;
-}
-
-.snack--hidden {
-  bottom: -62px;
-}
-
-.snack--show {
   bottom: 0;
+  transform: translateY(62px);
+  will-change: transform;
+  transition: transform 0.4s ease-in-out;
+}
+
+.snack--visible {
+  transform: none;
 }

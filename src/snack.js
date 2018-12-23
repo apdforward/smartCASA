@@ -6,12 +6,10 @@ class Snack {
 
   showSnack() {
     clearTimeout(this.timeOut);
-    this.elem.classList.add('snack--show');
-    this.elem.classList.remove('snack--hidden');
+    this.elem.classList.add('snack--visible');
     this.timeOut = setTimeout(() => {
-      this.elem.classList.remove('snack--show');
-      this.elem.classList.add('snack--hidden');
-    }, 2000);
+      this.elem.classList.remove('snack--visible');
+    }, 2500);
   }
 }
 
