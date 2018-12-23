@@ -4,6 +4,7 @@ class Help {
     this.message = message;
     this.className = className;
     this.timeOut;
+    this.active = false;
     const boxElem = document.createElement('div');
     this.messageBox = this.elem.parentNode.appendChild(boxElem);
     this.messageBox.classList.add('message-box');
@@ -20,19 +21,27 @@ class Help {
 
   showMessage() {
     clearTimeout(this.timeOut);
-    const rect = this.elem.getBoundingClientRect();
-    const left = rect.left + window.scrollX;
-    const height = rect.bottom - rect.top;
-    this.messageBox.style.left = left;
-    console.log(height);
-    this.messageBox.style.bottom = `${20 + height}px`;
-    this.messageBox.classList.remove('message-box--hidden');
-    this.messageBox.classList.add('message-box--show');
-
-    this.timeOut = setTimeout(() => {
+    if (this.active) {
       this.messageBox.classList.remove('message-box--show');
       this.messageBox.classList.add('message-box--hidden');
-    }, 10000);
+      this.active = false;
+    } else {
+      this.active = true;
+      const rect = this.elem.getBoundingClientRect();
+      const left = rect.left + window.scrollX;
+      const height = rect.bottom - rect.top;
+      this.messageBox.style.left = left;
+      console.log(height);
+      this.messageBox.style.bottom = `${20 + height}px`;
+      this.messageBox.classList.remove('message-box--hidden');
+      this.messageBox.classList.add('message-box--show');
+
+      this.timeOut = setTimeout(() => {
+        this.messageBox.classList.remove('message-box--show');
+        this.messageBox.classList.add('message-box--hidden');
+        this.active = false;
+      }, 10000);
+    }
   }
 }
 
