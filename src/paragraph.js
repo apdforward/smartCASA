@@ -1,4 +1,4 @@
-import replaceTerms from './glossary';
+import { replaceTerms } from './glossary';
 
 class Paragraph {
   constructor() {

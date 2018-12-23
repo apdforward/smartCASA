@@ -3,15 +3,17 @@ import Paragraph from './paragraph';
 const words = [{ term: 'force', definition: 'the definition of force' }];
 
 class Term {
-  constructor(text) {
+  constructor(props) {
     this.elem = document.createElement('span');
+    console.log(props);
     this.elem.setAttribute(
       'definition',
-      words
-        .filter(obj => obj.term === text.toLowerCase())
-        .reduce((acc, obj) => `${obj.term}: ${obj.definition}`, '')
+      props.definition ||
+        words
+          .filter(obj => obj.term === props.text.toLowerCase())
+          .reduce((acc, obj) => `${obj.term}: ${obj.definition}`, '')
     );
-    this.elem.innerText = text;
+    this.elem.innerText = props.text;
     this.elem.classList.add('term');
   }
 }
@@ -23,7 +25,7 @@ function findTerms(text) {
     const paragraphWord = paragraphWords[i].replace(/,|\.|'|!|\?/g, '');
     const j = terms.indexOf(paragraphWord.toLowerCase());
     if (j !== -1 && terms[j] === paragraphWord.toLowerCase()) {
-      const term = new Term(paragraphWord);
+      const term = new Term({ text: paragraphWord });
       paragraphWords.splice(i, 1, term.elem.outerHTML);
     }
   }
@@ -58,4 +60,4 @@ function replaceTerms() {
   }
 }
 
-export default replaceTerms;
+export { replaceTerms, Term };

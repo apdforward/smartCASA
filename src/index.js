@@ -4,6 +4,7 @@ import Paragraph from './paragraph';
 import { CategoryTopic, SpecificTopic } from './topic';
 import Help from './help';
 import API from './api-client';
+import { Term } from './glossary';
 
 const topics = [
   { value: 'Use of Force', id: 1 },
@@ -34,9 +35,14 @@ const specificTopics = [
     specificFrag.appendChild(specificTopic.elem);
   }
   document.querySelector('.specific-topics').appendChild(specificFrag);
+  const helpTerm = new Term({
+    text: 'term',
+    definition: 'an example definition'
+  });
+  helpTerm.elem.style.zIndex = 99999;
   new Help(
     '.js-paragraph-help',
-    'This is a span test to make sure the <span class="term">term</span> tag works'
+    `This is a span test to make sure the ${helpTerm.elem.outerHTML} tag works`
   );
   const data = api.getParagraph({ key: 14 });
   const paragraph = new Paragraph();
