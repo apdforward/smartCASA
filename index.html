@@ -15,8 +15,8 @@
     <div class="container">
       <div class="container__paragraph">
         <div class="paragraph">
-          <div class="topic"><span class="topic__chip">Use of Force</span></div>
-          <div class="topic"><span class="topic__chip">Use of Force</span></div>
+          <div class="category-topics topic"></div>
+          <div class="specific-topics topic"></div>
           <select
             name="paragraph-select"
             id="paragraph-select"
@@ -25,18 +25,27 @@
             <option value="lorem">Lorem</option>
             <option value="ipsum">Ipsum</option>
           </select>
-          <h1 class="paragraph__title">Paragraph 14</h1>
-          <div class="paragraph__body"></div>
-          <div class="paragraph__term paragraph__term--hidden"></div>
-          <div class="paragraph__help">?</div>
-          <div class="paragraph__copy-btn">Copy</div>
+          <h1 class="js-paragraph__title paragraph__title">Paragraph 14</h1>
+          <div class="js-paragraph__body paragraph__body"></div>
+          <div
+            class="js-paragraph__term paragraph__term paragraph__term--hidden"
+          ></div>
+          <div class="js-paragraph-help help">?</div>
+          <div class="js-copy-btn copy-btn">Copy</div>
         </div>
       </div>
       <div class="container__compliance">
         <div class="compliance">
           <div class="compliance__title"></div>
           <div class="compliance__chart"></div>
-          <div class="compliance__detail"></div>
+          <div class="compliance__detail">
+            <h2 class="compliance-title"></h2>
+            <ul class="compliance-list">
+              <li class="compliance-list__item"></li>
+              <li class="compliance-list__item"></li>
+              <li class="compliance-list__item"></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

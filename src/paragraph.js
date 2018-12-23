@@ -2,17 +2,16 @@ import replaceTerms from './glossary';
 
 class Paragraph {
   constructor() {
-    this._title = document.querySelector('.paragraph__title');
-    this._body = document.querySelector('.paragraph__body');
+    this.title = document.querySelector('.js-paragraph__title');
+    this.body = document.querySelector('.js-paragraph__body');
+    this.setState = this.setState.bind(this);
   }
 
-  set title(str) {
-    this._title.innerHTML = str;
-  }
-
-  set body(str) {
-    this._body.innerHTML = str;
-    replaceTerms(str);
+  setState(props) {
+    const paragraphNumber = props.paragraph_number || '';
+    this.title.innerHTML = `Paragraph ${paragraphNumber}`;
+    this.body.innerHTML = props.paragraph_text || '';
+    replaceTerms(props.paragraph_body);
   }
 }
 

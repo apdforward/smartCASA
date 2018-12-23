@@ -1,6 +1,6 @@
 * {
   font-family: 'Oxygen', sans-serif;
-  color: #333;
+  color: #212121;
 }
 
 body {
@@ -82,14 +82,12 @@ select {
   position: relative;
 }
 
-.paragraph__title {
-}
-
 .paragraph__body {
+  cursor: default;
   line-height: 1.5rem;
 }
 
-.paragraph__copy-btn {
+.copy-btn {
   cursor: pointer;
   position: absolute;
   right: 10px;
@@ -105,12 +103,9 @@ select {
   transition: 0.3s;
 }
 
-.paragraph__copy-btn--clicked {
+.copy-btn--clicked {
   background-color: #006a7f;
   box-shadow: 2px 2px 3px #aaa;
-}
-
-.paragraph__select {
 }
 
 .paragraph__term {
@@ -134,7 +129,7 @@ select {
   transition: visibility 0.3s, opacity 0.3s linear;
 }
 
-.paragraph__help {
+.help {
   font-size: 0.7em;
   cursor: pointer;
   position: absolute;
@@ -150,9 +145,31 @@ select {
   transition: 0.3s;
 }
 
-.paragraph__help:hover {
+.help:hover {
   background-color: #888;
   box-shadow: 1px 1px 2px #aaa;
+}
+
+.message-box {
+  padding: 10px;
+  width: 66%;
+  position: absolute;
+  z-index: 9999;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 2px #aaa;
+  color: black;
+  transition: opacity 0.3s linear;
+}
+
+.message-box--show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.message-box--hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .compliance {
@@ -160,14 +177,35 @@ select {
   padding: 15px 15px;
 }
 
+.compliance__chart {
+  min-height: 200px;
+}
+
 .topic {
-  padding: 10px;
+  min-height: 30px;
+  padding: 15px;
+  overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  background: #aaa;
+  border-radius: 10px;
+}
+
+.specific-topics {
+  white-space: nowrap;
 }
 
 .topic__chip {
   cursor: pointer;
   background-color: #dddddd;
   padding: 5px 7px;
+  margin: 5px;
   transition: 0.3s;
 }
 
@@ -175,15 +213,25 @@ select {
   background-color: #d0d0d0;
 }
 
-.topic__chip--clicked {
-  background-color: #c4c4c4;
-  box-shadow: 1px 1px 3px #aaa;
+.topic__chip--active {
+  background-color: #7b1fa2;
+  color: white;
+  box-shadow: 2px 2px 4px #aaa;
 }
 
-.topic__chip--selected {
-  background-color: #00acc1;
+.topic__chip--active:hover {
+  background-color: #690d90;
+  color: white;
+  transition: 0.3s;
 }
 
+.topic__chip--hidden {
+  display: none;
+}
+
+.topic__chip--show {
+  display: inline;
+}
 .term {
   cursor: pointer;
   text-decoration: underline dotted #007c91;

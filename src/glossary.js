@@ -1,7 +1,6 @@
-const words = [
-  { term: 'lorem', definition: 'also lorem' },
-  { term: 'voluptate', definition: 'pleasure?' }
-];
+import Paragraph from './paragraph';
+
+const words = [{ term: 'force', definition: 'the definition of force' }];
 
 class Term {
   constructor(text) {
@@ -10,7 +9,7 @@ class Term {
       'definition',
       words
         .filter(obj => obj.term === text.toLowerCase())
-        .reduce((acc, obj) => obj.definition, '')
+        .reduce((acc, obj) => `${obj.term}: ${obj.definition}`, '')
     );
     this.elem.innerText = text;
     this.elem.classList.add('term');
@@ -20,19 +19,20 @@ class Term {
 function findTerms(text) {
   const paragraphWords = text.split(' ');
   const terms = words.map(obj => obj.term);
-  paragraphWords.slice(0).forEach((word, i) => {
-    const paragraphWord = word.replace(/,|\.|'|!|\?/g, '');
+  for (let i = 0; i < paragraphWords.length; i++) {
+    const paragraphWord = paragraphWords[i].replace(/,|\.|'|!|\?/g, '');
     const j = terms.indexOf(paragraphWord.toLowerCase());
     if (j !== -1 && terms[j] === paragraphWord.toLowerCase()) {
       const term = new Term(paragraphWord);
       paragraphWords.splice(i, 1, term.elem.outerHTML);
     }
-  });
+  }
   return paragraphWords.join(' ');
 }
 
 function replaceTerms() {
-  const paragraphBody = document.querySelector('.paragraph__body');
+  const paragraph = new Paragraph();
+  const paragraphBody = paragraph.body;
   let text = paragraphBody.innerHTML;
   text = text.replace(/^(\s+)/g, '');
   const tmp = document.createElement('span');
@@ -41,10 +41,10 @@ function replaceTerms() {
   paragraphBody.appendChild(tmp);
   const terms = document.querySelectorAll('.term');
   let timeout;
-  terms.forEach(term => {
+  for (const term of terms) {
     term.addEventListener('click', e => {
       clearTimeout(timeout);
-      const termHint = document.querySelector('.paragraph__term');
+      const termHint = document.querySelector('.js-paragraph__term');
       termHint.classList.remove('paragraph__term--hidden');
       termHint.classList.add('paragraph__term--show');
       termHint.style.left = `${e.pageX - 10}px`;
@@ -55,7 +55,7 @@ function replaceTerms() {
         termHint.classList.add('paragraph__term--hidden');
       }, 2000);
     });
-  });
+  }
 }
 
 export default replaceTerms;
