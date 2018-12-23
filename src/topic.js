@@ -4,7 +4,7 @@ class Topic {
     this.id = props.id;
     this.value = props.value;
     this.active = false;
-    this.elem = document.createElement('span');
+    this.elem = document.createElement('div');
     this.elem.classList.add('topic__chip');
     this.elem.innerHTML = this.value;
   }

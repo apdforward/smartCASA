@@ -12,11 +12,15 @@
     <nav class="navigation">
       <a href="/" class="navigation__title">SmartCASA</a>
     </nav>
-    <div class="container">
+    <section class="filter">
+      <div class="topic-filter">
+        <div class="category-topics topic"></div>
+        <div class="specific-topics topic"></div>
+      </div>
+    </section>
+    <section class="container">
       <div class="container__paragraph">
         <div class="paragraph">
-          <div class="category-topics topic"></div>
-          <div class="specific-topics topic"></div>
           <select
             name="paragraph-select"
             id="paragraph-select"
@@ -48,7 +52,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
     <div class="snack snack--hidden">Paragraph copied to clipboard</div>
 
     <script src="./bundle.js"></script>
