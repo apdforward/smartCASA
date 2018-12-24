@@ -31,35 +31,49 @@ class Term {
   }
 }
 
-function findTerms(text) {
-  const paragraphWords = text.split(' ');
-  const terms = words.map(obj => obj.term.toLowerCase());
-  for (let i = 0; i < paragraphWords.length; i++) {
-    const paragraphWord = paragraphWords[i].replace(/,|\.|'|!|\?/g, '');
-    const j = terms.indexOf(paragraphWord.toLowerCase());
-    console.log(terms[j]);
-    if (j !== -1 && terms[j] === paragraphWord.toLowerCase()) {
-      const term = new Term({ text: paragraphWord });
-      paragraphWords.splice(i, 1, term.elem.outerHTML);
-    }
+function termIndices(str, find) {
+  const regex = new RegExp(find, 'gi');
+  let result;
+  const indices = [];
+  while ((result = regex.exec(str))) {
+    indices.push(result.index);
   }
-  return paragraphWords.join(' ');
+  return indices;
 }
 
 function replaceTerms(text) {
-  text = text.replace(/^(\s+)/g, '');
-  const tmp = document.createElement('span');
-  tmp.innerHTML = findTerms(text);
-  const terms = tmp.querySelectorAll('.term');
-  let timeout;
+  const terms = words.map(word => {
+    return word.term;
+  });
   for (const term of terms) {
-    term.addEventListener('click', e => {
+    const indices = termIndices(text, term);
+    const termLength = term.length;
+    let offset = 0;
+    for (let i = 0; i < indices.length; i++) {
+      const startIdx = indices[i] + offset;
+      const endIdx = indices[i] + termLength + offset;
+      const word = text.slice(startIdx, endIdx);
+      const term = new Term({ text: word });
+      text =
+        text.slice(0, startIdx) +
+        term.elem.outerHTML +
+        text.slice(startIdx + termLength);
+
+      offset += term.elem.outerHTML.length - termLength;
+    }
+  }
+  const tmp = document.createElement('span');
+  tmp.innerHTML = text;
+  const termElems = tmp.querySelectorAll('.term');
+  let timeout;
+  for (const elem of termElems) {
+    elem.addEventListener('click', e => {
       clearTimeout(timeout);
       const termHint = document.querySelector('.js-paragraph__term');
       termHint.classList.remove('paragraph__term--hidden');
       termHint.classList.add('paragraph__term--show');
-      termHint.style.left = `${e.pageX - 10}px`;
-      termHint.style.top = `${e.pageY - 35}px`;
+      termHint.style.left = `${e.pageX + 10}px`;
+      termHint.style.top = `${e.pageY - 45}px`;
       termHint.innerHTML = e.target.getAttribute('definition');
       timeout = setTimeout(() => {
         termHint.classList.remove('paragraph__term--show');

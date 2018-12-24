@@ -65,7 +65,6 @@ class ParagraphSelect {
     paragraphData.then(objs => {
       const frag = document.createDocumentFragment();
       for (const obj of objs) {
-        console.log(obj);
         const paragraphItem = new ParagraphItem(obj);
         this.paragraphs.push(paragraphItem);
         frag.appendChild(paragraphItem.elem);

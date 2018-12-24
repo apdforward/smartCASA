@@ -31,7 +31,6 @@ class Help {
       const left = rect.left + window.scrollX;
       const height = rect.bottom - rect.top;
       this.messageBox.style.left = left;
-      console.log(height);
       this.messageBox.style.bottom = `${20 + height}px`;
       this.messageBox.classList.remove('message-box--hidden');
       this.messageBox.classList.add('message-box--show');
