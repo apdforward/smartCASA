@@ -5,6 +5,7 @@ import { CategoryTopic, SpecificTopic } from './topic';
 import Help from './help';
 import API from './api-client';
 import { Term } from './glossary';
+import Filter from './filter';
 
 const topics = [
   { value: 'Use of Force', id: 1 },
@@ -22,7 +23,7 @@ const specificTopics = [
 ];
 (function() {
   const api = new API({ URL: 'http://localhost:3004', lang: 'en-US' });
-  console.log(topics);
+  new Filter();
   const categoryFrag = document.createDocumentFragment();
   for (const topic of topics) {
     const categoryTopic = new CategoryTopic(topic, api);

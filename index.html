@@ -11,24 +11,19 @@
   <body>
     <nav class="navigation">
       <a href="/" class="navigation__title">SmartCASA</a>
+      <div class="filter-btn">Filter</div>
+      <div class="paragraph-select">14 - Use of Force</div>
     </nav>
-    <section class="filter">
+    <section class="js-filter-panel filter-panel">
       <div class="topic-filter">
-        <div class="category-topics topic"></div>
-        <div class="specific-topics topic"></div>
+        <div class="category-topics topic"><h3>Category Tags</h3></div>
+
+        <div class="specific-topics topic"><h3>Specific Tags</h3></div>
       </div>
     </section>
     <section class="container">
       <div class="container__paragraph">
         <div class="paragraph">
-          <select
-            name="paragraph-select"
-            id="paragraph-select"
-            class="paragraph__select"
-          >
-            <option value="lorem">Lorem</option>
-            <option value="ipsum">Ipsum</option>
-          </select>
           <h1 class="js-paragraph__title paragraph__title">Paragraph 14</h1>
           <div class="js-paragraph__body paragraph__body"></div>
           <div
@@ -53,6 +48,7 @@
         </div>
       </div>
     </section>
+
     <div class="snack snack--hidden">Paragraph copied to clipboard</div>
 
     <script src="./bundle.js"></script>

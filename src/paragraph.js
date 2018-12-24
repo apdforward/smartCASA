@@ -8,9 +8,10 @@ class Paragraph {
   }
 
   setState(props) {
-    const paragraphNumber = props.paragraph_number || '';
-    this.title.innerHTML = `Paragraph ${paragraphNumber}`;
-    this.body.innerHTML = props.paragraph_text || '';
+    this.title.innerHTML = `${props.paragraph_number} - ${
+      props.paragraph_title
+    }`;
+    this.body.innerHTML = props.paragraph_text;
     replaceTerms(props.paragraph_body);
   }
 }

@@ -17,39 +17,90 @@ h4 {
   font-weight: normal;
 }
 
-select {
-  border: 0;
-  padding: 15px;
-  outline: 1px solid #000;
-  background-color: white;
-  height: 30px;
-  min-width: 150px;
+h3 {
+  margin-top: 5px;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  border: none;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background: #aaa;
+  border-radius: 10px;
 }
 
 .navigation {
   background-color: #00acc1;
   display: flex;
-  height: 70px;
-  line-height: 70px;
+  justify-content: flex-end;
+  height: 50px;
+  line-height: 50px;
   box-shadow: 0px 1px 3px #aaa;
 }
 
 .navigation__title {
+  margin-right: auto;
   text-decoration: none;
   color: black;
   padding: 0px 25px;
   font-size: 2rem;
 }
 
-.container {
+.paragraph-select {
+  padding: 0px 30px;
   display: flex;
+  align-items: center;
+}
+
+select {
+  border: 0;
+  margin: 0 auto;
+  outline: none;
+  background-color: white;
+  height: 30px;
+  min-width: 150px;
+}
+
+.filter-btn {
+  font-size: 1.2rem;
+  cursor: pointer;
+  height: 100%;
+  padding: 0 35px;
+}
+
+.filter-btn:hover {
+  background-color: #24d0e5;
+}
+
+.filter-btn--active {
+  background-color: #24d0e5;
+}
+
+.container {
+  z-index: 1;
+  position: relative;
+  display: flex;
+  top: 50px;
   margin: 15px 15px 0 15px;
 }
 
-.filter {
+.filter-panel {
+  z-index: 3;
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  overflow: hidden;
+  height: 0px;
+  -webkit-transition: height 0.4s ease-in-out;
+  -moz-transition: height 0.4s ease-in-out;
+  -o-transition: height 0.4s ease-in-out;
+  transition: height 0.4s ease-in-out;
   box-shadow: 1px 1px 3px #aaa;
-  margin: 15px 30px 0 30px;
-  display: flex;
+}
+
+.filter-panel--visible {
+  height: 250px;
 }
 
 .container__paragraph {
@@ -64,8 +115,13 @@ select {
 
 .paragraph {
   box-shadow: 1px 1px 3px #aaa;
-  padding: 15px 15px 70px;
+  padding: 0px 15px 70px;
   position: relative;
+}
+
+.paragraph__title {
+  margin: 0;
+  padding: 15px 0px 15px 0px;
 }
 
 .paragraph__body {
@@ -169,18 +225,9 @@ select {
 
 .topic {
   min-height: 30px;
+  margin: 0px 30px;
   padding: 15px;
   overflow-x: scroll;
-}
-
-::-webkit-scrollbar {
-  height: 10px;
-  border: none;
-}
-
-::-webkit-scrollbar-thumb:horizontal {
-  background: #aaa;
-  border-radius: 10px;
 }
 
 .specific-topics {
@@ -228,6 +275,7 @@ select {
 }
 
 .snack {
+  z-index: 9;
   text-align: center;
   position: fixed;
   left: calc(50% - 140px);
