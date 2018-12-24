@@ -1,17 +1,17 @@
-class Filter {
-  constructor() {
+class FilterPanel {
+  constructor(paragraphSelect) {
     this.active = false;
+    this.paragraphSelect = paragraphSelect;
     this.btn = document.querySelector('.filter-btn');
-    console.log(this.btn);
-    this.showFilterPanel = this.showFilterPanel.bind(this);
+    this.toggleFilterPanel = this.toggleFilterPanel.bind(this);
     this.addEventListeners();
   }
 
   addEventListeners() {
-    this.btn.addEventListener('click', this.showFilterPanel);
+    this.btn.addEventListener('click', this.toggleFilterPanel);
   }
 
-  showFilterPanel() {
+  toggleFilterPanel() {
     const filterPanel = document.querySelector('.js-filter-panel');
     if (this.active) {
       filterPanel.classList.remove('filter-panel--visible');
@@ -25,4 +25,4 @@ class Filter {
   }
 }
 
-export default Filter;
+export default FilterPanel;

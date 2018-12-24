@@ -1,11 +1,11 @@
 import '@babel/polyfill';
 import './copy-button';
-import Paragraph from './paragraph';
 import { CategoryTopic, SpecificTopic } from './topic';
 import Help from './help';
 import API from './api-client';
 import { Term } from './glossary';
-import Filter from './filter';
+import FilterPanel from './filter-panel';
+import ParagraphSelect from './paragraph-select';
 
 const topics = [
   { value: 'Use of Force', id: 1 },
@@ -23,7 +23,10 @@ const specificTopics = [
 ];
 (function() {
   const api = new API({ URL: 'http://localhost:3004', lang: 'en-US' });
-  new Filter();
+
+  const paragraphSelect = new ParagraphSelect(api);
+  new FilterPanel(paragraphSelect);
+
   const categoryFrag = document.createDocumentFragment();
   for (const topic of topics) {
     const categoryTopic = new CategoryTopic(topic, api);
@@ -45,7 +48,4 @@ const specificTopics = [
     '.js-paragraph-help',
     `This is a span test to make sure the ${helpTerm.elem.outerHTML} tag works`
   );
-  const data = api.getParagraph({ key: 14 });
-  const paragraph = new Paragraph();
-  data.then(data => paragraph.setState(data));
 })();
