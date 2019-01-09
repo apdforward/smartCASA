@@ -78,7 +78,7 @@ function replaceTerms(text) {
       timeout = setTimeout(() => {
         termHint.classList.remove('paragraph__term--show');
         termHint.classList.add('paragraph__term--hidden');
-      }, 2000);
+      }, 4000);
     });
   }
   return tmp;

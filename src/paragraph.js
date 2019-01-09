@@ -4,15 +4,14 @@ class Paragraph {
   constructor() {
     this.title = document.querySelector('.js-paragraph__title');
     this.body = document.querySelector('.js-paragraph__body');
-    this.setState = this.setState.bind(this);
+    this.update = this.update.bind(this);
   }
 
-  setState(props) {
-    this.title.innerHTML = `${props.paragraph_number} - ${
-      props.paragraph_title
-    }`;
-    this.body.innerHTML = props.paragraph_text;
-    replaceTerms(props.paragraph_body);
+  update(data) {
+    this.title.innerHTML = `${data.paragraphNumber} - ${data.paragraphTitle}`;
+    const paragraphTerms = replaceTerms(data.paragraphText);
+    this.body.innerHTML = '';
+    this.body.append(paragraphTerms);
   }
 }
 

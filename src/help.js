@@ -9,7 +9,7 @@ class Help {
     this.messageBox = this.elem.parentNode.appendChild(boxElem);
     this.messageBox.classList.add('message-box');
     this.messageBox.classList.add('message-box--hidden');
-    this.messageBox.innerHTML = this.message;
+    this.messageBox.appendChild(this.message);
 
     this.showMessage = this.showMessage.bind(this);
     this.addEventListeners();

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Russ Biggs <russbiggs@gmail.com>",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "scripts": {
     "start:dev": "webpack-dev-server"
   },

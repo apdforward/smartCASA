@@ -1,6 +1,7 @@
 class Topic {
-  constructor(props, api) {
+  constructor(props, api, paragraphSelect) {
     this.api = api;
+    this.paragraphSelect = paragraphSelect;
     this.id = props.id;
     this.value = props.value;
     this.active = false;
@@ -11,8 +12,8 @@ class Topic {
 }
 
 class CategoryTopic extends Topic {
-  constructor(props, api) {
-    super(props, api);
+  constructor(props, api, paragraphSelect) {
+    super(props, api, paragraphSelect);
     this.activate = this.activate.bind(this);
     this.deactivate = this.deactivate.bind(this);
     this.addEventListeners();
@@ -20,6 +21,7 @@ class CategoryTopic extends Topic {
   addEventListeners() {
     this.elem.addEventListener('click', () => {
       if (this.active) {
+        this.paragraphSelect.removeFilter();
         this.active = false;
         this.deactivate();
       } else {
@@ -58,8 +60,8 @@ class CategoryTopic extends Topic {
 }
 
 class SpecificTopic extends Topic {
-  constructor(props, api) {
-    super(props, api);
+  constructor(props, api, paragraphSelect) {
+    super(props, api, paragraphSelect);
     this.elem.setAttribute('value', this.value);
     this.elem.classList.add(`category-${props.category_id}`);
     this.elem.classList.add('topic__chip--hidden');
@@ -70,6 +72,7 @@ class SpecificTopic extends Topic {
   addEventListeners() {
     this.elem.addEventListener('click', () => {
       if (this.active) {
+        paragraphSelect.removeFilter();
         this.active = false;
         this.deactivate();
       } else {

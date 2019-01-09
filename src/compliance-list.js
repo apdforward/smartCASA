@@ -10,30 +10,48 @@ class ComplianceList {
     this.operationalCompliance = document.querySelector(
       '.compliance-list li:nth-child(3)'
     );
-    this.setState = this.setState.bind(this);
+    this.update = this.update.bind(this);
   }
 
-  setState(props) {
+  update(data) {
+    this.primaryCompliance.classList.remove(
+      'compliance-list__item--not-in-compliance'
+    );
+    this.primaryCompliance.classList.remove(
+      'compliance-list__item--in-compliance'
+    );
+    this.secondaryCompliance.classList.remove(
+      'compliance-list__item--not-in-compliance'
+    );
+    this.secondaryCompliance.classList.remove(
+      'compliance-list__item--in-compliance'
+    );
+    this.operationalCompliance.classList.remove(
+      'compliance-list__item--not-in-compliance'
+    );
+    this.operationalCompliance.classList.remove(
+      'compliance-list__item--in-compliance'
+    );
     const compliances = {
-      'In Compliance': 'in-compliance',
-      'Not In Compliance': 'not-in-compliance'
+      'In Compliance': 'compliance-list__item--in-compliance',
+      'Not In Compliance': 'compliance-list__item--not-in-compliance'
     };
-    this.title.innerHTML = `IMR - ${props.report_id}`;
-    this.primaryCompliance.innerHTML = `Primary Compiance: ${
-      props.primary_compliance
+    this.title.innerHTML = `IMR - ${data.reportId}`;
+    this.primaryCompliance.innerHTML = `Primary Compliance: ${
+      data.primaryCompliance
     }`;
-    const primaryClass = compliances[data.data.primary_compliance];
+    const primaryClass = compliances[data.primaryCompliance];
     this.primaryCompliance.classList.add(primaryClass);
-    this.primaryCompliance.innerHTML = `Secondary Compiance: ${
-      props.secondary_compliance
+    const secondaryClass = compliances[data.secondaryCompliance];
+    this.secondaryCompliance.innerHTML = `Secondary Compliance: ${
+      data.secondaryCompliance
     }`;
-    const secondaryClass = compliances[data.data.primary_compliance];
-    this.primaryCompliance.classList.add(secondaryClass);
-    this.primaryCompliance.innerHTML = `Operational Compiance: ${
-      props.operational_compliance
+    this.secondaryCompliance.classList.add(secondaryClass);
+    this.operationalCompliance.innerHTML = `Operational Compliance: ${
+      data.operationalCompliance
     }`;
-    const operationalClass = compliances[props.operational_compliance];
-    this.primaryCompliance.classList.add(operationalClass);
+    const operationalClass = compliances[data.operationalCompliance];
+    this.operationalCompliance.classList.add(operationalClass);
   }
 }
 

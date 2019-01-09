@@ -20,7 +20,7 @@ h4 {
 h3 {
   margin-top: 5px;
 }
-
+/*
 ::-webkit-scrollbar {
   height: 10px;
   border: none;
@@ -29,7 +29,7 @@ h3 {
   background: #aaa;
   border-radius: 10px;
 }
-
+*/
 .navigation {
   background-color: #00acc1;
   display: flex;
@@ -63,6 +63,7 @@ select {
 
 .filter-btn {
   font-size: 1.2rem;
+  line-height: 60px;
   cursor: pointer;
   height: 100%;
   padding: 0 35px;
@@ -80,7 +81,7 @@ select {
   z-index: 1;
   position: relative;
   display: flex;
-  top: 50px;
+  top: 20px;
   margin: 15px 15px 0 15px;
 }
 
@@ -191,13 +192,20 @@ select {
   bottom: 10px;
   background-color: #007c91;
   box-shadow: 3px 3px 4px #aaa;
-  color: #fff;
   width: 50px;
   height: 50px;
-  line-height: 50px;
+  line-height: 60px;
   text-align: center;
   border-radius: 50%;
   transition: 0.3s;
+}
+
+.feather-clipboard {
+  stroke: #fff;
+}
+
+.feather-filter {
+  fill: #000;
 }
 
 .copy-btn--clicked {
@@ -217,7 +225,7 @@ select {
 
 .paragraph__term--show {
   visibility: visible;
-  opacity: 0.9;
+  opacity: 0.95;
   transition: visibility 0.1s, opacity 0.1s linear;
 }
 
@@ -272,11 +280,28 @@ select {
 
 .compliance {
   box-shadow: 1px 1px 3px #aaa;
-  padding: 15px 15px;
+  padding: 0px 15px 70px;
+}
+
+.compliance__title {
+  margin: 0;
+  padding: 15px 0px 15px 0px;
 }
 
 .compliance__chart {
   min-height: 200px;
+}
+
+.compliance-list__item--in-compliance::after {
+  font-size: 1.3rem;
+  content: ' \2713';
+  color: green;
+}
+
+.compliance-list__item--not-in-compliance::after {
+  font-size: 1.3rem;
+  content: ' \2715';
+  color: red;
 }
 
 .topic {
@@ -350,4 +375,26 @@ select {
 
 .snack--visible {
   transform: none;
+}
+
+.axis {
+  stroke: #000;
+  stroke-width: 1px;
+  fill: none;
+}
+
+.bar {
+  cursor: pointer;
+}
+
+.bar--zero {
+  fill: blue;
+}
+
+.bar--positive {
+  fill: #66a61e;
+}
+
+.bar--negative {
+  fill: #d95f02;
 }

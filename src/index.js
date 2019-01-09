@@ -6,6 +6,9 @@ import API from './api-client';
 import { Term } from './glossary';
 import FilterPanel from './filter-panel';
 import ParagraphSelect from './paragraph-select';
+import Paragraph from './paragraph';
+import ComplianceList from './compliance-list';
+import ComplianceChart from './compliance-chart';
 
 const topics = [
   { value: 'Use of Force', id: 1 },
@@ -21,21 +24,29 @@ const specificTopics = [
   { category_id: 2, value: 'Specialized Tactical Units', id: 7 },
   { category_id: 2, value: 'Specialized Investigative Units', id: 8 }
 ];
-(function() {
+{
   const api = new API({ URL: 'http://localhost:3004', lang: 'en-US' });
+  const paragraph = new Paragraph();
+  const complianceList = new ComplianceList();
+  const complianceChart = new ComplianceChart(complianceList);
 
-  const paragraphSelect = new ParagraphSelect(api);
+  const paragraphSelect = new ParagraphSelect(
+    api,
+    paragraph,
+    complianceList,
+    complianceChart
+  );
+
   new FilterPanel(paragraphSelect);
-
   const categoryFrag = document.createDocumentFragment();
   for (const topic of topics) {
-    const categoryTopic = new CategoryTopic(topic, api);
+    const categoryTopic = new CategoryTopic(topic, api, paragraphSelect);
     categoryFrag.appendChild(categoryTopic.elem);
   }
   document.querySelector('.category-topics').appendChild(categoryFrag);
   const specificFrag = document.createDocumentFragment();
   for (const topic of specificTopics) {
-    const specificTopic = new SpecificTopic(topic, api);
+    const specificTopic = new SpecificTopic(topic, api, paragraphSelect);
     specificFrag.appendChild(specificTopic.elem);
   }
   document.querySelector('.specific-topics').appendChild(specificFrag);
@@ -44,8 +55,14 @@ const specificTopics = [
     definition: 'an example definition'
   });
   helpTerm.elem.style.zIndex = 99999;
-  new Help(
-    '.js-paragraph-help',
-    `This is a span test to make sure the ${helpTerm.elem.outerHTML} tag works`
-  );
-})();
+  const helpFrag = document.createDocumentFragment();
+  const t = document.createTextNode('This is a span test to make sure the ');
+  const s = document.createTextNode(' tag works');
+  helpFrag.appendChild(t);
+  helpFrag.appendChild(helpTerm.elem);
+  helpFrag.appendChild(s);
+  new Help('.js-paragraph-help', helpFrag);
+  api.getAllParagraphs().then(data => {
+    paragraphSelect.createList(data);
+  });
+}

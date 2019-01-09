@@ -1,15 +1,15 @@
-import { replaceTerms } from './glossary';
-
 class ParagraphItem {
-  constructor(props) {
+  constructor(data, api, paragraph, complianceList, complianceChart) {
     this.elem = document.createElement('li');
-    this.id = props.id;
-    this.paragraphNumber = props.paragraph_number;
-    this.paragraphTitle = props.paragraph_title;
-    this.paragraphText = props.paragraph_text;
-    this.elem.innerHTML = `${this.paragraphNumber} - ${this.paragraphTitle}`;
+    this.api = api;
+    this.paragraph = paragraph;
+    this.complianceList = complianceList;
+    this.complianceChart = complianceChart;
+    this.data = data;
+    this.elem.innerHTML = `${this.data.paragraphNumber} - ${
+      this.data.paragraphTitle
+    }`;
     this.selectParagraph = this.selectParagraph.bind(this);
-
     this.addEventListeners();
   }
 
@@ -27,51 +27,50 @@ class ParagraphItem {
 
   selectParagraph() {
     const paragraphSelect = document.querySelector('.selected-paragraph');
-    paragraphSelect.innerHTML = `${this.paragraphNumber} - ${
-      this.paragraphTitle
+    paragraphSelect.innerHTML = `${this.data.paragraphNumber} - ${
+      this.data.paragraphTitle
     }`;
-    const paragraphTitle = document.querySelector('.js-paragraph__title');
-    const paragraphBody = document.querySelector('.js-paragraph__body');
-    paragraphTitle.innerHTML = `${this.paragraphNumber} - ${
-      this.paragraphTitle
-    }`;
-    paragraphBody.innerHTML = this.paragraphText;
-    const paragraphTerms = replaceTerms(paragraphBody.innerHTML);
-    paragraphBody.innerHTML = '';
-    paragraphBody.append(paragraphTerms);
+    this.paragraph.update(this.data);
+    this.api.getComplianceByParagraph(this.data.id).then(data => {
+      this.complianceChart.update(data);
+    });
   }
 }
 
 class ParagraphSelect {
-  constructor(api) {
+  constructor(api, paragraph, complianceList, complianceChart) {
+    this.complianceList = complianceList;
+    this.complianceChart = complianceChart;
     this.api = api;
+    this.paragraph = paragraph;
     this.timeout;
     this.active = false;
     this.disabled = false;
     this.elem = document.querySelector('.paragraph-select');
     this.dropdown = document.querySelector('.paragraph-list');
-    this.setParagraphList = this.setParagraphList.bind(this);
+    this.createList = this.createList.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.filterList = this.filterList.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
     this.paragraphs = [];
-
-    this.setParagraphList();
     this.addEventListeners();
   }
 
-  setParagraphList(paragraph) {
-    const paragraphData = this.api.getAllParagraphs();
-    paragraphData.then(objs => {
-      const frag = document.createDocumentFragment();
-      for (const obj of objs) {
-        const paragraphItem = new ParagraphItem(obj);
-        this.paragraphs.push(paragraphItem);
-        frag.appendChild(paragraphItem.elem);
-      }
-      this.paragraphs[0].selectParagraph();
-      this.dropdown.appendChild(frag);
-    });
+  createList(data) {
+    const frag = document.createDocumentFragment();
+    for (const obj of data) {
+      const paragraphItem = new ParagraphItem(
+        obj,
+        this.api,
+        this.paragraph,
+        this.complianceList,
+        this.complianceChart
+      );
+      this.paragraphs.push(paragraphItem);
+      frag.appendChild(paragraphItem.elem);
+    }
+    this.paragraphs[0].selectParagraph();
+    this.dropdown.appendChild(frag);
   }
 
   addEventListeners() {
