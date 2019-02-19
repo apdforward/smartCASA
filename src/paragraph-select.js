@@ -27,12 +27,17 @@ class ParagraphItem {
 
   selectParagraph() {
     const paragraphSelect = document.querySelector('.selected-paragraph');
-    paragraphSelect.innerHTML = `${this.data.paragraphNumber} - ${
+    paragraphSelect.innerHTML = `&para; ${this.data.paragraphNumber} - ${
       this.data.paragraphTitle
     }`;
     this.paragraph.update(this.data);
     this.api.getComplianceByParagraph(this.data.id).then(data => {
-      this.complianceChart.update(data);
+      this.api.getAllReports().then(reports => {
+        for (let i = 0; i < data.length; i++) {
+          data[i].report = reports[i];
+        }
+        this.complianceChart.update(data);
+      });
     });
   }
 }

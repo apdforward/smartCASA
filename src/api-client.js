@@ -5,44 +5,58 @@ class API {
     this.getAllParagraphs = this.getAllParagraphs.bind(this);
     this.getParagraph = this.getParagraph.bind(this);
     const headers = new Headers();
-    headers.append('Content-Type', 'text/json');
+    headers.append('Content-Type', 'applications/json');
     headers.append('Accept-Language', this.lang);
-
     this.init = { method: 'GET', mode: 'cors', headers: headers };
   }
 
   async getAllParagraphs() {
     const response = await fetch(`${this.baseURL}/paragraphs`, this.init);
-    return await response.json();
+    const jsonData = await response.json();
+    return await jsonData.data;
   }
+
   async getParagraph(paragraphId) {
     const response = await fetch(
       `${this.baseURL}/paragraphs/${paragraphId}`,
       this.init
     );
-    return await response.json();
+    const jsonData = await response.json();
+    return await jsonData.data;
   }
+
   async getComplianceByParagraph(paragraphId) {
     const response = await fetch(
       `${this.baseURL}/paragraphs/${paragraphId}/compliances`,
       this.init
     );
-    return await response.json();
+    const jsonData = await response.json();
+    return await jsonData.data;
   }
 
   async getAllCompliances() {
     const response = await fetch(`${this.baseURL}/compliances`, this.init);
-    return await response.json();
+    const jsonData = await response.json();
+    return await jsonData.data;
   }
-  /*
-  async getCompliance(params) {
-    const response = await fetch(
-      `${this.URL}/compliances/${params.key}`,
-      this.init
-    );
-    return await response.json();
+
+  async getAllReports() {
+    const response = await fetch(`${this.baseURL}/reports`, this.init);
+    const jsonData = await response.json();
+    return await jsonData.data;
   }
-  */
+
+  async getAllCategoryTags() {
+    const response = await fetch(`${this.baseURL}/category-tags`, this.init);
+    const jsonData = await response.json();
+    return await jsonData.data;
+  }
+
+  async getAllSpecificTags() {
+    const response = await fetch(`${this.baseURL}/specific-tags`, this.init);
+    const jsonData = await response.json();
+    return await jsonData.data;
+  }
 }
 
 export default API;

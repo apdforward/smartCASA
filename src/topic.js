@@ -63,7 +63,7 @@ class SpecificTopic extends Topic {
   constructor(props, api, paragraphSelect) {
     super(props, api, paragraphSelect);
     this.elem.setAttribute('value', this.value);
-    this.elem.classList.add(`category-${props.category_id}`);
+    this.elem.classList.add(`category-${props.categoryId}`);
     this.elem.classList.add('topic__chip--hidden');
     this.activate = this.activate.bind(this);
     this.deactivate = this.deactivate.bind(this);
@@ -72,7 +72,7 @@ class SpecificTopic extends Topic {
   addEventListeners() {
     this.elem.addEventListener('click', () => {
       if (this.active) {
-        paragraphSelect.removeFilter();
+        this.paragraphSelect.removeFilter();
         this.active = false;
         this.deactivate();
       } else {

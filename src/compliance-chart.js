@@ -100,9 +100,36 @@ class ComplianceChart {
 function calculateScores(data) {
   const scores = data.map(imr => {
     let totalScore = 0;
-    totalScore += imr.primaryCompliance == 'In Compliance' ? 3 : -3;
-    totalScore += imr.secondaryCompliance == 'In Compliance' ? 2 : -2;
-    totalScore += imr.operationalCompliance == 'In Compliance' ? 1 : -1;
+    switch (imr.primaryCompliance) {
+      case 'In Compliance':
+        totalScore += 3;
+        break;
+      case 'Not In Compliance':
+        totalScore += -3;
+        break;
+      default:
+        totalScore += 0;
+    }
+    switch (imr.secondaryCompliance) {
+      case 'In Compliance':
+        totalScore += 2;
+        break;
+      case 'Not In Compliance':
+        totalScore += -2;
+        break;
+      default:
+        totalScore += 0;
+    }
+    switch (imr.operationalCompliance) {
+      case 'In Compliance':
+        totalScore += 1;
+        break;
+      case 'Not In Compliance':
+        totalScore += -1;
+        break;
+      default:
+        totalScore += 0;
+    }
     return {
       imr: imr,
       score: totalScore / 6

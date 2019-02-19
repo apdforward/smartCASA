@@ -1,6 +1,8 @@
 class ComplianceList {
   constructor() {
-    this.title = document.querySelector('.compliance-title');
+    this.title = document.querySelector('.report-title');
+    this.pages = document.querySelector('.report-pages');
+    this.reportData = document.querySelector('.report-data');
     this.primaryCompliance = document.querySelector(
       '.compliance-list li:nth-child(1)'
     );
@@ -14,6 +16,15 @@ class ComplianceList {
   }
 
   update(data) {
+    while (this.pages.firstChild) {
+      this.pages.removeChild(this.pages.firstChild);
+    }
+    this.reportData.innerHTML = '';
+    this.reportData.innerHTML = `<b>Publication Date:</b> ${parseDate(
+      data.report.publishDate
+    )}  <br/><b>Monitoring Period:</b> ${parseDate(
+      data.report.periodBegin
+    )} - ${parseDate(data.report.periodEnd)}`;
     this.primaryCompliance.classList.remove(
       'compliance-list__item--not-in-compliance'
     );
@@ -37,6 +48,14 @@ class ComplianceList {
       'Not In Compliance': 'compliance-list__item--not-in-compliance'
     };
     this.title.innerHTML = `IMR - ${data.reportId}`;
+    let pagesText = '';
+    for (const page of data.pages) {
+      pagesText += page;
+      pagesText += ', ';
+    }
+    pagesText = pagesText.slice(0, -2);
+    const pages = document.createTextNode(`Pages ${pagesText}`);
+    this.pages.appendChild(pages);
     this.primaryCompliance.innerHTML = `Primary Compliance: ${
       data.primaryCompliance
     }`;
@@ -53,6 +72,28 @@ class ComplianceList {
     const operationalClass = compliances[data.operationalCompliance];
     this.operationalCompliance.classList.add(operationalClass);
   }
+}
+
+function parseDate(dateString) {
+  const date = new Date(dateString);
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+  return `${monthNames[monthIndex]}  ${day} ${year}`;
 }
 
 export default ComplianceList;
