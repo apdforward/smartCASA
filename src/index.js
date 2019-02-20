@@ -11,7 +11,7 @@ import ComplianceList from './compliance-list';
 import ComplianceChart from './compliance-chart';
 
 {
-  const api = new API({ URL: 'http://localhost:3000', lang: 'en-US' });
+  const api = new API({ URL: 'https://api.smartcasa.org', lang: 'en-US' });
   const paragraph = new Paragraph();
   const complianceList = new ComplianceList();
   const complianceChart = new ComplianceChart(complianceList);
@@ -57,57 +57,6 @@ import ComplianceChart from './compliance-chart';
   helpFrag.appendChild(helpTerm.elem);
   helpFrag.appendChild(s);
   new Help('.js-paragraph-help', helpFrag);
-  /*
-  const complianceHelpFrag = document.createDocumentFragment();
-  complianceHelpFrag.appendChild(
-    document.createTextNode(
-      'Compliance is normally evaluated twice yearly by the independent monitoring team'
-    )
-  );
-
-  complianceHelpFrag.appendChild(document.createElement('br'));
-  complianceHelpFrag.appendChild(
-    document.createTextNode(
-      'The values in the graph are indexed to provide a high level overview of performance.'
-    )
-  );
-
-  complianceHelpFrag.appendChild(document.createElement('br'));
-  complianceHelpFrag.appendChild(
-    document.createTextNode('The index is calculated by the following scoring:')
-  );
-
-  complianceHelpFrag.appendChild(document.createElement('br'));
-  complianceHelpFrag.appendChild(
-    document.createTextNode(
-      'Primary Compliance: In Compliance +3, Not In Compliance -3'
-    )
-  );
-
-  complianceHelpFrag.appendChild(document.createElement('br'));
-  complianceHelpFrag.appendChild(
-    document.createTextNode(
-      'Secondary Compliance: In Compliance +2, Not In Compliance -2'
-    )
-  );
-
-  complianceHelpFrag.appendChild(document.createElement('br'));
-  complianceHelpFrag.appendChild(
-    document.createTextNode(
-      'Operational Compliance: In Compliance +1, Not In Compliance -1'
-    )
-  );
-
-  complianceHelpFrag.appendChild(document.createElement('br'));
-  complianceHelpFrag.appendChild(
-    document.createTextNode(
-      'The sum of the scores for the report is then divided by 6 to create an index in the'
-    )
-  );
-  complianceHelpFrag.appendChild(document.createElement('br'));
-  complianceHelpFrag.appendChild(document.createTextNode('range of -1 to 1'));
-  new Help('.js-compliance-help', complianceHelpFrag);
-  */
   api.getAllParagraphs().then(data => {
     paragraphSelect.createList(data);
   });

@@ -323,14 +323,17 @@ class Term {
 }
 
 function replaceAll(target, search, replacement) {
-  return target.replace(new RegExp(search, 'gi'), replacement);
+  return target.replace(
+    new RegExp(`(${search})(s?)`, 'gi'),
+    `${replacement}$2`
+  );
 }
 function replaceTerms(text) {
   for (const term of words) {
     text = replaceAll(text, term.term, btoa(term.term));
   }
   for (const term of words) {
-    const t = new Term({ text: term.term, ...term });
+    const t = new Term({ text: term.term });
     text = text.split(btoa(term.term)).join(t.elem.outerHTML);
   }
 

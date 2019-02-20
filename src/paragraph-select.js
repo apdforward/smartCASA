@@ -29,7 +29,7 @@ class ParagraphItem {
     const paragraphSelect = document.querySelector('.selected-paragraph');
     paragraphSelect.innerHTML = `&para; ${this.data.paragraphNumber} - ${
       this.data.paragraphTitle
-    }`;
+    } &nbsp;&#9660;`;
     this.paragraph.update(this.data);
     this.api.getComplianceByParagraph(this.data.id).then(data => {
       this.api.getAllReports().then(reports => {
@@ -58,6 +58,7 @@ class ParagraphSelect {
     this.filterList = this.filterList.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
     this.paragraphs = [];
+    this.filter = [];
     this.addEventListeners();
   }
 
@@ -108,12 +109,15 @@ class ParagraphSelect {
     });
   }
 
-  filterList(filter) {
-    this.paragraphs.map(paragraph => {
-      if (filter.indexOf(paragraph.id) != 1) {
+  filterList() {
+    const filterSet = new Set(this.filter);
+    for (const paragraph of this.paragraphs) {
+      if (!filterSet.has(paragraph.data.id)) {
         paragraph.hide();
+      } else {
+        paragraph.show();
       }
-    });
+    }
   }
 }
 

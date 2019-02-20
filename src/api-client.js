@@ -57,6 +57,24 @@ class API {
     const jsonData = await response.json();
     return await jsonData.data;
   }
+
+  async getParagraphsByCategoryTag(categoryTagId) {
+    const response = await fetch(
+      `${this.baseURL}/category-tags/${categoryTagId}/paragraphs`,
+      this.init
+    );
+    const jsonData = await response.json();
+    return await jsonData.data;
+  }
+
+  async getParagraphsBySpecificTag(specificTagId) {
+    const response = await fetch(
+      `${this.baseURL}/specific-tags/${specificTagId}/paragraphs`,
+      this.init
+    );
+    const jsonData = await response.json();
+    return await jsonData.data;
+  }
 }
 
 export default API;

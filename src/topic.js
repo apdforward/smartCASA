@@ -21,11 +21,25 @@ class CategoryTopic extends Topic {
   addEventListeners() {
     this.elem.addEventListener('click', () => {
       if (this.active) {
-        this.paragraphSelect.removeFilter();
         this.active = false;
+        this.api.getParagraphsByCategoryTag(this.id).then(paragraphs => {
+          const paragraphIds = paragraphs.map(p => p.id);
+          for (const paragraphId of paragraphIds) {
+            const idx = this.paragraphSelect.filter.indexOf(paragraphId);
+            if (idx != -1) {
+              this.paragraphSelect.filter.splice(idx, 1);
+            }
+          }
+          this.paragraphSelect.filterList();
+        });
         this.deactivate();
       } else {
         this.active = true;
+        this.api.getParagraphsByCategoryTag(this.id).then(paragraphs => {
+          const paragraphIds = paragraphs.map(p => p.id);
+          this.paragraphSelect.filter.push(...paragraphIds);
+          this.paragraphSelect.filterList();
+        });
         this.activate();
       }
     });
@@ -71,12 +85,26 @@ class SpecificTopic extends Topic {
   }
   addEventListeners() {
     this.elem.addEventListener('click', () => {
+      // change this to a more specific class
+      const actives = document.querySelectorAll('.topic__chip--active');
+      if (actives.length == 0) {
+        this.paragraphSelect.filter = [];
+      }
       if (this.active) {
-        this.paragraphSelect.removeFilter();
+        this.api.getParagraphsBySpecificTag(this.id).then(paragraphs => {
+          const paragraphIds = paragraphs.map(p => p.id);
+          this.paragraphSelect.filter.push(...paragraphIds);
+          this.paragraphSelect.filterList();
+        });
         this.active = false;
         this.deactivate();
       } else {
         this.active = true;
+        this.api.getParagraphsBySpecificTag(this.id).then(paragraphs => {
+          const paragraphIds = paragraphs.map(p => p.id);
+          this.paragraphSelect.filter.push(...paragraphIds);
+          this.paragraphSelect.filterList();
+        });
         this.activate();
       }
     });

@@ -6,7 +6,7 @@
 html,
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 0 80px 0;
   height: 100%;
 }
 
@@ -160,6 +160,11 @@ select {
 .paragraph-select--active .paragraph-list {
   max-height: 50vh;
 }
+
+.paragraph-choice--hidden {
+  display: none;
+}
+
 .container__paragraph {
   margin: 0 15px 0 15px;
   width: 50%;
