@@ -34,8 +34,8 @@ h3 {
   background-color: #00acc1;
   display: flex;
   justify-content: flex-end;
-  height: 50px;
-  line-height: 50px;
+  height: 60px;
+  line-height: 60px;
   box-shadow: 0px 1px 3px #aaa;
 }
 
@@ -43,8 +43,14 @@ h3 {
   margin-right: auto;
   text-decoration: none;
   color: black;
-  padding: 0px 25px;
+  padding: 0px 5px;
   font-size: 2rem;
+}
+
+.logo {
+  padding: 10px 0px 10px 25px;
+  height: 40px;
+  width: 40px;
 }
 
 .paragraph-select {
@@ -63,7 +69,7 @@ select {
 
 .filter-btn {
   font-size: 1.2rem;
-  line-height: 60px;
+  line-height: 65px;
   cursor: pointer;
   height: 100%;
   padding: 0 35px;
@@ -178,6 +184,7 @@ select {
 .paragraph {
   box-shadow: 1px 1px 3px #aaa;
   padding: 0px 15px 70px;
+  margin-bottom: 50px;
   position: relative;
 }
 
