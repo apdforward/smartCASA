@@ -308,54 +308,64 @@ const words = [
 
 class Term {
   constructor(props) {
+    this.props = props;
     this.elem = document.createElement('span');
-    this.elem.setAttribute(
-      'definition',
+    this.definition =
       props.definition ||
-        words
-          .filter(obj => obj.term.toLowerCase() === props.text.toLowerCase())
-          .reduce((acc, obj) => `${obj.term} ${obj.definition}`, '')
-    );
+      words
+        .filter(obj => obj.term.toLowerCase() === props.text.toLowerCase())
+        .reduce((acc, obj) => `${obj.term} ${obj.definition}`, '');
+    // this.elem.setAttribute('definition', this.definition);
     this.elem.innerText = props.text;
     this.elem.classList.add('term');
+    this.timeout;
+    this.showDefinition = this.showDefinition.bind(this);
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    this.elem.addEventListener('click', this.showDefinition);
+  }
+
+  showDefinition(e) {
+    console.log(this.props);
+    clearTimeout(this.timeout);
+    const termHint = document.querySelector('.js-paragraph__term');
+    termHint.classList.remove('paragraph__term--hidden');
+    termHint.classList.add('paragraph__term--show');
+    termHint.style.left = `${e.pageX + 10}px`;
+    termHint.style.top = `${e.pageY - 45}px`;
+    termHint.innerHTML = this.definition;
+    this.timeout = setTimeout(() => {
+      termHint.classList.remove('paragraph__term--show');
+      termHint.classList.add('paragraph__term--hidden');
+    }, 4000);
   }
 }
 
-function replaceAll(target, search, replacement) {
-  return target.replace(
-    new RegExp(`(${search})(s?)`, 'gi'),
-    `${replacement}$2`
-  );
-}
-function replaceTerms(text) {
+function replaceTerms(elem) {
+  let termIdxs = [];
   for (const term of words) {
-    text = replaceAll(text, term.term, btoa(term.term));
-  }
-  for (const term of words) {
-    const t = new Term({ text: term.term });
-    text = text.split(btoa(term.term)).join(t.elem.outerHTML);
+    let result;
+    const regex = new RegExp(`(${term.term})s?(?=\\s|\\,|\\.|$)`, 'gi');
+    while ((result = regex.exec(elem.firstChild.nodeValue)) !== null) {
+      const idx = result.index;
+      console.log(result);
+      termIdxs.push({ text: result[1], term: term.term, idx: idx });
+    }
   }
 
-  const tmp = document.createElement('span');
-  tmp.innerHTML = text;
-  const termElems = tmp.querySelectorAll('.term');
-  let timeout;
-  for (const elem of termElems) {
-    elem.addEventListener('click', e => {
-      clearTimeout(timeout);
-      const termHint = document.querySelector('.js-paragraph__term');
-      termHint.classList.remove('paragraph__term--hidden');
-      termHint.classList.add('paragraph__term--show');
-      termHint.style.left = `${e.pageX + 10}px`;
-      termHint.style.top = `${e.pageY - 45}px`;
-      termHint.innerHTML = e.target.getAttribute('definition');
-      timeout = setTimeout(() => {
-        termHint.classList.remove('paragraph__term--show');
-        termHint.classList.add('paragraph__term--hidden');
-      }, 4000);
-    });
+  termIdxs = termIdxs.sort(propComparator('idx'));
+  for (let i = 0; i < termIdxs.length; i++) {
+    const { text, term, idx } = termIdxs[i];
+    const replacement = elem.firstChild.splitText(idx);
+    replacement.nodeValue = replacement.nodeValue.slice(term.length);
+    const termDef = new Term({ text: text, term: term });
+    elem.insertBefore(termDef.elem, replacement);
   }
-  return tmp;
 }
+
+const propComparator = key => (a, b) =>
+  a.idx == b.idx ? 0 : a.idx < b.idx ? 1 : -1;
 
 export { replaceTerms, Term };

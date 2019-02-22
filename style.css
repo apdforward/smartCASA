@@ -198,6 +198,10 @@ select {
   line-height: 1.5rem;
 }
 
+.paragraph__body br {
+  line-height: 2rem;
+}
+
 .copy-btn {
   cursor: pointer;
   position: absolute;
