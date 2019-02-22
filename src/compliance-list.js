@@ -1,3 +1,5 @@
+import { Term } from './glossary';
+
 class ComplianceList {
   constructor() {
     this.title = document.querySelector('.report-title');
@@ -18,6 +20,17 @@ class ComplianceList {
   update(data) {
     while (this.pages.firstChild) {
       this.pages.removeChild(this.pages.firstChild);
+    }
+    while (this.primaryCompliance.firstChild) {
+      this.primaryCompliance.removeChild(this.primaryCompliance.firstChild);
+    }
+    while (this.secondaryCompliance.firstChild) {
+      this.secondaryCompliance.removeChild(this.secondaryCompliance.firstChild);
+    }
+    while (this.operationalCompliance.firstChild) {
+      this.operationalCompliance.removeChild(
+        this.operationalCompliance.firstChild
+      );
     }
     this.reportData.innerHTML = '';
     this.reportData.innerHTML = `<b>Publication Date:</b> ${parseDate(
@@ -56,19 +69,63 @@ class ComplianceList {
     pagesText = pagesText.slice(0, -2);
     const pages = document.createTextNode(`Pages ${pagesText}`);
     this.pages.appendChild(pages);
-    this.primaryCompliance.innerHTML = `Primary Compliance: ${
-      data.primaryCompliance
-    }`;
+    const primaryComplianceTerm = new Term({
+      text: 'Primary Compliance',
+      term: 'Primary Compliance',
+      definition: `Primary compliance is the “policy” part of
+      compliance. To attain primary compliance, APD must have in
+      place operational policies and procedures designed to guide
+      officers, supervisors and managers in the performance of the tasks
+      outlined in the CASA. As a matter of course, the policies must be
+      reflective of the requirements of the CASA; must comply with
+      national standards for effective policing policy; and must
+      demonstrate trainable and evaluable policy components.`
+    });
+    const primaryComplianceStatus = document.createTextNode(
+      `: ${data.primaryCompliance}`
+    );
+    this.primaryCompliance.appendChild(primaryComplianceTerm.elem);
+    this.primaryCompliance.appendChild(primaryComplianceStatus);
     const primaryClass = compliances[data.primaryCompliance];
     this.primaryCompliance.classList.add(primaryClass);
     const secondaryClass = compliances[data.secondaryCompliance];
-    this.secondaryCompliance.innerHTML = `Secondary Compliance: ${
-      data.secondaryCompliance
-    }`;
+    const secondaryComplianceTerm = new Term({
+      text: 'Secondary Compliance',
+      term: 'Secondary Compliance',
+      definition: `Secondary compliance is attained by
+      implementing supervisory, managerial and executive practices
+      designed to (and effective in) implementing the policy as written,
+      e.g., sergeants routinely enforce the policies among field
+      personnel and are held accountable by managerial and executive
+      levels of the department for doing so. By definition, there should
+      be operational artifacts (reports, disciplinary records, remands to
+      retraining, follow-up, and even revisions to policies if necessary,
+      indicating that the policies developed in the first stage of
+      compliance are known to, followed by, and important to
+      supervisory and managerial levels of the agency.`
+    });
+    const secondaryComplianceStatus = document.createTextNode(
+      `: ${data.secondaryCompliance}`
+    );
+    this.secondaryCompliance.appendChild(secondaryComplianceTerm.elem);
+    this.secondaryCompliance.appendChild(secondaryComplianceStatus);
     this.secondaryCompliance.classList.add(secondaryClass);
-    this.operationalCompliance.innerHTML = `Operational Compliance: ${
-      data.operationalCompliance
-    }`;
+    const operationalComplianceTerm = new Term({
+      text: 'Operational Compliance',
+      term: 'Operational Compliance',
+      definition: `Operational compliance is attained at
+      the point that the adherence to policies is apparent in the day-today 
+      operation of the agency e.g., line personnel are routinely held
+      accountable for compliance, not by the monitoring staff, but by
+      their sergeants, and sergeants are routinely held accountable for
+      compliance by their lieutenants and command staff. In other
+      words, the APD “owns” and enforces its policies.`
+    });
+    const operationalComplianceStatus = document.createTextNode(
+      `: ${data.operationalCompliance}`
+    );
+    this.operationalCompliance.appendChild(operationalComplianceTerm.elem);
+    this.operationalCompliance.appendChild(operationalComplianceStatus);
     const operationalClass = compliances[data.operationalCompliance];
     this.operationalCompliance.classList.add(operationalClass);
   }

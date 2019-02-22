@@ -315,7 +315,6 @@ class Term {
       words
         .filter(obj => obj.term.toLowerCase() === props.text.toLowerCase())
         .reduce((acc, obj) => `${obj.term} ${obj.definition}`, '');
-    // this.elem.setAttribute('definition', this.definition);
     this.elem.innerText = props.text;
     this.elem.classList.add('term');
     this.timeout;
@@ -328,14 +327,14 @@ class Term {
   }
 
   showDefinition(e) {
-    console.log(this.props);
     clearTimeout(this.timeout);
     const termHint = document.querySelector('.js-paragraph__term');
     termHint.classList.remove('paragraph__term--hidden');
     termHint.classList.add('paragraph__term--show');
-    termHint.style.left = `${e.pageX + 10}px`;
-    termHint.style.top = `${e.pageY - 45}px`;
     termHint.innerHTML = this.definition;
+    const style = window.getComputedStyle(termHint);
+    termHint.style.left = `${e.clientX + 10}px`;
+    termHint.style.top = `${e.clientY - parseInt(style.height) - 20}px`;
     this.timeout = setTimeout(() => {
       termHint.classList.remove('paragraph__term--show');
       termHint.classList.add('paragraph__term--hidden');
@@ -350,7 +349,6 @@ function replaceTerms(elem) {
     const regex = new RegExp(`(${term.term})s?(?=\\s|\\,|\\.|$)`, 'gi');
     while ((result = regex.exec(elem.firstChild.nodeValue)) !== null) {
       const idx = result.index;
-      console.log(result);
       termIdxs.push({ text: result[1], term: term.term, idx: idx });
     }
   }
