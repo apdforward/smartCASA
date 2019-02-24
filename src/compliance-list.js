@@ -58,9 +58,15 @@ class ComplianceList {
     );
     const compliances = {
       'In Compliance': 'compliance-list__item--in-compliance',
-      'Not In Compliance': 'compliance-list__item--not-in-compliance'
+      'Not In Compliance': 'compliance-list__item--not-in-compliance',
+      'Not Yet Due': 'compliance-list__item--other',
+      'Not Reported': 'compliance-list__item--other',
+      Pending: 'compliance-list__item--other',
+      'Unable to Monitor': 'compliance-list__item--other'
     };
-    this.title.innerHTML = `IMR - ${data.reportId}`;
+    this.title.innerHTML = `Independent Monitoring Report (IMR) - ${
+      data.reportId
+    }:`;
     let pagesText = '';
     for (const page of data.pages) {
       pagesText += page;
@@ -82,13 +88,16 @@ class ComplianceList {
       demonstrate trainable and evaluable policy components.`
     });
     const primaryComplianceStatus = document.createTextNode(
-      `: ${data.primaryCompliance}`
+      `${data.primaryCompliance}`
     );
-    this.primaryCompliance.appendChild(primaryComplianceTerm.elem);
-    this.primaryCompliance.appendChild(primaryComplianceStatus);
+    const primaryComplianceContainer = document.createElement('div');
     const primaryClass = compliances[data.primaryCompliance];
-    this.primaryCompliance.classList.add(primaryClass);
-    const secondaryClass = compliances[data.secondaryCompliance];
+    primaryComplianceContainer.appendChild(primaryComplianceStatus);
+    primaryComplianceContainer.classList.add(primaryClass);
+    this.primaryCompliance.appendChild(primaryComplianceTerm.elem);
+    this.primaryCompliance.append(document.createTextNode(': '));
+    this.primaryCompliance.appendChild(primaryComplianceContainer);
+
     const secondaryComplianceTerm = new Term({
       text: 'Secondary Compliance',
       term: 'Secondary Compliance',
@@ -105,11 +114,15 @@ class ComplianceList {
       supervisory and managerial levels of the agency.`
     });
     const secondaryComplianceStatus = document.createTextNode(
-      `: ${data.secondaryCompliance}`
+      `${data.secondaryCompliance}`
     );
+    const secondaryComplianceContainer = document.createElement('div');
+    const secondaryClass = compliances[data.secondaryCompliance];
+    secondaryComplianceContainer.appendChild(secondaryComplianceStatus);
+    secondaryComplianceContainer.classList.add(secondaryClass);
     this.secondaryCompliance.appendChild(secondaryComplianceTerm.elem);
-    this.secondaryCompliance.appendChild(secondaryComplianceStatus);
-    this.secondaryCompliance.classList.add(secondaryClass);
+    this.secondaryCompliance.append(document.createTextNode(': '));
+    this.secondaryCompliance.appendChild(secondaryComplianceContainer);
     const operationalComplianceTerm = new Term({
       text: 'Operational Compliance',
       term: 'Operational Compliance',
@@ -122,12 +135,15 @@ class ComplianceList {
       words, the APD “owns” and enforces its policies.`
     });
     const operationalComplianceStatus = document.createTextNode(
-      `: ${data.operationalCompliance}`
+      `${data.operationalCompliance}`
     );
-    this.operationalCompliance.appendChild(operationalComplianceTerm.elem);
-    this.operationalCompliance.appendChild(operationalComplianceStatus);
+    const operationalComplianceContainer = document.createElement('div');
     const operationalClass = compliances[data.operationalCompliance];
-    this.operationalCompliance.classList.add(operationalClass);
+    operationalComplianceContainer.appendChild(operationalComplianceStatus);
+    operationalComplianceContainer.classList.add(operationalClass);
+    this.operationalCompliance.appendChild(operationalComplianceTerm.elem);
+    this.operationalCompliance.append(document.createTextNode(': '));
+    this.operationalCompliance.appendChild(operationalComplianceContainer);
   }
 }
 

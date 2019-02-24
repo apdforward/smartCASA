@@ -306,6 +306,18 @@ select {
   padding: 10px 0px 10px 0px;
 }
 
+.label {
+  cursor: pointer;
+}
+
+.underline {
+  fill: none;
+}
+
+.underline--active {
+  fill: #24d0e5;
+}
+
 .report-title {
   margin: 0;
   padding: 10px 0px 10px 0px;
@@ -315,16 +327,32 @@ select {
   min-height: 200px;
 }
 
-.compliance-list__item--in-compliance::after {
-  font-size: 1.3rem;
-  content: ' \2713';
-  color: green;
+.compliance-list__item {
+  margin: 10px 0;
 }
 
-.compliance-list__item--not-in-compliance::after {
-  font-size: 1.3rem;
-  content: ' \2715';
-  color: red;
+.compliance-list__item--in-compliance {
+  display: inline;
+  color: #66a61e;
+  border: #99d951 0.5px solid;
+  padding: 1px 4px;
+  font-weight: 600;
+}
+
+.compliance-list__item--not-in-compliance {
+  display: inline;
+  color: #d95f02;
+  border: #ff9235 0.5px solid;
+  padding: 1px 4px;
+  font-weight: 600;
+}
+
+.compliance-list__item--other {
+  display: inline;
+  color: #575757;
+  border: #717171 0.5px solid;
+  padding: 1px 4px;
+  font-weight: 600;
 }
 
 .topic {

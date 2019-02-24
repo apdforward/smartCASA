@@ -48,6 +48,12 @@ class ComplianceChart {
       bar.setAttribute('height', Math.abs(imr.score) * 100 || 10);
       bar.addEventListener('click', () => {
         this.complianceList.update(imr.imr);
+        const active = document.querySelector('.underline--active');
+        active.classList.remove('underline--active');
+        const underline = document.querySelector(
+          `.underline-${imr.imr.reportId}`
+        );
+        underline.classList.add('underline--active');
       });
       bar.classList.add('bar');
       bar.classList.add(colorClass);
@@ -61,6 +67,7 @@ class ComplianceChart {
     const barWidth = this.width / this.data.length - 10;
     const frag = document.createDocumentFragment();
     let x = barWidth / 2;
+    let underlineX = 0;
     for (const imr of this.data) {
       const label = document.createElementNS(
         'http://www.w3.org/2000/svg',
@@ -69,9 +76,30 @@ class ComplianceChart {
       label.innerHTML = `IMR-${imr.reportId}`;
       label.setAttribute('x', x);
       label.classList.add('label');
+      label.classList.add(`label-${imr.reportId}`);
       x += barWidth + 10;
       label.setAttribute('y', this.height - 70);
+      label.addEventListener('click', () => {
+        this.complianceList.update(imr);
+        const active = document.querySelector('.underline--active');
+        active.classList.remove('underline--active');
+        const underline = document.querySelector(`.underline-${imr.reportId}`);
+        underline.classList.add('underline--active');
+      });
+
+      const underline = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'rect'
+      );
+      underline.classList.add('underline');
+      underline.classList.add(`underline-${imr.reportId}`);
+      underline.setAttribute('height', 5);
+      underline.setAttribute('width', barWidth);
+      underline.setAttribute('x', underlineX);
+      underline.setAttribute('y', this.height - 70);
       frag.appendChild(label);
+      frag.appendChild(underline);
+      underlineX += barWidth + 10;
     }
     this.g.appendChild(frag);
     const labels = document.querySelectorAll('.label');
@@ -91,8 +119,12 @@ class ComplianceChart {
     }
     this.drawChart();
     this.data = data;
-    this.drawBars();
     this.drawLabels();
+    const active = document.querySelector(
+      `.underline-${this.data.slice(-1)[0].reportId}`
+    );
+    active.classList.add('underline--active');
+    this.drawBars();
     this.complianceList.update(this.data.slice(-1)[0]);
   }
 }
