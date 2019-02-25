@@ -45,11 +45,6 @@ const words = [
   },
   {
     definition:
-      'means a pistol, revolver, shotgun, carbine, or machine gun, as well as any instrument capable of discharging a bullet or shot.',
-    term: 'firearm'
-  },
-  {
-    definition:
       'means the development or putting into place of a policy or procedure, including the appropriate training of all relevant personnel, and the consistent and verified performance of that policy or procedure in actual practice.',
     term: 'implementation'
   },
@@ -229,6 +224,11 @@ const words = [
   },
   {
     definition:
+      'means a pistol, revolver, shotgun, carbine, or machine gun, as well as any instrument capable of discharging a bullet or shot.',
+    term: 'firearm'
+  },
+  {
+    definition:
       'means race, ethnicity, age, sex, gender expression or gender identity, sexual orientation, and limited English proficiency, if known.',
     term: 'demographic category'
   },
@@ -344,12 +344,23 @@ class Term {
 
 function replaceTerms(elem) {
   let termIdxs = [];
+  const ranges = [];
   for (const term of words) {
     let result;
-    const regex = new RegExp(`(${term.term})s?(?=\\s|\\,|\\.|$)`, 'gi');
+    const regex = new RegExp(`(${term.term})s?(?=\\s|\\'|\\,|\\.|$)`, 'gi');
     while ((result = regex.exec(elem.firstChild.nodeValue)) !== null) {
+      let unique = true;
       const idx = result.index;
-      termIdxs.push({ text: result[1], term: term.term, idx: idx });
+      for (const range of ranges) {
+        if ((idx > range[0] && idx < range[1]) || idx == range[0]) {
+          console.log(term, idx, range);
+          unique = false;
+        }
+      }
+      ranges.push([idx, idx + term.term.length]);
+      if (unique) {
+        termIdxs.push({ text: result[1], term: term.term, idx: idx });
+      }
     }
   }
 
