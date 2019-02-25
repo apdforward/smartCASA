@@ -353,7 +353,6 @@ function replaceTerms(elem) {
       const idx = result.index;
       for (const range of ranges) {
         if ((idx > range[0] && idx < range[1]) || idx == range[0]) {
-          console.log(term, idx, range);
           unique = false;
         }
       }
