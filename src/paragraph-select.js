@@ -37,6 +37,9 @@ class ParagraphItem {
           data[i].report = reports[i];
         }
         this.complianceChart.update(data);
+        document.querySelector(
+          '.title-paragraph-number'
+        ).innerHTML = this.data.paragraphNumber;
       });
     });
   }
