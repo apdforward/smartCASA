@@ -25,7 +25,7 @@ function addLineBreaks(parentElem) {
     const node = parentElem.childNodes[i];
     if (node.nodeType == Node.TEXT_NODE) {
       let result;
-      const regex = new RegExp(/\s(\(*[a-z]{1}[\)|\.])\s/gi);
+      const regex = new RegExp(/\s(\(*[a-z]{1,3}[\)|\.])\s/gi);
       const idxs = [];
       while ((result = regex.exec(node.nodeValue)) !== null) {
         const idx = result.index;
