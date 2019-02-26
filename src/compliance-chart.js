@@ -1,3 +1,5 @@
+import { parseDate } from './utils';
+
 class ComplianceChart {
   constructor(complianceList) {
     this.complianceList = complianceList;
@@ -8,6 +10,7 @@ class ComplianceChart {
     this.height = 300;
     this.drawChart = this.drawChart.bind(this);
     this.update = this.update.bind(this);
+    this.setTitle = this.setTitle.bind(this);
   }
 
   drawChart() {
@@ -113,12 +116,21 @@ class ComplianceChart {
 
   onResize() {}
 
+  setTitle() {
+    const dateRange = document.querySelector('.compliance-dates');
+    dateRange.innerHTML = '';
+    dateRange.innerHTML = `${parseDate(
+      this.data[0].report.periodBegin
+    )} - ${parseDate(this.data.slice(-1)[0].report.periodEnd)}`;
+  }
+
   update(data) {
     while (this.g.lastChild) {
       this.g.removeChild(this.g.lastChild);
     }
     this.drawChart();
     this.data = data;
+    this.setTitle();
     this.drawLabels();
     const active = document.querySelector(
       `.underline-${this.data.slice(-1)[0].reportId}`
