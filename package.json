@@ -5,7 +5,7 @@
   "author": "Russ Biggs <russbiggs@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "start:dev": "webpack-dev-server"
+    "start:dev": "webpack-dev-server --mode=development"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

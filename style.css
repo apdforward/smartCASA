@@ -20,16 +20,7 @@ h4 {
 h3 {
   margin-top: 5px;
 }
-/*
-::-webkit-scrollbar {
-  height: 10px;
-  border: none;
-}
-::-webkit-scrollbar-thumb:horizontal {
-  background: #aaa;
-  border-radius: 10px;
-}
-*/
+
 .navigation {
   background-color: #00acc1;
   display: flex;
@@ -117,17 +108,18 @@ select {
   right: 0px;
   padding: 0px;
   margin-right: 30px;
-  top: 34px;
+  top: 44px;
   z-index: 4;
   background-color: #eee;
   box-shadow: 0px 1px 3px #aaa;
-  -webkit-transition: height 0.4s ease-in-out;
-  -moz-transition: height 0.4s ease-in-out;
-  -o-transition: height 0.4s ease-in-out;
-  transition: height 0.4s ease-in-out;
+  -webkit-transition: height 0.2s ease-in-out;
+  -moz-transition: height 0.2s ease-in-out;
+  -o-transition: height 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
 }
 
 .paragraph-list--overflow {
+  height: 400px;
   overflow: auto;
 }
 
@@ -423,14 +415,18 @@ select {
   height: 30px;
   padding: 15px;
   width: 280px;
-  background-color: #333;
   color: white;
+  background-color: #333;
   line-height: 30px;
   opacity: 0.7;
   bottom: 0;
   transform: translateY(62px);
   will-change: transform;
   transition: transform 0.4s ease-in-out;
+}
+
+.snack--hidden {
+  background-color: #fff;
 }
 
 .snack--visible {

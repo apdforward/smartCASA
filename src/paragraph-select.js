@@ -88,21 +88,18 @@ class ParagraphSelect {
 
   toggleDropdown() {
     clearTimeout(this.timeout);
-    const nParagraphs = this.dropdown.childNodes.length;
     if (this.active) {
       this.elem.classList.remove('paragraph-select--active');
-      this.dropdown.style.height = '0px';
       this.active = false;
       this.timeout = setTimeout(() => {
         this.dropdown.classList.remove('paragraph-list--overflow');
-      }, 400);
+      }, 200);
     } else {
-      this.dropdown.style.height = `${nParagraphs * 36}px`;
       this.elem.classList.add('paragraph-select--active');
       this.active = true;
       this.timeout = setTimeout(() => {
         this.dropdown.classList.add('paragraph-list--overflow');
-      }, 400);
+      }, 200);
     }
   }
 
