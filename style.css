@@ -79,6 +79,7 @@ select {
   position: relative;
   display: flex;
   top: 20px;
+  min-height: 100vh;
   margin: 15px 15px 0 15px;
 }
 
@@ -321,7 +322,23 @@ select {
   padding: 0px 15px 70px;
 }
 
+.compliance--hidden {
+  display: none;
+}
+
+.no-compliance {
+  text-align: center;
+  position: relative;
+  box-shadow: 1px 1px 3px #aaa;
+  padding: 70px 15px 70px;
+}
+
+.no-compliance--hidden {
+  display: none;
+}
+
 .compliance__title {
+  text-align: center;
   margin: 0;
   padding: 10px 0px 10px 0px;
 }
@@ -344,6 +361,7 @@ select {
 }
 
 .compliance__chart {
+  width: 100%;
   min-height: 200px;
 }
 
@@ -465,6 +483,10 @@ select {
   stroke: #000;
   stroke-width: 1px;
   fill: none;
+}
+
+.background {
+  fill: #f9f9f9;
 }
 
 .bar {

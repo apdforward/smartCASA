@@ -3,10 +3,12 @@ import { parseDate } from './utils';
 class ComplianceChart {
   constructor(complianceList) {
     this.complianceList = complianceList;
+    const parent = document.querySelector('.compliance__chart');
+    const { width } = parent.getBoundingClientRect();
     this.svg = document.querySelector('.compliance__chart > svg ');
     this.g = document.querySelector('.compliance__chart > svg > g');
     this.data = [];
-    this.width = 600;
+    this.width = width;
     this.height = 300;
     this.drawChart = this.drawChart.bind(this);
     this.update = this.update.bind(this);
@@ -14,6 +16,16 @@ class ComplianceChart {
   }
 
   drawChart() {
+    this.svg.style.width = this.width;
+    this.svg.style.height = this.height;
+    const background = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'rect'
+    );
+    background.classList.add('background');
+    background.setAttribute('width', this.width);
+    background.setAttribute('height', 200);
+    this.g.appendChild(background);
     const axis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     axis.classList.add('axis');
     axis.setAttribute('x1', '0');
@@ -21,6 +33,26 @@ class ComplianceChart {
     axis.setAttribute('x2', this.width);
     axis.setAttribute('y2', '100');
     this.g.appendChild(axis);
+    const minAxis = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'line'
+    );
+    minAxis.classList.add('axis');
+    minAxis.setAttribute('x1', '0');
+    minAxis.setAttribute('y1', '200');
+    minAxis.setAttribute('x2', this.width);
+    minAxis.setAttribute('y2', '200');
+    const maxAxis = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'line'
+    );
+    this.g.appendChild(minAxis);
+    maxAxis.classList.add('axis');
+    maxAxis.setAttribute('x1', '0');
+    maxAxis.setAttribute('y1', '1');
+    maxAxis.setAttribute('x2', this.width);
+    maxAxis.setAttribute('y2', '1');
+    this.g.appendChild(maxAxis);
   }
 
   drawBars() {
@@ -128,16 +160,25 @@ class ComplianceChart {
     while (this.g.lastChild) {
       this.g.removeChild(this.g.lastChild);
     }
-    this.drawChart();
-    this.data = data;
-    this.setTitle();
-    this.drawLabels();
-    const active = document.querySelector(
-      `.underline-${this.data.slice(-1)[0].reportId}`
-    );
-    active.classList.add('underline--active');
-    this.drawBars();
-    this.complianceList.update(this.data.slice(-1)[0]);
+    const noComplianceElem = document.querySelector('.no-compliance');
+    const complianceElem = document.querySelector('.compliance');
+    if (data.length > 0) {
+      noComplianceElem.classList.add('no-compliance--hidden');
+      complianceElem.classList.remove('compliance--hidden');
+      this.drawChart();
+      this.data = data;
+      this.setTitle();
+      this.drawLabels();
+      const active = document.querySelector(
+        `.underline-${this.data.slice(-1)[0].reportId}`
+      );
+      active.classList.add('underline--active');
+      this.drawBars();
+      this.complianceList.update(this.data.slice(-1)[0]);
+    } else {
+      complianceElem.classList.add('compliance--hidden');
+      noComplianceElem.classList.remove('no-compliance--hidden');
+    }
   }
 }
 

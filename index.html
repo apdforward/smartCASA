@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css" />
     <title>smartCASA</title>
   </head>
-
   <body>
     <nav class="navigation">
       <img src="./smartcasa_logo.png" alt="smartcasa logo" class="logo" />
@@ -45,15 +44,20 @@
         </div>
       </div>
       <div class="container__compliance">
-        <div class="no-compliance"></div>
+        <div class="no-compliance no-compliance--hidden">
+          <h3>Paragraph is not monitored</h3>
+        </div>
         <div class="compliance">
-          <h3 class="compliance__title">
-            Compliance Index History for Paragraph
-            <span class="title-paragraph-number"></span>
-          </h3>
-          <h4 class="compliance-dates"></h4>
+          <div class="compliance__title">
+            <h3>
+              Compliance Index History for Paragraph
+              <span class="title-paragraph-number"></span>
+            </h3>
+            <h4 class="compliance-dates"></h4>
+          </div>
+
           <div class="compliance__chart">
-            <svg width="600" height="250"><g></g></svg>
+            <svg><g></g></svg>
           </div>
           <div class="compliance__detail">
             <h3 class="report-title"></h3>
@@ -69,7 +73,6 @@
         </div>
       </div>
     </section>
-
     <footer class="footer">
       <span>Built by <a href="https://www.apdforward.org/">APDForward</a></span>
       <a href="https://github.com/apdforward/smartcasa">
