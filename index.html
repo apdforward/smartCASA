@@ -4,7 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      type="keywords"
+      content="smartCASA,Albuquerque,Police,DOJ,Justice,ACLU,Court,CASA,Approved,Settlement,Consent,Decree,Independent,Monitor"
+    />
     <link rel="stylesheet" href="style.css" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-135893593-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-135893593-1');
+    </script>
+    <script
+      src="https://browser.sentry-cdn.com/4.6.4/bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+
     <title>smartCASA</title>
   </head>
   <body>
@@ -80,6 +101,11 @@
       </a>
     </footer>
     <div class="snack snack--hidden">Paragraph copied to clipboard</div>
+    <script>
+      Sentry.init({
+        dsn: 'https://b7c67c111d834a39a1eb96417f76616b@sentry.io/1411397'
+      });
+    </script>
     <script src="./bundle.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
