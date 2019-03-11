@@ -16,8 +16,8 @@ class ComplianceChart {
   }
 
   drawChart() {
-    this.svg.style.width = this.width;
-    this.svg.style.height = this.height;
+    this.svg.setAttribute('width', this.width);
+    this.svg.setAttribute('height', this.height);
     const background = document.createElementNS(
       'http://www.w3.org/2000/svg',
       'rect'
