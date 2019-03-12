@@ -10,70 +10,103 @@ class API {
     this.init = { method: 'GET', mode: 'cors', headers: headers };
   }
 
-  async getAllParagraphs() {
-    const response = await fetch(`${this.baseURL}/paragraphs`, this.init);
-    const jsonData = await response.json();
-    return await jsonData.data;
+  getAllParagraphs() {
+    return fetch(`${this.baseURL}/paragraphs`, this.init)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 
-  async getParagraph(paragraphId) {
-    const response = await fetch(
-      `${this.baseURL}/paragraphs/${paragraphId}`,
-      this.init
-    );
-    const jsonData = await response.json();
-    return await jsonData.data;
+  getParagraph(paragraphId) {
+    return fetch(`${this.baseURL}/paragraphs/${paragraphId}`, this.init)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 
-  async getComplianceByParagraph(paragraphId) {
-    const response = await fetch(
+  getComplianceByParagraph(paragraphId) {
+    return fetch(
       `${this.baseURL}/paragraphs/${paragraphId}/compliances`,
       this.init
-    );
-    const jsonData = await response.json();
-    return await jsonData.data;
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 
-  async getAllCompliances() {
-    const response = await fetch(`${this.baseURL}/compliances`, this.init);
-    const jsonData = await response.json();
-    return await jsonData.data;
+  getAllCompliances() {
+    return fetch(`${this.baseURL}/compliances`, this.init)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 
-  async getAllReports() {
-    const response = await fetch(`${this.baseURL}/reports`, this.init);
-    const jsonData = await response.json();
-    return await jsonData.data;
+  getAllReports() {
+    return fetch(`${this.baseURL}/reports`, this.init)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 
-  async getAllCategoryTags() {
-    const response = await fetch(`${this.baseURL}/category-tags`, this.init);
-    const jsonData = await response.json();
-    return await jsonData.data;
+  getAllCategoryTags() {
+    return fetch(`${this.baseURL}/category-tags`, this.init)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 
-  async getAllSpecificTags() {
-    const response = await fetch(`${this.baseURL}/specific-tags`, this.init);
-    const jsonData = await response.json();
-    return await jsonData.data;
+  getAllSpecificTags() {
+    return fetch(`${this.baseURL}/specific-tags`, this.init)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 
-  async getParagraphsByCategoryTag(categoryTagId) {
-    const response = await fetch(
+  getParagraphsByCategoryTag(categoryTagId) {
+    return fetch(
       `${this.baseURL}/category-tags/${categoryTagId}/paragraphs`,
       this.init
-    );
-    const jsonData = await response.json();
-    return await jsonData.data;
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 
-  async getParagraphsBySpecificTag(specificTagId) {
-    const response = await fetch(
+  getParagraphsBySpecificTag(specificTagId) {
+    return fetch(
       `${this.baseURL}/specific-tags/${specificTagId}/paragraphs`,
       this.init
-    );
-    const jsonData = await response.json();
-    return await jsonData.data;
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return data.data;
+      });
   }
 }
 
