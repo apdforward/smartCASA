@@ -4,9 +4,10 @@ class API {
     this.lang = config.lang || 'en';
     this.getAllParagraphs = this.getAllParagraphs.bind(this);
     this.getParagraph = this.getParagraph.bind(this);
-    const headers = new Headers();
-    headers.append('Content-Type', 'applications/json');
-    headers.append('Accept-Language', this.lang);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept-Language': this.lang
+    };
     this.init = { method: 'GET', mode: 'cors', headers: headers };
   }
 
