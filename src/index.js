@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import './copy-button';
 import { CategoryTopic, SpecificTopic } from './topic';
 import Help from './help';
