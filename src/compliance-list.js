@@ -95,7 +95,7 @@ class ComplianceList {
     primaryComplianceContainer.appendChild(primaryComplianceStatus);
     primaryComplianceContainer.classList.add(primaryClass);
     this.primaryCompliance.appendChild(primaryComplianceTerm.elem);
-    this.primaryCompliance.append(document.createTextNode(': '));
+    this.primaryCompliance.appendChild(document.createTextNode(': '));
     this.primaryCompliance.appendChild(primaryComplianceContainer);
 
     const secondaryComplianceTerm = new Term({
@@ -121,7 +121,7 @@ class ComplianceList {
     secondaryComplianceContainer.appendChild(secondaryComplianceStatus);
     secondaryComplianceContainer.classList.add(secondaryClass);
     this.secondaryCompliance.appendChild(secondaryComplianceTerm.elem);
-    this.secondaryCompliance.append(document.createTextNode(': '));
+    this.secondaryCompliance.appendChild(document.createTextNode(': '));
     this.secondaryCompliance.appendChild(secondaryComplianceContainer);
     const operationalComplianceTerm = new Term({
       text: 'Operational Compliance',
@@ -142,7 +142,7 @@ class ComplianceList {
     operationalComplianceContainer.appendChild(operationalComplianceStatus);
     operationalComplianceContainer.classList.add(operationalClass);
     this.operationalCompliance.appendChild(operationalComplianceTerm.elem);
-    this.operationalCompliance.append(document.createTextNode(': '));
+    this.operationalCompliance.appendChild(document.createTextNode(': '));
     this.operationalCompliance.appendChild(operationalComplianceContainer);
   }
 }

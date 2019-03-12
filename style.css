@@ -23,11 +23,22 @@ h3 {
 
 .navigation {
   background-color: #00acc1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: row;	
+  -webkit-box-orient:horizontal;	
+  -webkit-box-direction:normal;	
+  -ms-flex-direction:row;	
+  flex-direction:row; 
   justify-content: flex-end;
   height: 60px;
   line-height: 60px;
   box-shadow: 0px 1px 3px #aaa;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
 }
 
 .navigation__title {

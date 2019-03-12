@@ -108,7 +108,7 @@ class ComplianceChart {
         'http://www.w3.org/2000/svg',
         'text'
       );
-      label.innerHTML = `IMR-${imr.reportId}`;
+      label.textContent = `IMR-${imr.reportId}`;
       label.setAttribute('x', x);
       label.classList.add('label');
       label.classList.add(`label-${imr.reportId}`);
