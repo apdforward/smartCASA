@@ -23,7 +23,6 @@ import ComplianceChart from './compliance-chart';
   );
 
   api.getAllCategoryTags().then(topics => {
-    console.log(topics);
     const categoryFrag = document.createDocumentFragment();
     for (const topic of topics) {
       const categoryTopic = new CategoryTopic(topic, api, paragraphSelect);
