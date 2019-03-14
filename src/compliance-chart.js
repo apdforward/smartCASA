@@ -74,7 +74,7 @@ class ComplianceChart {
         y = 100 - Math.abs(imr.score) * 100;
         colorClass = 'bar--positive';
       } else {
-        y = Math.abs(imr.score) * 100;
+        y = 100;
         colorClass = 'bar--negative';
       }
       bar.setAttribute('width', barWidth - 10);
@@ -184,40 +184,25 @@ class ComplianceChart {
 
 function calculateScores(data) {
   const scores = data.map(imr => {
-    let totalScore = 0;
-    switch (imr.primaryCompliance) {
-      case 'In Compliance':
-        totalScore += 3;
-        break;
-      case 'Not In Compliance':
-        totalScore += -3;
-        break;
-      default:
-        totalScore += 0;
-    }
-    switch (imr.secondaryCompliance) {
-      case 'In Compliance':
-        totalScore += 2;
-        break;
-      case 'Not In Compliance':
-        totalScore += -2;
-        break;
-      default:
-        totalScore += 0;
-    }
-    switch (imr.operationalCompliance) {
-      case 'In Compliance':
-        totalScore += 1;
-        break;
-      case 'Not In Compliance':
-        totalScore += -1;
-        break;
-      default:
-        totalScore += 0;
+    let score = 0;
+    if (imr.primaryCompliance == 'Not In Compliance') {
+      score = -3;
+    } else if (imr.primaryCompliance == 'In Compliance') {
+      if (imr.secondaryCompliance == 'Not In Compliance') {
+        score = -2;
+      } else if (imr.secondaryCompliance == 'In Compliance') {
+        if (imr.operationalCompliance == 'In Compliance') {
+          score = 3;
+        } else {
+          score = -1;
+        }
+      } else {
+        score = 1;
+      }
     }
     return {
       imr: imr,
-      score: totalScore / 6
+      score: score / 3
     };
   });
 
