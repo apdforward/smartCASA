@@ -8,14 +8,21 @@
       type="keywords"
       content="smartCASA,Albuquerque,Police,DOJ,Justice,ACLU,Court,CASA,Approved,Settlement,Consent,Decree,Independent,Monitor"
     />
+    <meta
+      name="Description"
+      content="smartCASA is an interactive web application for exploring the Albuquerque Police Department Court Approved Settlement Agreement Compliance"
+    />
     <link rel="stylesheet" href="style.css" />
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-135893593-1"
     ></script>
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
-    <script src="https://unpkg.com/unfetch/polyfill"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.2.20171210/classList.min.js"></script>
+    <!--[if IE]>
+      <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
+      <script src="https://unpkg.com/unfetch/polyfill"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.2.20171210/classList.min.js"></script>
+    <![endif]-->
+    <link rel="preconnect" href="https://api.smartcasa.org" />
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
