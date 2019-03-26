@@ -5,6 +5,7 @@
   "author": "Russ Biggs <russbiggs@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
+    "build-index": "node build-lunr-idx.js",
     "start:dev": "webpack-dev-server --mode=development"
   },
   "devDependencies": {
@@ -21,6 +22,7 @@
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "follow-redirects": "^1.7.0",
     "prettier": "^1.15.3",
     "prettier-eslint": "^8.8.2",
     "regenerator-runtime": "^0.13.1",
@@ -28,5 +30,7 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lunr": "^2.3.6"
+  }
 }

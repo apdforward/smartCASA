@@ -38,24 +38,20 @@
     <nav class="navigation">
       <img src="./smartcasa_logo.png" alt="smartcasa logo" class="logo" />
       <a href="/" class="navigation__title"> smartCASA </a>
-      <div class="filter-btn"><i data-feather="filter"></i></div>
+      <div class="search-icon-container"><i data-feather="search"></i></div>
+      <input
+        type="text"
+        name="search"
+        id="search"
+        class="topic-search"
+        placeholder="type here to filter paragraph list"
+        disabled
+      />
       <div class="paragraph-select">
         <span class="selected-paragraph"></span>
         <ul class="paragraph-list"></ul>
       </div>
     </nav>
-    <section class="js-filter-panel filter-panel">
-      <div class="topic-filter">
-        <div class="category-topics topic">
-          <h3>Category Tags</h3>
-          <div class="category-topics__container"></div>
-        </div>
-        <div class="specific-topics topic">
-          <h3>Specific Tags</h3>
-          <div class="specific-topics__container"></div>
-        </div>
-      </div>
-    </section>
     <section class="container">
       <div class="container__paragraph">
         <div class="paragraph">

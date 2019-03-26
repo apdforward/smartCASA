@@ -27,11 +27,11 @@ h3 {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;	
-  -webkit-box-orient:horizontal;	
-  -webkit-box-direction:normal;	
-  -ms-flex-direction:row;	
-  flex-direction:row; 
+  -webkit-flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
   justify-content: flex-end;
   height: 60px;
   line-height: 60px;
@@ -253,8 +253,36 @@ select {
   stroke: #fff;
 }
 
-.feather-filter {
-  fill: #000;
+.search-icon-container {
+  padding: 5px 10px 0px 0px;
+}
+
+.topic-search {
+  height: 30px;
+  width: 220px;
+  margin-top: 12px;
+  border: 0;
+  outline: 0;
+  background: #0000;
+  border-bottom: 1px solid #000;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.topic-search::placeholder {
+  font-size: 0.9rem;
+  color: #333;
+  opacity: 1;
+}
+
+.topic-search:-ms-input-placeholder {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.topic-search::-ms-input-placeholder {
+  color: #333;
+  font-size: 0.9rem;
 }
 
 .copy-btn--clicked {

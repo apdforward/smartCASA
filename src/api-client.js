@@ -63,52 +63,6 @@ class API {
         return data.data;
       });
   }
-
-  getAllCategoryTags() {
-    return fetch(`${this.baseURL}/category-tags`, this.init)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        return data.data;
-      });
-  }
-
-  getAllSpecificTags() {
-    return fetch(`${this.baseURL}/specific-tags`, this.init)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        return data.data;
-      });
-  }
-
-  getParagraphsByCategoryTag(categoryTagId) {
-    return fetch(
-      `${this.baseURL}/category-tags/${categoryTagId}/paragraphs`,
-      this.init
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        return data.data;
-      });
-  }
-
-  getParagraphsBySpecificTag(specificTagId) {
-    return fetch(
-      `${this.baseURL}/specific-tags/${specificTagId}/paragraphs`,
-      this.init
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        return data.data;
-      });
-  }
 }
 
 export default API;
