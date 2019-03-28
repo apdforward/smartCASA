@@ -36,14 +36,43 @@
   </head>
   <body>
     <nav class="navigation">
-      <img src="./smartcasa_logo.png" alt="smartcasa logo" class="logo" />
-      <a href="/" class="navigation__title"> smartCASA </a>
+      <div class="logo">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 55.6 55.6"
+        >
+          <path fill="#fff" d="M6.4 17.2h42.9v37.5H6.4z" />
+          <path fill="#fff" d="M6.1 1.2h26.4v20H6.1z" />
+          <image
+            width="22.9"
+            height="17.7"
+            x="26.7"
+            y="-23.7"
+            preserveAspectRatio="none"
+            transform="matrix(.69385 .72012 -.62684 .77915 0 0)"
+            xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAVCAYAAAC33pUlAAAABHNCSVQICAgIfAhkiAAAADJJREFU SIntzTENACAAxMBCcID/DYnsj4sPQ8/AjSSh48xSBICZmZmZmZnZz9kCdum6D9wwBdPhx1IhAAAA AElFTkSuQmCC"
+          />
+          <path
+            fill="#010002"
+            d="M50.3 17.9a2 2 0 0 0-.2-.5v-.1a2 2 0 0 0-.4-.5L33.5.6a2 2 0 0 0-.5-.3 2 2 0 0 0-1-.3H7.3a2 2 0 0 0-2 2v51.6c0 1.1 1 2 2 2h41a2 2 0 0 0 2-2V18.3v-.4zm-3.3-.6L33.8 17V4.1l6.2 6.3zm-39.2 36l.1-50.8 23.9-.2-.3 15.6c0 1.1.5 1.4 1.6 1.5l14.9.2-.5 33.4z"
+          />
+          <path
+            fill="#00acc1"
+            d="M10.4 49.7h9V15h-9zM22.2 49.8h9V36.5h-9zM34.2 49.8h9V26.7h-9z"
+          />
+        </svg>
+      </div>
+      <a href="/" class="navigation__title" aria-label="link to page">
+        smartCASA
+      </a>
       <div class="search-icon-container"><i data-feather="search"></i></div>
       <input
         type="text"
         name="search"
         id="search"
         class="topic-search"
+        aria-label="term search filter"
         placeholder="type here to filter paragraph list"
         disabled
       />
@@ -98,9 +127,15 @@
     </section>
     <footer class="footer">
       <span>
-        Built by <a href="https://www.apdforward.org/">APD Forward</a>
+        Built by
+        <a href="https://www.apdforward.org/" aria-label="APD Forward homepage"
+          >APD Forward</a
+        >
       </span>
-      <a href="https://github.com/apdforward/smartcasa">
+      <a
+        href="https://github.com/apdforward/smartcasa"
+        aria-label="smartCASA github page"
+      >
         <i data-feather="github"></i>
       </a>
     </footer>
