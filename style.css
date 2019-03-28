@@ -410,16 +410,16 @@ select {
 
 .compliance-list__item--in-compliance {
   display: inline;
-  color: #66a61e;
-  border: #99d951 0.5px solid;
+  color: #4d7d17;
+  border: #679731 0.5px solid; /* 10% lighter from text*/
   padding: 1px 4px;
   font-weight: 600;
 }
 
 .compliance-list__item--not-in-compliance {
   display: inline;
-  color: #d95f02;
-  border: #ff9235 0.5px solid;
+  color: #bb5202;
+  border: #d56c1c 0.5px solid; /* 10% lighter from text*/
   padding: 1px 4px;
   font-weight: 600;
 }
@@ -427,7 +427,7 @@ select {
 .compliance-list__item--other {
   display: inline;
   color: #575757;
-  border: #717171 0.5px solid;
+  border: #717171 0.5px solid; /* 10% lighter from text*/
   padding: 1px 4px;
   font-weight: 600;
 }
