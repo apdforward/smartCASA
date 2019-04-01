@@ -12,7 +12,7 @@ const words = [
   {
     definition:
       'shall refer to the Albuquerque Police Department and its agents, officers, supervisors, and employees (both sworn and unsworn).',
-    term: 'the department'
+    term: 'department'
   },
   {
     definition:
