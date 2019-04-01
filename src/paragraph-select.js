@@ -67,6 +67,7 @@ class ParagraphSelect {
 
   createList(data) {
     const frag = document.createDocumentFragment();
+    data.sort((a, b) => (a.paragraphNumber > b.paragraphNumber ? 1 : -1)); // api should return sorted but this is just an addtional check
     for (const obj of data) {
       const paragraphItem = new ParagraphItem(
         obj,
@@ -78,7 +79,7 @@ class ParagraphSelect {
       this.paragraphs.push(paragraphItem);
       frag.appendChild(paragraphItem.elem);
     }
-    this.paragraphs[0].selectParagraph();
+    this.paragraphs[13].selectParagraph();
     this.dropdown.appendChild(frag);
   }
 
