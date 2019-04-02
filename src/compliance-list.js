@@ -73,8 +73,27 @@ class ComplianceList {
       pagesText += ', ';
     }
     pagesText = pagesText.slice(0, -2);
+    const imrPageOffset = {
+      1: 2,
+      2: 13,
+      3: 15,
+      4: 14,
+      5: 2,
+      6: 2,
+      8: 2
+    };
+    const pagesAnchor = document.createElement('a');
+    pagesAnchor.setAttribute('target', '_blank');
+    const correctedPage = data.pages[0] + imrPageOffset[data.reportId];
+    pagesAnchor.setAttribute(
+      'href',
+      `https://s3-us-west-2.amazonaws.com/smartcasa-docs/IMR-${
+        data.reportId
+      }.pdf#page=${correctedPage}`
+    );
     const pages = document.createTextNode(`Pages ${pagesText}`);
-    this.pages.appendChild(pages);
+    pagesAnchor.appendChild(pages);
+    this.pages.appendChild(pagesAnchor);
     const primaryComplianceTerm = new Term({
       text: 'Primary Compliance',
       term: 'Primary Compliance',
