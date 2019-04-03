@@ -84,6 +84,7 @@ class ComplianceList {
     };
     const pagesAnchor = document.createElement('a');
     pagesAnchor.setAttribute('target', '_blank');
+    pagesAnchor.setAttribute('rel', 'noopener');
     const correctedPage = data.pages[0] + imrPageOffset[data.reportId];
     pagesAnchor.setAttribute(
       'href',
