@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: 'circleci/node'
+      - image: 'circleci/python:latest-node'
     steps:
       - checkout
       - run: yarn install && yarn run deploy
