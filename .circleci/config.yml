@@ -1,31 +1,31 @@
 version: 2.1
+
 orbs:
   aws-s3: circleci/aws-s3@1.0.0
-workflows:
-  build-deploy:
-    jobs:
-      build:
-        docker:
-          - image: 'circleci/node'
-        steps:
-          - checkout
-          - restore_cache:
-              name: Restore Yarn Package Cache
-              keys:
-                - yarn-packages-{{ checksum "yarn.lock" }}
-          - run:
-              name: Install Dependencies
-              command: yarn install --frozen-lockfile
-          - save_cache:
-              name: Save Yarn Package Cache
-              key: yarn-packages-{{ checksum "yarn.lock" }}
-              paths:
-                - ~/.cache/yarn
-          - run: yarn install && yarn run deploy
-          - aws-s3/sync:
-              from: bucket
-              to: 's3://smartcasa.org'
-              arguments: |
-                --acl public-read \
-                --cache-control "max-age=3600"
-              overwrite: true
+
+jobs:
+  build:
+    docker:
+      - image: 'circleci/node'
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: yarn install && yarn run deploy
+      - aws-s3/sync:
+          from: bucket
+          to: 's3://smartcasa.org'
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=3600"
+          overwrite: true
