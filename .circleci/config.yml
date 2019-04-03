@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run: yarn install && yarn run deploy
       - aws-s3/sync:
-          from: bucket
+          from: build
           to: 's3://smartcasa.org/'
           arguments: |
             --acl public-read \
