@@ -2,17 +2,21 @@ import './copy-button';
 import Help from './help';
 import API from './api-client';
 import { Term } from './glossary';
+import Modal from './modal';
 import ParagraphSelect from './paragraph-select';
 import Paragraph from './paragraph';
 import ComplianceList from './compliance-list';
 import ComplianceChart from './compliance-chart';
 import Search from './search';
+import { set, keys, Store } from 'idb-keyval';
 
 {
+  const store = new Store('smart-casa-db', 'smart-casa-store');
   const api = new API({ URL: 'https://api.smartcasa.org', lang: 'en-US' });
   const paragraph = new Paragraph();
   const complianceList = new ComplianceList();
   const complianceChart = new ComplianceChart(complianceList);
+  const modal = new Modal();
 
   const paragraphSelect = new ParagraphSelect(
     api,
@@ -35,5 +39,11 @@ import Search from './search';
   new Help('.js-paragraph-help', helpFrag);
   api.getAllParagraphs().then(data => {
     paragraphSelect.createList(data);
+  });
+  keys(store).then(keys => {
+    if (keys.length == 0) {
+      modal.open();
+      set('lastVisit', new Date().toISOString(), store);
+    }
   });
 }
