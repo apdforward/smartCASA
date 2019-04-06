@@ -193,8 +193,10 @@ function calculateScores(data) {
       } else if (imr.secondaryCompliance == 'In Compliance') {
         if (imr.operationalCompliance == 'In Compliance') {
           score = 3;
-        } else {
+        } else if (imr.operationalCompliance == 'Not In Compliance') {
           score = -1;
+        } else {
+          score = 2;
         }
       } else {
         score = 1;
