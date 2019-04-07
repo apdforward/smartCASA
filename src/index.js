@@ -8,10 +8,8 @@ import Paragraph from './paragraph';
 import ComplianceList from './compliance-list';
 import ComplianceChart from './compliance-chart';
 import Search from './search';
-import { set, keys, Store } from 'idb-keyval';
 
 {
-  const store = new Store('smart-casa-db', 'smart-casa-store');
   const api = new API({ URL: 'https://api.smartcasa.org', lang: 'en-US' });
   const paragraph = new Paragraph();
   const complianceList = new ComplianceList();
@@ -40,10 +38,15 @@ import { set, keys, Store } from 'idb-keyval';
   api.getAllParagraphs().then(data => {
     paragraphSelect.createList(data);
   });
-  keys(store).then(keys => {
-    if (keys.length == 0) {
-      modal.open();
-      set('lastVisit', new Date().toISOString(), store);
+  let cookie = false;
+  const cookies = document.cookie.split('; ');
+  for (const c of cookies) {
+    if (c == 'visited=True') {
+      cookie = true;
     }
-  });
+  }
+  if (!cookie) {
+    modal.open();
+    document.cookie = `visited=True; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+  }
 }
