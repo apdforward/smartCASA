@@ -33,7 +33,7 @@
     <title>smartCASA</title>
   </head>
   <body>
-    <nav class="navigation">
+    <div class="navigation">
       <div class="logo">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@
         <span class="selected-paragraph"></span>
         <ul class="paragraph-list"></ul>
       </div>
-    </nav>
+    </div>
     <section class="container">
       <div class="container__paragraph">
         <div class="paragraph">
@@ -162,15 +162,18 @@
           >APD Forward</a
         >
       </span>
-      <div class="about js-about-btn">About</div>
-      <a
-        href="https://github.com/apdforward/smartcasa"
-        target="_blank"
-        rel="noopener"
-        aria-label="smartCASA github page"
-      >
-        <i data-feather="github"></i>
-      </a>
+      <div class="footer-right">
+        <div class="about js-about-btn">About</div>
+        <a
+          href="https://github.com/apdforward/smartcasa"
+          target="_blank"
+          rel="noopener"
+          class="github-link"
+          aria-label="smartCASA github page"
+        >
+          <i data-feather="github"></i>
+        </a>
+      </div>
     </footer>
     <div class="snack snack--hidden">Paragraph copied to clipboard</div>
     <script
