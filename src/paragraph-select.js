@@ -1,10 +1,18 @@
 class ParagraphItem {
-  constructor(data, api, paragraph, complianceList, complianceChart) {
+  constructor(
+    data,
+    api,
+    paragraph,
+    complianceList,
+    complianceChart,
+    complianceTable
+  ) {
     this.elem = document.createElement('li');
     this.api = api;
     this.paragraph = paragraph;
     this.complianceList = complianceList;
     this.complianceChart = complianceChart;
+    this.complianceTable = complianceTable;
     this.data = data;
     this.elem.innerHTML = `${this.data.paragraphNumber} - ${
       this.data.paragraphTitle
@@ -37,6 +45,7 @@ class ParagraphItem {
           data[i].report = reports[i];
         }
         this.complianceChart.update(data);
+        this.complianceTable.update(data);
         document.querySelector(
           '.title-paragraph-number'
         ).innerHTML = this.data.paragraphNumber;
@@ -46,9 +55,16 @@ class ParagraphItem {
 }
 
 class ParagraphSelect {
-  constructor(api, paragraph, complianceList, complianceChart) {
+  constructor(
+    api,
+    paragraph,
+    complianceList,
+    complianceChart,
+    complianceTable
+  ) {
     this.complianceList = complianceList;
     this.complianceChart = complianceChart;
+    this.complianceTable = complianceTable;
     this.api = api;
     this.paragraph = paragraph;
     this.timeout;
@@ -74,7 +90,8 @@ class ParagraphSelect {
         this.api,
         this.paragraph,
         this.complianceList,
-        this.complianceChart
+        this.complianceChart,
+        this.complianceTable
       );
       this.paragraphs.push(paragraphItem);
       frag.appendChild(paragraphItem.elem);

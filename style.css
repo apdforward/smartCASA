@@ -538,6 +538,10 @@ select {
   text-align: center;
 }
 
+.compliance-table {
+  display: none;
+}
+
 @media screen and (max-width: 800px) {
   .container {
     -webkit-flex-direction: column;
@@ -557,6 +561,112 @@ select {
   }
 
   .topic-search {
+    display: none;
+  }
+}
+
+@media print {
+  .compliance-table {
+    display: block;
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  .term {
+    text-decoration: none;
+  }
+
+  .feather-github {
+    display: none;
+  }
+
+  .about {
+    display: none;
+  }
+  .container {
+    display: block;
+    position: relative;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .paragraph {
+    box-shadow: none;
+    break-after: page;
+  }
+
+  .compliance {
+    box-shadow: none;
+  }
+
+  .container__paragraph {
+    display: block;
+    position: relative;
+    margin: 0;
+    break-after: page;
+    width: 100%;
+  }
+
+  .container__compliance {
+    display: block;
+    position: relative;
+    margin: 0;
+    break-before: page;
+    width: 100%;
+    box-shadow: none !important;
+  }
+
+  .compliance-table {
+    border-collapse: collapse;
+  }
+
+  .compliance-table > tbody > tr > td {
+    margin: 5px;
+    height: 25px;
+    text-align: left;
+  }
+
+  .compliance-table > thead > tr {
+    text-align: left;
+    border-bottom: 1px solid #777;
+    margin-bottom: 10px;
+  }
+
+  .compliance-table > thead > tr > th {
+    padding: 0px 5px;
+  }
+
+  .compliance-table > thead::after {
+    content: '';
+    display: block;
+    height: 0.7em;
+    width: 100%;
+    background: white;
+  }
+
+  .compliance__detail {
+    display: none;
+  }
+
+  .underline {
+    display: none;
+  }
+
+  .snack {
+    display: none;
+  }
+
+  .copy-btn {
+    display: none;
+  }
+
+  .topic-search {
+    display: none;
+  }
+
+  .paragraph-select {
     display: none;
   }
 }

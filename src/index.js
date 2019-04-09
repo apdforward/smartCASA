@@ -8,19 +8,22 @@ import Paragraph from './paragraph';
 import ComplianceList from './compliance-list';
 import ComplianceChart from './compliance-chart';
 import Search from './search';
+import ComplianceTable from './compliance-table';
 
 {
   const api = new API({ URL: 'https://api.smartcasa.org', lang: 'en-US' });
   const paragraph = new Paragraph();
   const complianceList = new ComplianceList();
   const complianceChart = new ComplianceChart(complianceList);
+  const complianceTable = new ComplianceTable();
   const modal = new Modal();
 
   const paragraphSelect = new ParagraphSelect(
     api,
     paragraph,
     complianceList,
-    complianceChart
+    complianceChart,
+    complianceTable
   );
   new Search(paragraphSelect);
   const helpTerm = new Term({
