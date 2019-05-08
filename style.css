@@ -450,6 +450,35 @@ select {
   fill: #f9f9f9;
 }
 
+.chart-tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 5px;
+  font-size: 12px;
+  background: white;
+  border: 0px;
+  box-shadow: 1px 1px 3px #333;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.2s ease-in;
+}
+
+.legend-item.green {
+  fill: #66a61e;
+}
+
+.legend-item.red {
+  fill: #d95f02;
+}
+.legend-item.blue {
+  fill: blue;
+}
+
+.chart-tooltip--visible {
+  opacity: 0.93;
+}
+
 .bar {
   cursor: pointer;
 }

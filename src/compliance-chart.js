@@ -9,7 +9,9 @@ class ComplianceChart {
     this.g = document.querySelector('.compliance__chart > svg > g');
     this.data = [];
     this.width = width;
-    this.height = 300;
+    this.height = 250;
+    this.tooltipTimeout;
+    this.tooltip = document.querySelector('.chart-tooltip');
     this.drawChart = this.drawChart.bind(this);
     this.update = this.update.bind(this);
     this.setTitle = this.setTitle.bind(this);
@@ -59,7 +61,7 @@ class ComplianceChart {
     const barWidth = this.width / this.data.length - 10;
     const imrs = calculateScores(this.data);
     const frag = document.createDocumentFragment();
-    let x = 0;
+    let x = 10;
     for (const imr of imrs) {
       const bar = document.createElementNS(
         'http://www.w3.org/2000/svg',
@@ -90,6 +92,19 @@ class ComplianceChart {
         );
         underline.classList.add('underline--active');
       });
+      bar.addEventListener('mouseover', e => {
+        clearTimeout(this.tooltipTimeout);
+        this.tooltipTimeout = setTimeout(() => {
+          this.tooltip.classList.add('chart-tooltip--visible');
+          this.tooltip.innerHTML = `${imr.apdfScore}`;
+          this.tooltip.style.left = `${e.pageX}px`;
+          this.tooltip.style.top = `${e.pageY - 100}px`;
+        }, 800);
+      });
+      bar.addEventListener('mouseout', () => {
+        this.tooltip.classList.remove('chart-tooltip--visible');
+        clearTimeout(this.tooltipTimeout);
+      });
       bar.classList.add('bar');
       bar.classList.add(colorClass);
       x += barWidth + 10;
@@ -113,7 +128,7 @@ class ComplianceChart {
       label.classList.add('label');
       label.classList.add(`label-${imr.reportId}`);
       x += barWidth + 10;
-      label.setAttribute('y', this.height - 70);
+      label.setAttribute('y', this.height - 20);
       label.addEventListener('click', () => {
         this.complianceList.update(imr);
         const active = document.querySelector('.underline--active');
@@ -131,7 +146,7 @@ class ComplianceChart {
       underline.setAttribute('height', 5);
       underline.setAttribute('width', barWidth);
       underline.setAttribute('x', underlineX);
-      underline.setAttribute('y', this.height - 70);
+      underline.setAttribute('y', this.height - 20);
       frag.appendChild(label);
       frag.appendChild(underline);
       underlineX += barWidth + 10;
@@ -185,25 +200,33 @@ class ComplianceChart {
 function calculateScores(data) {
   const scores = data.map(imr => {
     let score = 0;
+    let apdfScore = 'Not measured/Not yet due';
     if (imr.primaryCompliance == 'Not In Compliance') {
       score = -3;
+      apdfScore = 'Primary Non-compliance';
     } else if (imr.primaryCompliance == 'In Compliance') {
       if (imr.secondaryCompliance == 'Not In Compliance') {
         score = -2;
+        apdfScore = 'Secondary Non-compliance';
       } else if (imr.secondaryCompliance == 'In Compliance') {
         if (imr.operationalCompliance == 'In Compliance') {
           score = 3;
+          apdfScore = 'Opertational Compliance';
         } else if (imr.operationalCompliance == 'Not In Compliance') {
           score = -1;
+          apdfScore = 'Opertational Non-compliance';
         } else {
           score = 2;
+          apdfScore = 'Secondary Compliance';
         }
       } else {
         score = 1;
+        apdfScore = 'Primary Compliance';
       }
     }
     return {
       imr: imr,
+      apdfScore: apdfScore,
       score: score / 3
     };
   });

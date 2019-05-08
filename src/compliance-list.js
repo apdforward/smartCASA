@@ -5,6 +5,7 @@ class ComplianceList {
     this.title = document.querySelector('.report-title');
     this.pages = document.querySelector('.report-pages');
     this.reportData = document.querySelector('.report-data');
+    this.apdfCompliance = document.querySelector('.apdf-compliance');
     this.primaryCompliance = document.querySelector(
       '.compliance-list li:nth-child(1)'
     );
@@ -18,6 +19,7 @@ class ComplianceList {
   }
 
   update(data) {
+    this.apdfCompliance.innerHTML = '';
     while (this.pages.firstChild) {
       this.pages.removeChild(this.pages.firstChild);
     }
@@ -80,7 +82,8 @@ class ComplianceList {
       4: 14,
       5: 2,
       6: 2,
-      8: 2
+      8: 2,
+      9: 2
     };
     const pagesAnchor = document.createElement('a');
     pagesAnchor.setAttribute('target', '_blank');

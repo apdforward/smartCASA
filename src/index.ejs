@@ -35,31 +35,10 @@
   <body>
     <div class="navigation">
       <div class="logo">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 0 55.6 55.6"
-        >
-          <path fill="#fff" d="M6.4 17.2h42.9v37.5H6.4z" />
-          <path fill="#fff" d="M6.1 1.2h26.4v20H6.1z" />
-          <image
-            width="22.9"
-            height="17.7"
-            x="26.7"
-            y="-23.7"
-            preserveAspectRatio="none"
-            transform="matrix(.69385 .72012 -.62684 .77915 0 0)"
-            xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAVCAYAAAC33pUlAAAABHNCSVQICAgIfAhkiAAAADJJREFU SIntzTENACAAxMBCcID/DYnsj4sPQ8/AjSSh48xSBICZmZmZmZnZz9kCdum6D9wwBdPhx1IhAAAA AElFTkSuQmCC"
-          />
-          <path
-            fill="#010002"
-            d="M50.3 17.9a2 2 0 0 0-.2-.5v-.1a2 2 0 0 0-.4-.5L33.5.6a2 2 0 0 0-.5-.3 2 2 0 0 0-1-.3H7.3a2 2 0 0 0-2 2v51.6c0 1.1 1 2 2 2h41a2 2 0 0 0 2-2V18.3v-.4zm-3.3-.6L33.8 17V4.1l6.2 6.3zm-39.2 36l.1-50.8 23.9-.2-.3 15.6c0 1.1.5 1.4 1.6 1.5l14.9.2-.5 33.4z"
-          />
-          <path
-            fill="#00acc1"
-            d="M10.4 49.7h9V15h-9zM22.2 49.8h9V36.5h-9zM34.2 49.8h9V26.7h-9z"
-          />
-        </svg>
+        <img
+          src="<%= require('../static/img/svg/logo.svg') %>"
+          alt="smart casa logo"
+        />
       </div>
       <a href="/" class="navigation__title" aria-label="link to page">
         smartCASA
@@ -108,11 +87,42 @@
 
           <div class="compliance__chart">
             <svg><g></g></svg>
+            <svg class="legend" height="100px">
+              <g>
+                <rect
+                  class="legend-item green"
+                  width="20px"
+                  height="20px"
+                  x="0"
+                  y="0"
+                ></rect>
+                <text x="22" y="16">Compliance</text>
+                <rect
+                  class="legend-item blue"
+                  width="20px"
+                  height="20px"
+                  x="0"
+                  y="30"
+                ></rect>
+                <text x="22" y="46">Not Yet Due/Not Measured</text>
+                <rect
+                  class="legend-item red"
+                  width="20px"
+                  height="20px"
+                  x="0"
+                  y="60"
+                ></rect>
+                <text x="22" y="76">Non-Compliance</text>
+              </g>
+            </svg>
           </div>
           <div class="compliance__detail">
             <h3 class="report-title"></h3>
             <div class="report-pages"></div>
             <div class="report-data"></div>
+            <h3>APD Forward Compliance</h3>
+            <h3 class="apdf-compliance"></h3>
+            <h3>Independent Monitor Compliance Table</h3>
             <ul class="compliance-list">
               <li class="compliance-list__item"></li>
               <li class="compliance-list__item"></li>
@@ -134,6 +144,7 @@
           </table>
         </div>
       </div>
+      <div class="chart-tooltip"></div>
       <div class="js-modal modal">
         <div class="js-modal__body modal__body">
           <h2 class="modal-title">Welcome to smartCASA</h2>
@@ -194,10 +205,13 @@
     ></script>
     <script>
       Sentry.init({
-        dsn: 'https://b7c67c111d834a39a1eb96417f76616b@sentry.io/1411397'
+        dsn: '<%= htmlWebpackPlugin.options.sentryDns %>'
       });
     </script>
-    <script src="./bundle.js"></script>
+    <script
+      type="text/javascript"
+      src="<%= htmlWebpackPlugin.files.js %>"
+    ></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
       feather.replace();

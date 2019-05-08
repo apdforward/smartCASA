@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "build-index": "node build-lunr-idx.js",
-    "start:dev": "webpack-dev-server --mode=development",
+    "start:dev": "FOO=Russ webpack-dev-server --mode=development",
     "build": "yarn run build-index && webpack",
     "clean": "if [ -d build ]; then rm -rf build; fi",
     "move": "cp index.html build && cp style.css build && cp favicon.ico build && cp lunr-index.json build && cp dist/bundle.js build",
@@ -26,7 +26,9 @@
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "file-loader": "^3.0.1",
     "follow-redirects": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
     "prettier": "^1.15.3",
     "prettier-eslint": "^8.8.2",
     "regenerator-runtime": "^0.13.1",
