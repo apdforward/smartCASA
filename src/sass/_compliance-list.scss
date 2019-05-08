@@ -1,0 +1,61 @@
+%compliance-text {
+  padding: 1px 4px;
+  font-weight: 600;
+}
+
+%compliance-text-in-compliance {
+  @extend %compliance-text;
+  color: $compliance;
+  border: $compliance 0.5px solid;
+}
+
+%compliance-text-not-in-compliance {
+  @extend %compliance-text;
+  color: $non-compliance;
+  border: $non-compliance-light 0.5px solid;
+}
+
+%compliance-text-other {
+  @extend %compliance-text;
+  color: $compliance-other;
+  border: $compliance-other-light 0.5px solid;
+}
+
+.js-compliance-summary-title {
+  display: inline;
+}
+
+.js-compliance-summary {
+  display: inline;
+}
+
+.compliance-summary--in-compliance {
+  @extend %compliance-text-in-compliance;
+}
+
+.compliance-summary--non-compliance {
+  @extend %compliance-text-not-in-compliance;
+}
+
+.compliance-summary--not-measured {
+  @extend %compliance-text-other;
+}
+
+.compliance-list__item {
+  margin: 10px 0;
+}
+
+.compliance-list__item--in-compliance {
+  display: inline;
+  @extend %compliance-text-in-compliance;
+}
+
+.compliance-list__item--not-in-compliance {
+  display: inline;
+  @extend %compliance-text-not-in-compliance;
+}
+
+.compliance-list__item--other {
+  display: inline;
+  @extend %compliance-text-other;
+}

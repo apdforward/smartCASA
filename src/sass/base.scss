@@ -1,6 +1,12 @@
+@import 'variables';
+@import 'navigation';
+@import 'chart';
+@import 'paragraph';
+@import 'compliance-list';
+
 * {
   font-family: 'Oxygen', sans-serif;
-  color: #212121;
+  color: $charcoal;
 }
 
 html,
@@ -19,59 +25,6 @@ h4 {
 
 h3 {
   margin-top: 5px;
-}
-
-.navigation {
-  background-color: #00acc1;
-  height: 60px;
-  line-height: 60px;
-  box-shadow: 0px 1px 3px #aaa;
-}
-
-.navigation__title {
-  float: left;
-  text-decoration: none;
-  color: black;
-  padding: 0px 5px;
-  font-size: 2rem;
-}
-
-.logo {
-  float: left;
-  padding: 10px 0px 10px 25px;
-  height: 40px;
-  width: 40px;
-}
-
-.paragraph-select {
-  float: right;
-  padding: 0px 30px;
-  margin-right: 30px;
-}
-
-select {
-  border: 0;
-  margin: 0 auto;
-  outline: none;
-  background-color: white;
-  height: 30px;
-  min-width: 150px;
-}
-
-.filter-btn {
-  font-size: 1.2rem;
-  line-height: 65px;
-  cursor: pointer;
-  height: 100%;
-  padding: 0 35px;
-}
-
-.filter-btn:hover {
-  background-color: #24d0e5;
-}
-
-.filter-btn--active {
-  background-color: #24d0e5;
 }
 
 .container {
@@ -97,24 +50,6 @@ select {
   float: right;
 }
 
-.filter-panel {
-  z-index: 3;
-  position: absolute;
-  background-color: white;
-  width: 100%;
-  overflow: hidden;
-  height: 0px;
-  -webkit-transition: height 0.4s ease-in-out;
-  -moz-transition: height 0.4s ease-in-out;
-  -o-transition: height 0.4s ease-in-out;
-  transition: height 0.4s ease-in-out;
-  box-shadow: 1px 1px 3px #aaa;
-}
-
-.filter-panel--visible {
-  height: 250px;
-}
-
 .paragraph-list {
   height: 0px;
   max-width: 500px;
@@ -125,8 +60,8 @@ select {
   margin-right: 30px;
   top: 44px;
   z-index: 4;
-  background-color: #eee;
-  box-shadow: 0px 1px 3px #aaa;
+  background-color: $white;
+  box-shadow: 0px 1px 3px $shadow;
   -webkit-transition: height 0.2s ease-in-out;
   -moz-transition: height 0.2s ease-in-out;
   -o-transition: height 0.2s ease-in-out;
@@ -143,15 +78,15 @@ select {
 }
 
 .paragraph-select:hover {
-  background-color: #24d0e5;
+  background-color: $light-turquoise;
 }
 
 .paragraph-select--active {
-  background-color: #24d0e5;
+  background-color: $light-turquoise;
 }
 
 .paragraph-list li {
-  background-color: #eee;
+  background-color: $shadow;
   overflow: hidden;
   padding: 0px 10px;
   vertical-align: center;
@@ -164,7 +99,7 @@ select {
 }
 
 .paragraph-list li:hover {
-  background-color: #aaa;
+  background-color: $shadow;
 }
 .paragraph-select--active .paragraph-list li {
   height: 36px;
@@ -188,93 +123,58 @@ select {
   width: 50%;
 }
 
-.paragraph {
-  box-shadow: 1px 1px 3px #aaa;
-  padding: 0px 15px 70px;
-  margin-bottom: 50px;
-  position: relative;
-}
-
-.paragraph__title {
-  margin: 0;
-  padding: 15px 0px 15px 0px;
-}
-
-.paragraph__body {
-  cursor: default;
-  line-height: 1.5rem;
-}
-
-.paragraph__body br {
-  line-height: 2rem;
-}
-
-.copy-btn {
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  background-color: #007c91;
-  box-shadow: 3px 3px 4px #aaa;
-  width: 50px;
-  height: 50px;
-  line-height: 60px;
-  text-align: center;
-  border-radius: 50%;
-  transition: 0.3s;
-}
-
-.feather-clipboard {
-  stroke: #fff;
-}
-
-.search-icon-container {
+.right-nav {
   float: right;
+}
+
+.search-icon {
+  position: relative;
+  top: 26px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-image: url('../../static/search.svg');
+  background-repeat: no-repeat;
+  display: inline-block;
   padding: 5px 10px 0px 0px;
 }
 
 .topic-search {
-  float: right;
   height: 30px;
   width: 220px;
   margin-top: 12px;
   border: 0;
   outline: 0;
   background: transparent;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid $black;
   font-size: 1.2rem;
   margin-right: 10px;
 }
 
 .topic-search::placeholder {
   font-size: 0.9rem;
-  color: #333;
+  color: $charcoal;
   opacity: 1;
 }
 
 .topic-search:-ms-input-placeholder {
-  color: #333;
-  font-size: 0.9rem;
-}
-
-.topic-search::-ms-input-placeholder {
-  color: #333;
+  color: $charcoal;
   font-size: 0.9rem;
 }
 
 .copy-btn--clicked {
-  background-color: #006a7f;
-  box-shadow: 2px 2px 3px #aaa;
+  background-color: $dark-turquoise;
+  box-shadow: 2px 2px 3px $shadow;
 }
 
 .paragraph__term {
-  background-color: #fff;
+  background-color: $white;
   padding: 2px 5px;
-  border: 1px solid #222;
+  border: 1px solid $shadow;
   position: fixed;
   max-width: 450px;
   z-index: 9;
-  box-shadow: 2px 2px 3px #999;
+  box-shadow: 2px 2px 3px $shadow;
 }
 
 .paragraph__term--show {
@@ -296,7 +196,7 @@ select {
   left: 10px;
   bottom: 10px;
   background-color: #777;
-  color: #fff;
+  color: $white;
   width: 17px;
   height: 17px;
   line-height: 17px;
@@ -307,7 +207,7 @@ select {
 
 .help:hover {
   background-color: #888;
-  box-shadow: 1px 1px 2px #aaa;
+  box-shadow: 1px 1px 2px $shadow;
 }
 
 .message-box {
@@ -315,10 +215,10 @@ select {
   width: 66%;
   position: absolute;
   z-index: 1;
-  background-color: #eee;
+  background-color: $white;
   border: 1px solid #ddd;
-  box-shadow: 1px 1px 2px #aaa;
-  color: black;
+  box-shadow: 1px 1px 2px $shadow;
+  color: $black;
   transition: opacity 0.3s linear;
 }
 
@@ -334,7 +234,7 @@ select {
 
 .compliance {
   position: relative;
-  box-shadow: 1px 1px 3px #aaa;
+  box-shadow: 1px 1px 3px $shadow;
   padding: 0px 15px 70px;
 }
 
@@ -345,7 +245,7 @@ select {
 .no-compliance {
   text-align: center;
   position: relative;
-  box-shadow: 1px 1px 3px #aaa;
+  box-shadow: 1px 1px 3px $shadow;
   padding: 70px 15px 70px;
 }
 
@@ -368,7 +268,7 @@ select {
 }
 
 .underline--active {
-  fill: #24d0e5;
+  fill: $light-turquoise;
 }
 
 .report-title {
@@ -381,37 +281,9 @@ select {
   min-height: 200px;
 }
 
-.compliance-list__item {
-  margin: 10px 0;
-}
-
-.compliance-list__item--in-compliance {
-  display: inline;
-  color: #4d7d17;
-  border: #679731 0.5px solid; /* 10% lighter from text*/
-  padding: 1px 4px;
-  font-weight: 600;
-}
-
-.compliance-list__item--not-in-compliance {
-  display: inline;
-  color: #bb5202;
-  border: #d56c1c 0.5px solid; /* 10% lighter from text*/
-  padding: 1px 4px;
-  font-weight: 600;
-}
-
-.compliance-list__item--other {
-  display: inline;
-  color: #575757;
-  border: #717171 0.5px solid; /* 10% lighter from text*/
-  padding: 1px 4px;
-  font-weight: 600;
-}
-
 .term {
   cursor: pointer;
-  text-decoration: underline dotted #007c91;
+  text-decoration: underline dotted $dark-turquoise;
 }
 
 .snack {
@@ -422,7 +294,7 @@ select {
   height: 30px;
   padding: 15px;
   width: 280px;
-  color: white;
+  color: $white;
   background-color: #333;
   line-height: 30px;
   opacity: 0.7;
@@ -433,66 +305,11 @@ select {
 }
 
 .snack--hidden {
-  background-color: #fff;
+  background-color: $white;
 }
 
 .snack--visible {
   transform: none;
-}
-
-.axis {
-  stroke: #000;
-  stroke-width: 1px;
-  fill: none;
-}
-
-.background {
-  fill: #f9f9f9;
-}
-
-.chart-tooltip {
-  position: absolute;
-  text-align: center;
-  padding: 5px;
-  font-size: 12px;
-  background: white;
-  border: 0px;
-  box-shadow: 1px 1px 3px #333;
-  pointer-events: none;
-  opacity: 0;
-  will-change: opacity;
-  transition: opacity 0.2s ease-in;
-}
-
-.legend-item.green {
-  fill: #66a61e;
-}
-
-.legend-item.red {
-  fill: #d95f02;
-}
-.legend-item.blue {
-  fill: blue;
-}
-
-.chart-tooltip--visible {
-  opacity: 0.93;
-}
-
-.bar {
-  cursor: pointer;
-}
-
-.bar--zero {
-  fill: blue;
-}
-
-.bar--positive {
-  fill: #66a61e;
-}
-
-.bar--negative {
-  fill: #d95f02;
 }
 
 .about {
@@ -514,7 +331,7 @@ select {
 }
 
 .modal__background {
-  background-color: #333;
+  background-color: $shadow;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -536,8 +353,8 @@ select {
   align-items: center;
   flex-direction: column;
   position: absolute;
-  background-color: #fff;
-  box-shadow: 2px 2px 5px #333;
+  background-color: $white;
+  box-shadow: 2px 2px 5px $shadow;
   padding: 20px;
   opacity: 0;
   z-index: 2;
@@ -558,8 +375,8 @@ select {
   cursor: pointer;
   border: none;
   text-align: center;
-  color: #000;
-  background-color: #00acc1;
+  color: $black;
+  background-color: $turquoise;
 }
 
 .modal-title {
@@ -569,6 +386,17 @@ select {
 
 .compliance-table {
   display: none;
+}
+
+.github-link {
+  width: 24px;
+  height: 28px;
+  padding-bottom: 12px;
+  background-image: url('../../static/github.svg');
+  background-position: 0px 14px;
+
+  background-repeat: no-repeat;
+  display: inline-block;
 }
 
 @media screen and (max-width: 800px) {
@@ -585,7 +413,7 @@ select {
     width: 95%;
   }
 
-  .search-icon-container {
+  .search-icon {
     display: none;
   }
 
@@ -672,7 +500,7 @@ select {
     display: block;
     height: 0.7em;
     width: 100%;
-    background: white;
+    background: $white;
   }
 
   .compliance__detail {

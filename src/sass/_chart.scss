@@ -1,0 +1,54 @@
+.axis {
+  stroke: $black;
+  stroke-width: 1px;
+  fill: none;
+}
+
+.background {
+  fill: $light-grey;
+}
+
+.chart-tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 5px;
+  font-size: 12px;
+  background: $white;
+  border: 0px;
+  box-shadow: 1px 1px 3px $shadow;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.2s ease-in;
+}
+
+.legend-item.green {
+  fill: $bar-positive;
+}
+
+.legend-item.red {
+  fill: $bar-negative;
+}
+.legend-item.blue {
+  fill: $bar-blue;
+}
+
+.chart-tooltip--visible {
+  opacity: 0.93;
+}
+
+.bar {
+  cursor: pointer;
+}
+
+.bar--zero {
+  fill: $bar-blue;
+}
+
+.bar--positive {
+  fill: $bar-positive;
+}
+
+.bar--negative {
+  fill: $bar-negative;
+}

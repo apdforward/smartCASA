@@ -1,4 +1,4 @@
-import { parseDate } from './utils';
+import { parseDate, calculateComplianceSummary, calculateScore } from './utils';
 
 class ComplianceChart {
   constructor(complianceList) {
@@ -59,7 +59,16 @@ class ComplianceChart {
 
   drawBars() {
     const barWidth = this.width / this.data.length - 10;
-    const imrs = calculateScores(this.data);
+    const imrs = this.data.map(imr => {
+      const complianceSummary = calculateComplianceSummary(imr);
+      const score = calculateScore(imr);
+      return {
+        imr: imr,
+        complianceSummary: complianceSummary,
+        score: score / 3
+      };
+    });
+
     const frag = document.createDocumentFragment();
     let x = 10;
     for (const imr of imrs) {
@@ -96,7 +105,7 @@ class ComplianceChart {
         clearTimeout(this.tooltipTimeout);
         this.tooltipTimeout = setTimeout(() => {
           this.tooltip.classList.add('chart-tooltip--visible');
-          this.tooltip.innerHTML = `${imr.apdfScore}`;
+          this.tooltip.innerHTML = `${imr.complianceSummary}`;
           this.tooltip.style.left = `${e.pageX}px`;
           this.tooltip.style.top = `${e.pageY - 100}px`;
         }, 800);
@@ -195,43 +204,6 @@ class ComplianceChart {
       noComplianceElem.classList.remove('no-compliance--hidden');
     }
   }
-}
-
-function calculateScores(data) {
-  const scores = data.map(imr => {
-    let score = 0;
-    let apdfScore = 'Not measured/Not yet due';
-    if (imr.primaryCompliance == 'Not In Compliance') {
-      score = -3;
-      apdfScore = 'Primary Non-compliance';
-    } else if (imr.primaryCompliance == 'In Compliance') {
-      if (imr.secondaryCompliance == 'Not In Compliance') {
-        score = -2;
-        apdfScore = 'Secondary Non-compliance';
-      } else if (imr.secondaryCompliance == 'In Compliance') {
-        if (imr.operationalCompliance == 'In Compliance') {
-          score = 3;
-          apdfScore = 'Opertational Compliance';
-        } else if (imr.operationalCompliance == 'Not In Compliance') {
-          score = -1;
-          apdfScore = 'Opertational Non-compliance';
-        } else {
-          score = 2;
-          apdfScore = 'Secondary Compliance';
-        }
-      } else {
-        score = 1;
-        apdfScore = 'Primary Compliance';
-      }
-    }
-    return {
-      imr: imr,
-      apdfScore: apdfScore,
-      score: score / 3
-    };
-  });
-
-  return scores;
 }
 
 export default ComplianceChart;

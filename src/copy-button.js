@@ -32,4 +32,4 @@ class CopyButton {
   }
 }
 
-new CopyButton();
+export default CopyButton;

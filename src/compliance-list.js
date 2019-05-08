@@ -1,11 +1,11 @@
 import { Term } from './glossary';
-import { parseDate } from './utils';
+import { parseDate, calculateComplianceSummary, calculateScore } from './utils';
 class ComplianceList {
   constructor() {
     this.title = document.querySelector('.report-title');
     this.pages = document.querySelector('.report-pages');
     this.reportData = document.querySelector('.report-data');
-    this.apdfCompliance = document.querySelector('.apdf-compliance');
+    this.complianceSummary = document.querySelector('.js-compliance-summary');
     this.primaryCompliance = document.querySelector(
       '.compliance-list li:nth-child(1)'
     );
@@ -19,7 +19,7 @@ class ComplianceList {
   }
 
   update(data) {
-    this.apdfCompliance.innerHTML = '';
+    this.complianceSummary.innerHTML = '';
     while (this.pages.firstChild) {
       this.pages.removeChild(this.pages.firstChild);
     }
@@ -34,29 +34,44 @@ class ComplianceList {
         this.operationalCompliance.firstChild
       );
     }
+
     this.reportData.innerHTML = '';
     this.reportData.innerHTML = `<b>Publication Date:</b> ${parseDate(
       data.report.publishDate
     )}  <br/><b>Monitoring Period:</b> ${parseDate(
       data.report.periodBegin
     )} - ${parseDate(data.report.periodEnd)}`;
-    this.primaryCompliance.classList.remove(
-      'compliance-list__item--not-in-compliance'
+
+    this.complianceSummary.classList.remove(
+      'compliance-summary--in-compliance',
+      'compliance-summary--non-compliance',
+      'compliance-summary--not-measured'
     );
+
+    const complianceSummaries = {
+      3: 'compliance-summary--in-compliance',
+      2: 'compliance-summary--in-compliance',
+      1: 'compliance-summary--in-compliance',
+      0: 'compliance-summary--not-measured',
+      '-1': 'compliance-summary--non-compliance',
+      '-2': 'compliance-summary--non-compliance',
+      '-3': 'compliance-summary--non-compliance'
+    };
+
     this.primaryCompliance.classList.remove(
-      'compliance-list__item--in-compliance'
+      'compliance-list__item--not-in-compliance',
+      'compliance-list__item--in-compliance',
+      'compliance-list__item--other'
     );
     this.secondaryCompliance.classList.remove(
-      'compliance-list__item--not-in-compliance'
-    );
-    this.secondaryCompliance.classList.remove(
-      'compliance-list__item--in-compliance'
-    );
-    this.operationalCompliance.classList.remove(
-      'compliance-list__item--not-in-compliance'
+      'compliance-list__item--not-in-compliance',
+      'compliance-list__item--in-compliance',
+      'compliance-list__item--other'
     );
     this.operationalCompliance.classList.remove(
-      'compliance-list__item--in-compliance'
+      'compliance-list__item--not-in-compliance',
+      'compliance-list__item--in-compliance',
+      'compliance-list__item--other'
     );
     const compliances = {
       'In Compliance': 'compliance-list__item--in-compliance',
@@ -66,9 +81,15 @@ class ComplianceList {
       Pending: 'compliance-list__item--other',
       'Unable to Monitor': 'compliance-list__item--other'
     };
+
     this.title.innerHTML = `Independent Monitoring Report (IMR) - ${
       data.reportId
     }:`;
+
+    this.complianceSummary.innerHTML = calculateComplianceSummary(data);
+    this.complianceSummary.classList.add(
+      complianceSummaries[calculateScore(data)]
+    );
     let pagesText = '';
     for (const page of data.pages) {
       pagesText += page;

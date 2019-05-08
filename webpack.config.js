@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
@@ -18,16 +19,24 @@ module.exports = {
         }
       },
       {
-        test: /\.(gif|svg|jpg|png)$/,
-        loader: 'file-loader'
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
       }
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
     new HtmlWebpackPlugin({
       hash: true,
       template: './src/index.ejs',
-      sentryDns: 'https://b7c67c111d834a39a1eb96417f76616b@sentry.io/1411397',
+      sentryDns: '', // 'https://b7c67c111d834a39a1eb96417f76616b@sentry.io/1411397',
       inject: false
     })
   ],

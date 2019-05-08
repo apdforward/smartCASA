@@ -1,0 +1,36 @@
+.navigation {
+  background-color: $turquoise;
+  height: 60px;
+  line-height: 60px;
+  box-shadow: 0px 1px 3px $shadow;
+}
+
+.navigation__title {
+  float: left;
+  text-decoration: none;
+  color: $black;
+  padding: 0px 5px;
+  font-size: 2rem;
+}
+
+.logo {
+  float: left;
+  padding: 10px 0px 10px 25px;
+  height: 40px;
+  width: 40px;
+}
+
+.paragraph-select {
+  float: right;
+  padding: 0px 30px;
+  margin-right: 30px;
+}
+
+select {
+  border: 0;
+  margin: 0 auto;
+  outline: none;
+  background-color: white;
+  height: 30px;
+  min-width: 150px;
+}

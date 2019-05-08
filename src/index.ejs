@@ -12,7 +12,7 @@
       name="Description"
       content="smartCASA is an interactive web application for exploring the Albuquerque Police Department Court Approved Settlement Agreement Compliance"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css %>" />
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-135893593-1"
@@ -35,27 +35,26 @@
   <body>
     <div class="navigation">
       <div class="logo">
-        <img
-          src="<%= require('../static/img/svg/logo.svg') %>"
-          alt="smart casa logo"
-        />
+        <img src="<%= require('../static/logo.svg') %>" alt="smart casa logo" />
       </div>
       <a href="/" class="navigation__title" aria-label="link to page">
         smartCASA
       </a>
-      <div class="search-icon-container"><i data-feather="search"></i></div>
-      <input
-        type="text"
-        name="search"
-        id="search"
-        class="topic-search"
-        aria-label="term search filter"
-        placeholder="type here to filter paragraph list"
-        disabled
-      />
-      <div class="paragraph-select">
-        <span class="selected-paragraph"></span>
-        <ul class="paragraph-list"></ul>
+      <div class="right-nav">
+        <div class="search-icon"></div>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          class="topic-search"
+          aria-label="term search filter"
+          placeholder="type here to filter paragraph list"
+          disabled
+        />
+        <div class="paragraph-select">
+          <span class="selected-paragraph"></span>
+          <ul class="paragraph-list"></ul>
+        </div>
       </div>
     </div>
     <section class="container">
@@ -67,9 +66,7 @@
             class="js-paragraph__term paragraph__term paragraph__term--hidden"
           ></div>
           <div class="js-paragraph-help help">?</div>
-          <div class="js-copy-btn copy-btn">
-            <i data-feather="clipboard"></i>
-          </div>
+          <div class="js-copy-btn copy-btn"></div>
         </div>
       </div>
       <div class="container__compliance">
@@ -120,15 +117,17 @@
             <h3 class="report-title"></h3>
             <div class="report-pages"></div>
             <div class="report-data"></div>
-            <h3>APD Forward Compliance</h3>
-            <h3 class="apdf-compliance"></h3>
+            <div class="compliance-summary">
+              <h4 class="js-compliance-summary-title">Compliance Summary:</h4>
+              <div class="js-compliance-summary"></div>
+            </div>
+
             <h3>Independent Monitor Compliance Table</h3>
             <ul class="compliance-list">
               <li class="compliance-list__item"></li>
               <li class="compliance-list__item"></li>
               <li class="compliance-list__item"></li>
             </ul>
-            <div class="js-compliance-help help">?</div>
           </div>
           <table class="compliance-table">
             <thead>
@@ -194,7 +193,6 @@
           class="github-link"
           aria-label="smartCASA github page"
         >
-          <i data-feather="github"></i>
         </a>
       </div>
     </footer>
@@ -212,9 +210,5 @@
       type="text/javascript"
       src="<%= htmlWebpackPlugin.files.js %>"
     ></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-      feather.replace();
-    </script>
   </body>
 </html>

@@ -1,0 +1,35 @@
+.paragraph {
+  box-shadow: 1px 1px 3px $shadow;
+  padding: 0px 15px 70px;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.paragraph__title {
+  margin: 0;
+  padding: 15px 0px 15px 0px;
+}
+
+.paragraph__body {
+  cursor: default;
+  line-height: 1.5rem;
+}
+
+.paragraph__body br {
+  line-height: 2rem;
+}
+
+.copy-btn {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: $dark-turquoise;
+  box-shadow: 2px 2px 3px $shadow;
+  width: 50px;
+  height: 50px;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 50%;
+  transition: 0.3s;
+}
