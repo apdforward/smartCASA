@@ -8,6 +8,7 @@ class ComplianceChart {
     this.svg = document.querySelector('.compliance__chart > svg ');
     this.g = document.querySelector('.compliance__chart > svg > g');
     this.data = [];
+    this.resizeTimeout;
     this.width = width;
     this.height = 250;
     this.tooltipTimeout;
@@ -15,6 +16,14 @@ class ComplianceChart {
     this.drawChart = this.drawChart.bind(this);
     this.update = this.update.bind(this);
     this.setTitle = this.setTitle.bind(this);
+    this.onResize = this.onResize.bind(this);
+    this.addEventListeners = this.addEventListeners.bind(this);
+
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    window.addEventListener('resize', this.onResize);
   }
 
   drawChart() {
@@ -35,6 +44,20 @@ class ComplianceChart {
     axis.setAttribute('x2', this.width);
     axis.setAttribute('y2', '100');
     this.g.appendChild(axis);
+    const dashes = [0.33, 0.66, 1.33, 1.67];
+    for (const dash of dashes) {
+      const dashAxis = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'line'
+      );
+      const y = dash * 100;
+      dashAxis.classList.add('dash-axis');
+      dashAxis.setAttribute('x1', '0');
+      dashAxis.setAttribute('y1', `${y}`);
+      dashAxis.setAttribute('x2', this.width);
+      dashAxis.setAttribute('y2', `${y}`);
+      this.g.appendChild(dashAxis);
+    }
     const minAxis = document.createElementNS(
       'http://www.w3.org/2000/svg',
       'line'
@@ -170,7 +193,14 @@ class ComplianceChart {
     }
   }
 
-  onResize() {}
+  onResize() {
+    clearTimeout(this.resizeTimeout);
+    this.resizeTimeout = setTimeout(() => {
+      const width = document.querySelector('.compliance').offsetWidth - 30;
+      this.width = width;
+      this.update(this.data);
+    }, 100);
+  }
 
   setTitle() {
     const dateRange = document.querySelector('.compliance-dates');

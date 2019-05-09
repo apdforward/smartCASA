@@ -4,6 +4,13 @@
   fill: none;
 }
 
+.dash-axis {
+  stroke: $shadow;
+  stroke-dasharray: 10;
+  stroke-width: 1px;
+  fill: none;
+}
+
 .background {
   fill: $light-grey;
 }
