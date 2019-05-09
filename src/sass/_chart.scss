@@ -15,6 +15,10 @@
   fill: $light-grey;
 }
 
+.label {
+  cursor: pointer;
+}
+
 .chart-tooltip {
   position: absolute;
   text-align: center;

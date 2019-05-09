@@ -6,11 +6,11 @@
   "license": "Apache-2.0",
   "scripts": {
     "build-index": "node build-lunr-idx.js",
-    "start:dev": "FOO=Russ webpack-dev-server --mode=development",
-    "build": "yarn run build-index && webpack",
-    "clean": "if [ -d build ]; then rm -rf build; fi",
-    "move": "cp index.html build && cp style.css build && cp favicon.ico build && cp lunr-index.json build && cp dist/bundle.js build",
-    "deploy": "yarn run clean && yarn run build && mkdir build && ls && yarn run move"
+    "start:dev": "webpack-dev-server --mode=development",
+    "build": "yarn run build-index && webpack --mode=production",
+    "clean": "if [ -d dist ]; then rm -rf dist; fi",
+    "move": "cp favicon.ico dist && cp lunr-index.json dist && cp dist/bundle.js build",
+    "deploy": "yarn run clean && yarn run build && yarn run move"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

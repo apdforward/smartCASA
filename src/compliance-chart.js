@@ -161,6 +161,7 @@ class ComplianceChart {
       label.classList.add(`label-${imr.reportId}`);
       x += barWidth + 10;
       label.setAttribute('y', this.height - 20);
+      label.style.fontSize = this.width / 35;
       label.addEventListener('click', () => {
         this.complianceList.update(imr);
         const active = document.querySelector('.underline--active');
