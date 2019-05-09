@@ -21,23 +21,30 @@
   border: $compliance-other-light 0.5px solid;
 }
 
-.js-compliance-summary-title {
+.compliance-summary {
+  padding: 15px 0;
+}
+
+.compliance-summary__title {
+}
+
+.js-compliance-summary__title {
   display: inline;
 }
 
-.js-compliance-summary {
+.js-compliance-summary__value {
   display: inline;
 }
 
-.compliance-summary--in-compliance {
+.compliance-summary__value--in-compliance {
   @extend %compliance-text-in-compliance;
 }
 
-.compliance-summary--non-compliance {
+.compliance-summary__value--non-compliance {
   @extend %compliance-text-not-in-compliance;
 }
 
-.compliance-summary--not-measured {
+.compliance-summary__value--not-measured {
   @extend %compliance-text-other;
 }
 

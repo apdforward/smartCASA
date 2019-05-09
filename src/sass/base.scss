@@ -162,11 +162,6 @@ h3 {
   font-size: 0.9rem;
 }
 
-.copy-btn--clicked {
-  background-color: $dark-turquoise;
-  box-shadow: 2px 2px 3px $shadow;
-}
-
 .paragraph__term {
   background-color: $white;
   padding: 2px 5px;
@@ -274,6 +269,7 @@ h3 {
 .report-title {
   margin: 0;
   padding: 10px 0px 10px 0px;
+  display: inline-block;
 }
 
 .compliance__chart {

@@ -32,4 +32,13 @@
   text-align: center;
   border-radius: 50%;
   transition: 0.3s;
+  background-image: url('../../static/copy-white-48.svg');
+  background-size: 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.copy-btn--clicked {
+  background-color: darken($dark-turquoise, 5%);
+  box-shadow: 1px 1px 2px $shadow;
 }

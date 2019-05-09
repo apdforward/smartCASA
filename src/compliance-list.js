@@ -5,7 +5,9 @@ class ComplianceList {
     this.title = document.querySelector('.report-title');
     this.pages = document.querySelector('.report-pages');
     this.reportData = document.querySelector('.report-data');
-    this.complianceSummary = document.querySelector('.js-compliance-summary');
+    this.complianceSummary = document.querySelector(
+      '.js-compliance-summary__value'
+    );
     this.primaryCompliance = document.querySelector(
       '.compliance-list li:nth-child(1)'
     );
@@ -34,7 +36,7 @@ class ComplianceList {
         this.operationalCompliance.firstChild
       );
     }
-
+    this.title.innerHTML = '';
     this.reportData.innerHTML = '';
     this.reportData.innerHTML = `<b>Publication Date:</b> ${parseDate(
       data.report.publishDate
@@ -43,19 +45,19 @@ class ComplianceList {
     )} - ${parseDate(data.report.periodEnd)}`;
 
     this.complianceSummary.classList.remove(
-      'compliance-summary--in-compliance',
-      'compliance-summary--non-compliance',
-      'compliance-summary--not-measured'
+      'compliance-summary__value--in-compliance',
+      'compliance-summary__value--non-compliance',
+      'compliance-summary__value--not-measured'
     );
 
     const complianceSummaries = {
-      3: 'compliance-summary--in-compliance',
-      2: 'compliance-summary--in-compliance',
-      1: 'compliance-summary--in-compliance',
-      0: 'compliance-summary--not-measured',
-      '-1': 'compliance-summary--non-compliance',
-      '-2': 'compliance-summary--non-compliance',
-      '-3': 'compliance-summary--non-compliance'
+      3: 'compliance-summary__value--in-compliance',
+      2: 'compliance-summary__value--in-compliance',
+      1: 'compliance-summary__value--in-compliance',
+      0: 'compliance-summary__value--not-measured',
+      '-1': 'compliance-summary__value--non-compliance',
+      '-2': 'compliance-summary__value--non-compliance',
+      '-3': 'compliance-summary__value--non-compliance'
     };
 
     this.primaryCompliance.classList.remove(
@@ -81,11 +83,13 @@ class ComplianceList {
       Pending: 'compliance-list__item--other',
       'Unable to Monitor': 'compliance-list__item--other'
     };
-
+    this.title.href = `https://s3-us-west-2.amazonaws.com/smartcasa-docs/IMR-${
+      data.reportId
+    }.pdf`;
     this.title.innerHTML = `Independent Monitoring Report (IMR) - ${
       data.reportId
     }:`;
-
+    this.title.title = `Download IMR ${data.reportId} PDF`;
     this.complianceSummary.innerHTML = calculateComplianceSummary(data);
     this.complianceSummary.classList.add(
       complianceSummaries[calculateScore(data)]
@@ -110,12 +114,10 @@ class ComplianceList {
     pagesAnchor.setAttribute('target', '_blank');
     pagesAnchor.setAttribute('rel', 'noopener');
     const correctedPage = data.pages[0] + imrPageOffset[data.reportId];
-    pagesAnchor.setAttribute(
-      'href',
-      `https://s3-us-west-2.amazonaws.com/smartcasa-docs/IMR-${
-        data.reportId
-      }.pdf#page=${correctedPage}`
-    );
+    pagesAnchor.href = `https://s3-us-west-2.amazonaws.com/smartcasa-docs/IMR-${
+      data.reportId
+    }.pdf#page=${correctedPage}`;
+
     const pages = document.createTextNode(`Pages ${pagesText}`);
     pagesAnchor.appendChild(pages);
     this.pages.appendChild(pagesAnchor);
