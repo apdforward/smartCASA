@@ -34,7 +34,7 @@ h3 {
   display: flex;
   top: 20px;
   min-height: 100vh;
-  margin: 15px 15px 0 15px;
+  margin: 15px 0 0 0;
 }
 
 .footer {
@@ -411,6 +411,19 @@ h3 {
 }
 
 @media screen and (max-width: 800px) {
+  .paragraph {
+    box-shadow: none;
+    margin: 0 20px;
+  }
+
+  .about {
+    display: none;
+  }
+
+  .compliance {
+    box-shadow: none;
+  }
+
   .paragraph-select {
     height: 60px;
     padding: 0;

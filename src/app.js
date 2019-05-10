@@ -48,7 +48,11 @@ import ComplianceTable from './compliance-table';
       cookie = true;
     }
   }
-  if (!cookie) {
+  const width =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+  if (!cookie && width > 800) {
     modal.open();
     document.cookie = `visited=True; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
   }
