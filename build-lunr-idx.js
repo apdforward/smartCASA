@@ -19,7 +19,7 @@ http.get('http://api.smartcasa.org/paragraphs', res => {
         this.add(paragraph);
       }
     });
-    fs.writeFile('./lunr-index.json', JSON.stringify(idx), () => {
+    fs.writeFile('./dist/lunr-index.json', JSON.stringify(idx), () => {
       console.log('done');
     });
   });

@@ -61,7 +61,6 @@ function calculateComplianceSummary(imr) {
       complianceSummary = 'Primary Compliance';
     }
   }
-  console.log(complianceSummary);
   return complianceSummary;
 }
 
