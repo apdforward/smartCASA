@@ -12,6 +12,14 @@
       name="Description"
       content="smartCASA is an interactive web application for exploring the Albuquerque Police Department Court Approved Settlement Agreement Compliance"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oxygen"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css %>" />
     <script
       async
@@ -61,13 +69,25 @@
     <section class="container">
       <div class="container__paragraph">
         <div class="paragraph">
+          <div class="paragraph__nav">
+            <button
+              class="js-previous-paragraph paragraph-btn-previous paragraph-btn"
+            >
+              <span>Previous</span>
+            </button>
+            <button class="js-next-paragraph paragraph-btn-next paragraph-btn">
+              <span>Next</span>
+            </button>
+          </div>
           <h1 class="js-paragraph__title paragraph__title"></h1>
           <div class="js-paragraph__body paragraph__body"></div>
           <div
             class="js-paragraph__term paragraph__term paragraph__term--hidden"
           ></div>
+
           <div class="js-paragraph-help help">?</div>
-          <div class="js-copy-btn copy-btn"></div>
+
+          <button class="js-copy-btn copy-btn"></button>
         </div>
       </div>
       <div class="container__compliance">

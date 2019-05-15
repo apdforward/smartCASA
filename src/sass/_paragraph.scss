@@ -1,12 +1,17 @@
 .paragraph {
   box-shadow: 1px 1px 3px $shadow;
-  padding: 0px 15px 70px;
+  padding: 40px 15px 70px;
   margin-bottom: 50px;
   position: relative;
+  background-color: $white;
 }
 
 .paragraph__title {
+  text-align: center;
   margin: 0;
+  font-size: 1.2rem;
+  font-weight: 1000;
+  margin: 15px 0 0 0;
   padding: 15px 0px 15px 0px;
 }
 
@@ -19,7 +24,76 @@
   line-height: 2rem;
 }
 
+.paragraph__nav {
+  position: absolute;
+  display: inline-block;
+  top: 15px;
+  margin-bottom: 30px;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+}
+
+.paragraph-btn {
+  display: inline-block;
+  position: relative;
+  border: none;
+  background-color: $dark-turquoise;
+
+  padding: 10px 15px;
+  width: 110px;
+  height: 36px;
+
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 2px 2px 3px $shadow;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  span {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+}
+
+.paragraph-btn-previous {
+  float: left;
+  span {
+    &::before {
+      content: ' \003c\003c\2002';
+    }
+  }
+}
+
+.paragraph-btn-next {
+  margin-right: 30px;
+  float: right;
+  span {
+    &::after {
+      content: '\2002\003E\003E';
+    }
+  }
+}
+
+.paragraph-btn--clicked {
+  background-color: darken($dark-turquoise, 5%);
+
+  &:hover {
+    box-shadow: 1px 1px 2px $shadow;
+  }
+}
+
+.paragraph-btn--hidden {
+  visibility: hidden;
+}
+
 .copy-btn {
+  border: none;
   cursor: pointer;
   position: absolute;
   right: 10px;
@@ -36,6 +110,10 @@
   background-size: 32px;
   background-position: center;
   background-repeat: no-repeat;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 .copy-btn--clicked {

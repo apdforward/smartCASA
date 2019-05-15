@@ -45,15 +45,15 @@ function calculateScore(imr) {
 function calculateComplianceSummary(imr) {
   let complianceSummary = 'Not measured/Not yet due';
   if (imr.primaryCompliance == 'Not In Compliance') {
-    complianceSummary = 'Primary Non-compliance';
+    complianceSummary = 'Primary Non-Compliance';
   } else if (imr.primaryCompliance == 'In Compliance') {
     if (imr.secondaryCompliance == 'Not In Compliance') {
-      complianceSummary = 'Secondary Non-compliance';
+      complianceSummary = 'Secondary Non-Compliance';
     } else if (imr.secondaryCompliance == 'In Compliance') {
       if (imr.operationalCompliance == 'In Compliance') {
         complianceSummary = 'Opertational Compliance';
       } else if (imr.operationalCompliance == 'Not In Compliance') {
-        complianceSummary = 'Opertational Non-compliance';
+        complianceSummary = 'Opertational Non-Compliance';
       } else {
         complianceSummary = 'Secondary Compliance';
       }

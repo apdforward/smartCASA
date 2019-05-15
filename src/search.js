@@ -3,8 +3,8 @@
 import lunr from 'lunr';
 
 class Search {
-  constructor(paragraphSelect) {
-    this.paragraphSelect = paragraphSelect;
+  constructor(subscriber) {
+    this.subscriber = subscriber;
     this.input = document.querySelector('.topic-search');
     this.idx;
     this.timeout;
@@ -22,13 +22,10 @@ class Search {
   inputOnChange() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
-      this.paragraphSelect.filter = [];
-      this.paragraphSelect.removeFilter();
       if (this.input.value.length > 2) {
         const refs = this.idx.search(this.input.value);
         const filteredParagraphs = refs.map(p => parseInt(p.ref));
-        this.paragraphSelect.filter = filteredParagraphs;
-        this.paragraphSelect.filterList();
+        this.subscriber.publish('paragraph-filter', filteredParagraphs);
       }
     }, 800);
   }

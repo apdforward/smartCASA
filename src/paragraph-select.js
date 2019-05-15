@@ -1,18 +1,8 @@
 class ParagraphItem {
-  constructor(
-    data,
-    api,
-    paragraph,
-    complianceList,
-    complianceChart,
-    complianceTable
-  ) {
+  constructor(data, api, subscriber) {
     this.elem = document.createElement('li');
     this.api = api;
-    this.paragraph = paragraph;
-    this.complianceList = complianceList;
-    this.complianceChart = complianceChart;
-    this.complianceTable = complianceTable;
+    this.subscriber = subscriber;
     this.data = data;
     this.elem.innerHTML = `${this.data.paragraphNumber} - ${
       this.data.paragraphTitle
@@ -38,14 +28,13 @@ class ParagraphItem {
     paragraphSelect.innerHTML = `&para; ${this.data.paragraphNumber} - ${
       this.data.paragraphTitle
     } &nbsp;&#9660;`;
-    this.paragraph.update(this.data);
+    this.subscriber.publish('paragraph-change', this.data);
     this.api.getComplianceByParagraph(this.data.id).then(data => {
       this.api.getAllReports().then(reports => {
         for (let i = 0; i < data.length; i++) {
           data[i].report = reports[i];
         }
-        this.complianceChart.update(data);
-        this.complianceTable.update(data);
+        this.subscriber.publish('report-list-change', data);
         document.querySelector(
           '.title-paragraph-number'
         ).innerHTML = this.data.paragraphNumber;
@@ -55,18 +44,9 @@ class ParagraphItem {
 }
 
 class ParagraphSelect {
-  constructor(
-    api,
-    paragraph,
-    complianceList,
-    complianceChart,
-    complianceTable
-  ) {
-    this.complianceList = complianceList;
-    this.complianceChart = complianceChart;
-    this.complianceTable = complianceTable;
+  constructor(api, subscriber) {
+    this.subscriber = subscriber;
     this.api = api;
-    this.paragraph = paragraph;
     this.timeout;
     this.active = false;
     this.disabled = false;
@@ -76,6 +56,7 @@ class ParagraphSelect {
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.filterList = this.filterList.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
+    this.setSelected = this.setSelected.bind(this);
     this.paragraphs = [];
     this.filter = [];
     this.addEventListeners();
@@ -85,14 +66,7 @@ class ParagraphSelect {
     const frag = document.createDocumentFragment();
     data.sort((a, b) => (a.paragraphNumber > b.paragraphNumber ? 1 : -1)); // api should return sorted but this is just an addtional check
     for (const obj of data) {
-      const paragraphItem = new ParagraphItem(
-        obj,
-        this.api,
-        this.paragraph,
-        this.complianceList,
-        this.complianceChart,
-        this.complianceTable
-      );
+      const paragraphItem = new ParagraphItem(obj, this.api, this.subscriber);
       this.paragraphs.push(paragraphItem);
       frag.appendChild(paragraphItem.elem);
     }
@@ -122,12 +96,22 @@ class ParagraphSelect {
   }
 
   removeFilter() {
+    this.filter = [];
     this.paragraphs.map(paragraph => {
       paragraph.show();
     });
   }
 
-  filterList() {
+  setSelected(paragraph) {
+    const paragraphSelect = document.querySelector('.selected-paragraph');
+    paragraphSelect.innerHTML = `&para; ${paragraph.paragraphNumber} - ${
+      paragraph.paragraphTitle
+    } &nbsp;&#9660;`;
+  }
+
+  filterList(data) {
+    this.removeFilter();
+    this.filter = data;
     const filterSet = new Set(this.filter);
     for (const paragraph of this.paragraphs) {
       if (!filterSet.has(paragraph.data.id)) {

@@ -6,7 +6,7 @@ class Help {
     this.timeOut;
     this.active = false;
     const boxElem = document.createElement('div');
-    this.messageBox = this.elem.parentNode.appendChild(boxElem);
+    this.messageBox = this.elem.parentNode.parentNode.appendChild(boxElem);
     this.messageBox.classList.add('message-box');
     this.messageBox.classList.add('message-box--hidden');
     this.messageBox.appendChild(this.message);

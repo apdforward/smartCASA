@@ -1,8 +1,8 @@
 import { parseDate, calculateComplianceSummary, calculateScore } from './utils';
 
 class ComplianceChart {
-  constructor(complianceList) {
-    this.complianceList = complianceList;
+  constructor(subscriber) {
+    this.subscriber = subscriber;
     const parent = document.querySelector('.compliance__chart');
     const { width } = parent.getBoundingClientRect();
     this.svg = document.querySelector('.compliance__chart > svg ');
@@ -116,7 +116,7 @@ class ComplianceChart {
       bar.setAttribute('y', y);
       bar.setAttribute('height', Math.abs(imr.score) * 100 || 10);
       bar.addEventListener('click', () => {
-        this.complianceList.update(imr.imr);
+        this.subscriber.publish('compliance-change', imr.imr);
         const active = document.querySelector('.underline--active');
         active.classList.remove('underline--active');
         const underline = document.querySelector(
@@ -161,9 +161,9 @@ class ComplianceChart {
       label.classList.add(`label-${imr.reportId}`);
       x += barWidth + 10;
       label.setAttribute('y', this.height - 20);
-      label.style.fontSize = this.width / 35;
+      label.style.fontSize = `${Math.min(this.width / 35, 16)}px`;
       label.addEventListener('click', () => {
-        this.complianceList.update(imr);
+        this.subscriber.publish('compliance-change', imr.imr);
         const active = document.querySelector('.underline--active');
         active.classList.remove('underline--active');
         const underline = document.querySelector(`.underline-${imr.reportId}`);
@@ -200,7 +200,7 @@ class ComplianceChart {
       const width = document.querySelector('.compliance').offsetWidth - 30;
       this.width = width;
       this.update(this.data);
-    }, 100);
+    }, 150);
   }
 
   setTitle() {
@@ -229,7 +229,7 @@ class ComplianceChart {
       );
       active.classList.add('underline--active');
       this.drawBars();
-      this.complianceList.update(this.data.slice(-1)[0]);
+      this.subscriber.publish('compliance-change', this.data.slice(-1)[0]);
     } else {
       complianceElem.classList.add('compliance--hidden');
       noComplianceElem.classList.remove('no-compliance--hidden');
