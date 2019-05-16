@@ -41,7 +41,7 @@
   background-color: $dark-turquoise;
 
   padding: 10px 15px;
-  width: 110px;
+  width: 120px;
   height: 36px;
 
   cursor: pointer;
@@ -65,7 +65,7 @@
   float: left;
   span {
     &::before {
-      content: ' \003c\003c\2002';
+      content: '\003c\2002';
     }
   }
 }
@@ -75,7 +75,7 @@
   float: right;
   span {
     &::after {
-      content: '\2002\003E\003E';
+      content: '\2002\003E';
     }
   }
 }
