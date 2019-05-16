@@ -150,6 +150,7 @@ class ComplianceChart {
     const frag = document.createDocumentFragment();
     let x = barWidth / 2;
     let underlineX = 0;
+    console.log(this.data);
     for (const imr of this.data) {
       const label = document.createElementNS(
         'http://www.w3.org/2000/svg',
@@ -163,7 +164,7 @@ class ComplianceChart {
       label.setAttribute('y', this.height - 20);
       label.style.fontSize = `${Math.min(this.width / 35, 16)}px`;
       label.addEventListener('click', () => {
-        this.subscriber.publish('compliance-change', imr.imr);
+        this.subscriber.publish('compliance-change', imr);
         const active = document.querySelector('.underline--active');
         active.classList.remove('underline--active');
         const underline = document.querySelector(`.underline-${imr.reportId}`);
