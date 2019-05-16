@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const pkg = require('./package.json');
 
 module.exports = {
   mode: 'production',
@@ -59,6 +60,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: true,
       template: './src/index.ejs',
+      version: pkg.version,
       sentryDns: 'https://b7c67c111d834a39a1eb96417f76616b@sentry.io/1411397',
       inject: false,
       files: {

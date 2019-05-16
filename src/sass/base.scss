@@ -48,6 +48,10 @@ h3 {
 .footer > span {
   float: left;
 }
+
+.footer > span.version {
+  margin: 0 10px;
+}
 .footer-right {
   float: right;
 }
