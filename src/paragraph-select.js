@@ -111,13 +111,15 @@ class ParagraphSelect {
 
   filterList(data) {
     this.removeFilter();
-    this.filter = data;
-    const filterSet = new Set(this.filter);
-    for (const paragraph of this.paragraphs) {
-      if (!filterSet.has(paragraph.data.id)) {
-        paragraph.hide();
-      } else {
-        paragraph.show();
+    if (data) {
+      this.filter = data;
+      const filterSet = new Set(this.filter);
+      for (const paragraph of this.paragraphs) {
+        if (!filterSet.has(paragraph.data.id)) {
+          paragraph.hide();
+        } else {
+          paragraph.show();
+        }
       }
     }
   }

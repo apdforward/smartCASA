@@ -22,6 +22,7 @@ class Search {
   inputOnChange() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
+      this.subscriber.publish('remove-filter');
       if (this.input.value.length > 2) {
         const refs = this.idx.search(this.input.value);
         const filteredParagraphs = refs.map(p => parseInt(p.ref));

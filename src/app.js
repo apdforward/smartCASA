@@ -58,6 +58,7 @@ import { IncrementButton, DecrementButton } from './paragraph-button';
   subscriber.subscribe('paragraph-dec', incrementBtn.update);
   subscriber.subscribe('report-list-change', complianceChart.update);
   subscriber.subscribe('report-list-change', complianceTable.update);
+  subscriber.subscribe('remove-filter', paragraphSelect.removeFilter);
 
   let cookie = false;
   const cookies = document.cookie.split('; ');
