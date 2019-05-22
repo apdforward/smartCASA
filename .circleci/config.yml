@@ -2,30 +2,30 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/dist
+    working_directory: .
     docker:
       - image: 'circleci/node'
     steps:
       - attach_workspace:
-          at: ~/dist
+          at: .
       - checkout
       - run: yarn install && yarn run deploy
       - run:
           name: show dist contents
-          command: ls ~/dist
+          command: ls ./dist
       - persist_to_workspace:
           root: .
           paths: dist
   deploy-dev:
-    working_directory: ~/dist
+    working_directory: .
     docker:
       - image: 'circleci/python'
     steps:
       - attach_workspace:
-          at: ~/dist
+          at: .
       - run:
           name: show dist contents
-          command: ls ~/dist
+          command: ls ./dist
       - run:
           name: install awscli
           command: sudo pip install awscli
@@ -42,12 +42,12 @@ jobs:
           name: set cache-control for index
           command: aws s3 cp s3://dev.smartcasa.org/index.html s3://dev.smartcasa.org/index.html --metadata '{"cache-control":"public, must-revalidate, proxy-revalidate, max-age=0"}'
   deploy-prod:
-    working_directory: ~/dist
+    working_directory: .
     docker:
       - image: 'circleci/python'
     steps:
       - attach_workspace:
-          at: ~/dist
+          at: ./dist
       - run:
           name: install awscli
           command: sudo pip install awscli
