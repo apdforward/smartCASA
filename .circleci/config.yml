@@ -2,12 +2,12 @@ version: 2
 
 jobs:
   build:
-    working_directory: .
+    working_directory: ~/workspace
     docker:
       - image: 'circleci/node'
     steps:
       - attach_workspace:
-          at: .
+          at: ~/workspace
       - checkout
       - run: yarn install && yarn run deploy
       - run:
@@ -22,7 +22,7 @@ jobs:
       - image: 'circleci/python'
     steps:
       - attach_workspace:
-          at: .
+          at: ~/workspace
       - run:
           name: show dist contents
           command: ls ./dist
@@ -47,7 +47,7 @@ jobs:
       - image: 'circleci/python'
     steps:
       - attach_workspace:
-          at: ./dist
+          at: ~/workspace
       - run:
           name: install awscli
           command: sudo pip install awscli
