@@ -25,7 +25,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: sync
-          command: aws s3 sync dist s3://smartcasa.org --acl public-read
+          command: aws s3 sync dist s3://dev.smartcasa.org --acl public-read
       - run:
           name: set cache-control
           command: aws s3 cp s3://dev.smartcasa.org/ s3://dev.smartcasa.org/ --recursive --include "*" --exclude "*.json" --exclude "*.html" --metadata '{"cache-control":"max-age=31536000"}'
