@@ -217,11 +217,11 @@ class ComplianceChart {
     }
     const noComplianceElem = document.querySelector('.no-compliance');
     const complianceElem = document.querySelector('.compliance');
+    this.data = data;
     if (data.length > 0) {
       noComplianceElem.classList.add('no-compliance--hidden');
       complianceElem.classList.remove('compliance--hidden');
       this.drawChart();
-      this.data = data;
       this.setTitle();
       this.drawLabels();
       const active = document.querySelector(
