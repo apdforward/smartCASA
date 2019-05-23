@@ -11,13 +11,16 @@ jobs:
       - checkout
       - run: yarn install && yarn run deploy
       - run:
+          name: show workspace contents
+          command: ls ~/workspace
+      - run:
           name: show dist contents
-          command: ls ./dist
+          command: ls ~/workspace/dist
       - persist_to_workspace:
           root: .
           paths: dist
   deploy-dev:
-    working_directory: .
+    working_directory: ~/workspace
     docker:
       - image: 'circleci/python'
     steps:
@@ -25,7 +28,7 @@ jobs:
           at: ~/workspace
       - run:
           name: show dist contents
-          command: ls ./dist
+          command: ls ~/workspace/dist
       - run:
           name: install awscli
           command: sudo pip install awscli
@@ -42,7 +45,7 @@ jobs:
           name: set cache-control for index
           command: aws s3 cp s3://dev.smartcasa.org/index.html s3://dev.smartcasa.org/index.html --metadata '{"cache-control":"public, must-revalidate, proxy-revalidate, max-age=0"}'
   deploy-prod:
-    working_directory: .
+    working_directory: ~/workspace
     docker:
       - image: 'circleci/python'
     steps:
