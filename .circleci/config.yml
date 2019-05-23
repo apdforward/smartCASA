@@ -9,6 +9,10 @@ jobs:
       - attach_workspace:
           at: ~/workspace
       - checkout
+      - run: echo $PWD
+      - run:
+          name: show workspace contents
+          command: ls -al  ~/workspace
       - run: yarn install && yarn run deploy
       - run:
           name: show workspace contents
