@@ -12,10 +12,10 @@ jobs:
       - run: yarn install && yarn run deploy
       - run:
           name: show workspace contents
-          command: ls ~/workspace
+          command: ls -al  ~/workspace
       - run:
           name: show dist contents
-          command: ls ~/workspace/dist
+          command: ls -al ~/workspace/dist
       - persist_to_workspace:
           root: .
           paths: dist

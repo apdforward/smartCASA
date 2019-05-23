@@ -9,7 +9,7 @@
     "start:dev": "webpack-dev-server --mode=development",
     "build": "yarn run build-index && webpack --mode=production",
     "clean": "if [ -d dist ]; then rm -rf dist; fi",
-    "move": "cp favicon.ico dist",
+    "move": "cp {favicon.ico,lunr-index.json} dist",
     "deploy": "yarn run clean && yarn run build && yarn run move"
   },
   "devDependencies": {
