@@ -369,6 +369,10 @@ h3 {
     box-shadow: none;
   }
 
+  .no-compliance {
+    box-shadow: none;
+  }
+
   .paragraph-select {
     height: 60px;
     padding: 0;
@@ -409,6 +413,10 @@ h3 {
   html,
   body {
     background-color: white;
+  }
+
+  .paragraph-btn {
+    display: none;
   }
 
   .compliance-table {
