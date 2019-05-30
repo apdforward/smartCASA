@@ -81,9 +81,6 @@
           </div>
           <h1 class="js-paragraph__title paragraph__title"></h1>
           <div class="js-paragraph__body paragraph__body"></div>
-          <div
-            class="js-paragraph__term paragraph__term paragraph__term--hidden"
-          ></div>
 
           <div class="js-paragraph-help help">?</div>
 
@@ -152,9 +149,15 @@
             <div class="report-pages"></div>
             <h3>Independent Monitor Compliance Table</h3>
             <ul class="compliance-list">
-              <li class="compliance-list__item"></li>
-              <li class="compliance-list__item"></li>
-              <li class="compliance-list__item"></li>
+              <li class="compliance-list__item">
+                <div class="js-primary-compliance"></div>
+              </li>
+              <li class="compliance-list__item">
+                <div class="js-secondary-compliance"></div>
+              </li>
+              <li class="compliance-list__item">
+                <div class="js-operational-compliance"></div>
+              </li>
             </ul>
           </div>
           <table class="compliance-table">
@@ -201,6 +204,10 @@
         <div class="js-modal__background modal__background"></div>
       </div>
     </section>
+    <div class="js-term-hint term-hint term-hint--hidden">
+      <div class="js-term-hint__body term-hint__body"></div>
+      <div class="js-term-hint__close term-hint__close">x</div>
+    </div>
     <footer class="footer">
       <span>
         Built by

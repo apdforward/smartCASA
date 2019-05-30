@@ -1,10 +1,11 @@
 import { Term } from './glossary';
 import { parseDate, calculateComplianceSummary, calculateScore } from './utils';
 class ComplianceList {
-  constructor() {
+  constructor(subscriber) {
     this.title = document.querySelector('.report-title');
     this.pages = document.querySelector('.report-pages');
     this.reportData = document.querySelector('.report-data');
+    this.subscriber = subscriber;
     this.complianceSummary = document.querySelector(
       '.js-compliance-summary__value'
     );
@@ -18,6 +19,79 @@ class ComplianceList {
       '.compliance-list li:nth-child(3)'
     );
     this.update = this.update.bind(this);
+    this.buildList = this.buildList.bind(this);
+    this.buildList();
+  }
+
+  buildList() {
+    const primaryComplianceTerm = new Term(
+      {
+        text: 'Primary Compliance',
+        term: 'Primary Compliance',
+        definition: `Primary compliance is the “policy” part of
+      compliance. To attain primary compliance, APD must have in
+      place operational policies and procedures designed to guide
+      officers, supervisors and managers in the performance of the tasks
+      outlined in the CASA. As a matter of course, the policies must be
+      reflective of the requirements of the CASA; must comply with
+      national standards for effective policing policy; and must
+      demonstrate trainable and evaluable policy components.`
+      },
+      this.subscriber
+    );
+    const primaryFrag = document.createDocumentFragment();
+    primaryFrag.appendChild(primaryComplianceTerm.elem);
+    primaryFrag.appendChild(document.createTextNode(': '));
+    this.primaryCompliance.insertBefore(
+      primaryFrag,
+      document.querySelector('.js-primary-compliance')
+    );
+    const secondaryComplianceTerm = new Term(
+      {
+        text: 'Secondary Compliance',
+        term: 'Secondary Compliance',
+        definition: `Secondary compliance is attained by
+      implementing supervisory, managerial and executive practices
+      designed to (and effective in) implementing the policy as written,
+      e.g., sergeants routinely enforce the policies among field
+      personnel and are held accountable by managerial and executive
+      levels of the department for doing so. By definition, there should
+      be operational artifacts (reports, disciplinary records, remands to
+      retraining, follow-up, and even revisions to policies if necessary,
+      indicating that the policies developed in the first stage of
+      compliance are known to, followed by, and important to
+      supervisory and managerial levels of the agency.`
+      },
+      this.subscriber
+    );
+    const secondaryFrag = document.createDocumentFragment();
+    secondaryFrag.appendChild(secondaryComplianceTerm.elem);
+    secondaryFrag.appendChild(document.createTextNode(': '));
+    this.secondaryCompliance.insertBefore(
+      secondaryFrag,
+      document.querySelector('.js-secondary-compliance')
+    );
+    const operationalComplianceTerm = new Term(
+      {
+        text: 'Operational Compliance',
+        term: 'Operational Compliance',
+        definition: `Operational compliance is attained at
+      the point that the adherence to policies is apparent in the day-today 
+      operation of the agency e.g., line personnel are routinely held
+      accountable for compliance, not by the monitoring staff, but by
+      their sergeants, and sergeants are routinely held accountable for
+      compliance by their lieutenants and command staff. In other
+      words, the APD “owns” and enforces its policies.`
+      },
+      this.subscriber
+    );
+    const operationalFrag = document.createDocumentFragment();
+    operationalFrag.appendChild(operationalComplianceTerm.elem);
+    operationalFrag.appendChild(document.createTextNode(': '));
+    this.operationalCompliance.insertBefore(
+      operationalFrag,
+      document.querySelector('.js-operational-compliance')
+    );
   }
 
   update(data) {
@@ -25,17 +99,7 @@ class ComplianceList {
     while (this.pages.firstChild) {
       this.pages.removeChild(this.pages.firstChild);
     }
-    while (this.primaryCompliance.firstChild) {
-      this.primaryCompliance.removeChild(this.primaryCompliance.firstChild);
-    }
-    while (this.secondaryCompliance.firstChild) {
-      this.secondaryCompliance.removeChild(this.secondaryCompliance.firstChild);
-    }
-    while (this.operationalCompliance.firstChild) {
-      this.operationalCompliance.removeChild(
-        this.operationalCompliance.firstChild
-      );
-    }
+
     this.title.innerHTML = '';
     this.reportData.innerHTML = '';
     this.reportData.innerHTML = `<b>Publication Date:</b> ${parseDate(
@@ -121,75 +185,67 @@ class ComplianceList {
     const pages = document.createTextNode(`Pages ${pagesText}`);
     pagesAnchor.appendChild(pages);
     this.pages.appendChild(pagesAnchor);
-    const primaryComplianceTerm = new Term({
-      text: 'Primary Compliance',
-      term: 'Primary Compliance',
-      definition: `Primary compliance is the “policy” part of
-      compliance. To attain primary compliance, APD must have in
-      place operational policies and procedures designed to guide
-      officers, supervisors and managers in the performance of the tasks
-      outlined in the CASA. As a matter of course, the policies must be
-      reflective of the requirements of the CASA; must comply with
-      national standards for effective policing policy; and must
-      demonstrate trainable and evaluable policy components.`
-    });
+
     const primaryComplianceStatus = document.createTextNode(
       `${data.primaryCompliance}`
     );
-    const primaryComplianceContainer = document.createElement('div');
+    const primaryComplianceContainer = document.querySelector(
+      '.js-primary-compliance'
+    );
+    primaryComplianceContainer.classList.remove(
+      'compliance-list__item--in-compliance',
+      'compliance-list__item--not-in-compliance',
+      'compliance-list__item--other'
+    );
+    while (primaryComplianceContainer.firstChild) {
+      primaryComplianceContainer.removeChild(
+        primaryComplianceContainer.firstChild
+      );
+    }
     const primaryClass = compliances[data.primaryCompliance];
     primaryComplianceContainer.appendChild(primaryComplianceStatus);
     primaryComplianceContainer.classList.add(primaryClass);
-    this.primaryCompliance.appendChild(primaryComplianceTerm.elem);
-    this.primaryCompliance.appendChild(document.createTextNode(': '));
-    this.primaryCompliance.appendChild(primaryComplianceContainer);
 
-    const secondaryComplianceTerm = new Term({
-      text: 'Secondary Compliance',
-      term: 'Secondary Compliance',
-      definition: `Secondary compliance is attained by
-      implementing supervisory, managerial and executive practices
-      designed to (and effective in) implementing the policy as written,
-      e.g., sergeants routinely enforce the policies among field
-      personnel and are held accountable by managerial and executive
-      levels of the department for doing so. By definition, there should
-      be operational artifacts (reports, disciplinary records, remands to
-      retraining, follow-up, and even revisions to policies if necessary,
-      indicating that the policies developed in the first stage of
-      compliance are known to, followed by, and important to
-      supervisory and managerial levels of the agency.`
-    });
     const secondaryComplianceStatus = document.createTextNode(
       `${data.secondaryCompliance}`
     );
-    const secondaryComplianceContainer = document.createElement('div');
+    const secondaryComplianceContainer = document.querySelector(
+      '.js-secondary-compliance'
+    );
+    secondaryComplianceContainer.classList.remove(
+      'compliance-list__item--in-compliance',
+      'compliance-list__item--not-in-compliance',
+      'compliance-list__item--other'
+    );
+    while (secondaryComplianceContainer.firstChild) {
+      secondaryComplianceContainer.removeChild(
+        secondaryComplianceContainer.firstChild
+      );
+    }
     const secondaryClass = compliances[data.secondaryCompliance];
     secondaryComplianceContainer.appendChild(secondaryComplianceStatus);
     secondaryComplianceContainer.classList.add(secondaryClass);
-    this.secondaryCompliance.appendChild(secondaryComplianceTerm.elem);
-    this.secondaryCompliance.appendChild(document.createTextNode(': '));
-    this.secondaryCompliance.appendChild(secondaryComplianceContainer);
-    const operationalComplianceTerm = new Term({
-      text: 'Operational Compliance',
-      term: 'Operational Compliance',
-      definition: `Operational compliance is attained at
-      the point that the adherence to policies is apparent in the day-today 
-      operation of the agency e.g., line personnel are routinely held
-      accountable for compliance, not by the monitoring staff, but by
-      their sergeants, and sergeants are routinely held accountable for
-      compliance by their lieutenants and command staff. In other
-      words, the APD “owns” and enforces its policies.`
-    });
+
     const operationalComplianceStatus = document.createTextNode(
       `${data.operationalCompliance}`
     );
-    const operationalComplianceContainer = document.createElement('div');
+    const operationalComplianceContainer = document.querySelector(
+      '.js-operational-compliance'
+    );
+
+    operationalComplianceContainer.classList.remove(
+      'compliance-list__item--in-compliance',
+      'compliance-list__item--not-in-compliance',
+      'compliance-list__item--other'
+    );
+    while (operationalComplianceContainer.firstChild) {
+      operationalComplianceContainer.removeChild(
+        operationalComplianceContainer.firstChild
+      );
+    }
     const operationalClass = compliances[data.operationalCompliance];
     operationalComplianceContainer.appendChild(operationalComplianceStatus);
     operationalComplianceContainer.classList.add(operationalClass);
-    this.operationalCompliance.appendChild(operationalComplianceTerm.elem);
-    this.operationalCompliance.appendChild(document.createTextNode(': '));
-    this.operationalCompliance.appendChild(operationalComplianceContainer);
   }
 }
 

@@ -1,9 +1,10 @@
 import { replaceTerms } from './glossary';
 
 class Paragraph {
-  constructor() {
+  constructor(subscriber) {
     this.title = document.querySelector('.js-paragraph__title');
     this.body = document.querySelector('.js-paragraph__body');
+    this.subscriber = subscriber;
     this.update = this.update.bind(this);
   }
 
@@ -14,7 +15,7 @@ class Paragraph {
     this.title.innerHTML = `${data.paragraphNumber} - ${data.paragraphTitle}`;
     const paragraphText = document.createTextNode(data.paragraphText);
     this.body.appendChild(paragraphText);
-    replaceTerms(this.body);
+    replaceTerms(this.body, this.subscriber);
     addLineBreaks(this.body);
   }
 }

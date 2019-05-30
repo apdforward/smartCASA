@@ -306,10 +306,42 @@ const words = [
   }
 ];
 
+class TermHint {
+  constructor() {
+    this.elem = document.querySelector('.js-term-hint');
+    this.body = document.querySelector('.js-term-hint__body');
+    this.close = document.querySelector('.js-term-hint__close');
+
+    this.dismiss = this.dismiss.bind(this);
+    this.show = this.show.bind(this);
+
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    this.close.addEventListener('click', this.dismiss);
+  }
+
+  show(data) {
+    this.elem.classList.remove('term-hint--hidden');
+    this.elem.classList.add('term-hint--show');
+    this.body.innerText = data.definition;
+    const { height } = window.getComputedStyle(this.body);
+    this.elem.style.left = `${data.pageX + 10}px`;
+    this.elem.style.top = `${data.pageY - parseInt(height) - 30}px`;
+  }
+
+  dismiss() {
+    this.elem.classList.remove('term-hint--show');
+    this.elem.classList.add('term-hint--hidden');
+  }
+}
+
 class Term {
-  constructor(props) {
+  constructor(props, subscriber) {
     this.props = props;
     this.elem = document.createElement('span');
+    this.subscriber = subscriber;
     this.definition =
       props.definition ||
       words
@@ -317,7 +349,7 @@ class Term {
         .reduce((acc, obj) => `${obj.term} ${obj.definition}`, '');
     this.elem.innerText = props.text;
     this.elem.classList.add('term');
-    this.timeout;
+
     this.showDefinition = this.showDefinition.bind(this);
     this.addEventListeners();
   }
@@ -327,22 +359,17 @@ class Term {
   }
 
   showDefinition(e) {
-    clearTimeout(this.timeout);
-    const termHint = document.querySelector('.js-paragraph__term');
-    termHint.classList.remove('paragraph__term--hidden');
-    termHint.classList.add('paragraph__term--show');
-    termHint.innerHTML = this.definition;
-    const style = window.getComputedStyle(termHint);
-    termHint.style.left = `${e.clientX + 10}px`;
-    termHint.style.top = `${e.clientY - parseInt(style.height) - 20}px`;
-    this.timeout = setTimeout(() => {
-      termHint.classList.remove('paragraph__term--show');
-      termHint.classList.add('paragraph__term--hidden');
-    }, 4000);
+    const data = {
+      pageX: e.pageX,
+      pageY: e.pageY,
+      definition: this.definition
+    };
+    console.log(data);
+    this.subscriber.publish('show-def', data);
   }
 }
 
-function replaceTerms(elem) {
+function replaceTerms(elem, subscriber) {
   let termIdxs = [];
   const ranges = [];
   for (const term of words) {
@@ -368,12 +395,12 @@ function replaceTerms(elem) {
     const { text, term, idx } = termIdxs[i];
     const replacement = elem.firstChild.splitText(idx);
     replacement.nodeValue = replacement.nodeValue.slice(term.length);
-    const termDef = new Term({ text: text, term: term });
+    const termDef = new Term({ text: text, term: term }, subscriber);
     elem.insertBefore(termDef.elem, replacement);
   }
 }
 
 const propComparator = key => (a, b) =>
-  a.idx == b.idx ? 0 : a.idx < b.idx ? 1 : -1;
+  a[key] == b[key] ? 0 : a[key] < b[key] ? 1 : -1;
 
-export { replaceTerms, Term };
+export { replaceTerms, Term, TermHint };

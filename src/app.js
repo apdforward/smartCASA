@@ -1,7 +1,7 @@
 import CopyButton from './copy-button';
 import Help from './help';
 import API from './api-client';
-import { Term } from './glossary';
+import { Term, TermHint } from './glossary';
 import Modal from './modal';
 import ParagraphSelect from './paragraph-select';
 import Paragraph from './paragraph';
@@ -15,23 +15,27 @@ import { IncrementButton, DecrementButton } from './paragraph-button';
 {
   const api = new API({ URL: 'https://api.smartcasa.org', lang: 'en-US' });
   const subscriber = new PubSub();
-  const paragraph = new Paragraph();
-  const complianceList = new ComplianceList();
+  const paragraph = new Paragraph(subscriber);
+  const complianceList = new ComplianceList(subscriber);
   const complianceChart = new ComplianceChart(subscriber);
   const complianceTable = new ComplianceTable();
   const incrementBtn = new IncrementButton(api, subscriber);
   const decrementBtn = new DecrementButton(api, subscriber);
   const modal = new Modal();
+  const termHint = new TermHint();
 
   const paragraphSelect = new ParagraphSelect(api, subscriber);
 
   new Search(subscriber);
   subscriber.subscribe('paragraph-filter', paragraphSelect.filterList);
   new CopyButton();
-  const helpTerm = new Term({
-    text: 'term',
-    definition: 'an example definition'
-  });
+  const helpTerm = new Term(
+    {
+      text: 'term',
+      definition: 'an example definition'
+    },
+    subscriber
+  );
   helpTerm.elem.style.zIndex = 99999;
   const helpFrag = document.createDocumentFragment();
   const t = document.createTextNode('Click any ');
@@ -59,6 +63,7 @@ import { IncrementButton, DecrementButton } from './paragraph-button';
   subscriber.subscribe('report-list-change', complianceChart.update);
   subscriber.subscribe('report-list-change', complianceTable.update);
   subscriber.subscribe('remove-filter', paragraphSelect.removeFilter);
+  subscriber.subscribe('show-def', termHint.show);
 
   let cookie = false;
   const cookies = document.cookie.split('; ');
