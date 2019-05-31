@@ -8,7 +8,7 @@ smartCASA is an interactive web application for exploring the City of Albuquerqu
 
 ### Development
 
-smartCASA is a single page application using JavaScript (up to ES8 syntax).
+smartCASA is a single page JavaScript application (up to ES8 syntax).
 
 Dependencies are managed using [yarn](https://yarnpkg.com/en/)
 
