@@ -24,10 +24,6 @@ class ParagraphItem {
   }
 
   selectParagraph() {
-    const paragraphSelect = document.querySelector('.selected-paragraph');
-    paragraphSelect.innerHTML = `&para; ${this.data.paragraphNumber} - ${
-      this.data.paragraphTitle
-    } &nbsp;&#9660;`;
     this.subscriber.publish('paragraph-change', this.data);
     this.api.getComplianceByParagraph(this.data.id).then(data => {
       this.api.getAllReports().then(reports => {
@@ -56,7 +52,6 @@ class ParagraphSelect {
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.filterList = this.filterList.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
-    this.setSelected = this.setSelected.bind(this);
     this.paragraphs = [];
     this.filter = [];
     this.addEventListeners();
@@ -100,13 +95,6 @@ class ParagraphSelect {
     this.paragraphs.map(paragraph => {
       paragraph.show();
     });
-  }
-
-  setSelected(paragraph) {
-    const paragraphSelect = document.querySelector('.selected-paragraph');
-    paragraphSelect.innerHTML = `&para; ${paragraph.paragraphNumber} - ${
-      paragraph.paragraphTitle
-    } &nbsp;&#9660;`;
   }
 
   filterList(data) {

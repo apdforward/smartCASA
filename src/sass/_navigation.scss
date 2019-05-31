@@ -61,10 +61,46 @@
   font-size: 0.9rem;
 }
 
+.search-results {
+  position: relative;
+  width: 230px;
+  //height: 40px;
+  //left: 990px;
+  //top: 42px;
+  //position: absolute;
+  //border-radius: 0 0 10px 10px;
+  background-color: #eee;
+  //z-index: 99;
+  visibility: visible;
+  opacity: 0.8;
+  transition: opacity 0.3s linear;
+  will-change: opacity;
+}
+
+.search-results--hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s linear;
+}
+
 .paragraph-select {
   float: right;
   padding: 0 15px 0 15px;
   cursor: pointer;
+}
+
+.select-label--hidden {
+  display: none;
+}
+
+.select-chevron {
+  display: inline-block;
+  background-image: url(../../static/hamburger.svg);
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+  background-size: 24px 24px;
+  transform: translateY(30%);
 }
 
 .paragraph-list {

@@ -49,6 +49,8 @@
         smartCASA
       </a>
       <div class="right-nav">
+        <div class="search-results search-results--hidden"></div>
+
         <div class="search-icon"></div>
         <input
           type="text"
@@ -61,7 +63,11 @@
         />
         <div class="paragraph-select">
           <div class="mobile-select"></div>
-          <span class="selected-paragraph"></span>
+          <span class="selected-paragraph">
+            <span class="search-result"></span>
+            <span class="select-label">Select a paragraph</span>
+            <div aria-hidden="true" class="select-chevron"></div>
+          </span>
           <ul class="paragraph-list"></ul>
         </div>
       </div>

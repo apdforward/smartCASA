@@ -28,14 +28,7 @@ class ComplianceList {
       {
         text: 'Primary Compliance',
         term: 'Primary Compliance',
-        definition: `Primary compliance is the “policy” part of
-      compliance. To attain primary compliance, APD must have in
-      place operational policies and procedures designed to guide
-      officers, supervisors and managers in the performance of the tasks
-      outlined in the CASA. As a matter of course, the policies must be
-      reflective of the requirements of the CASA; must comply with
-      national standards for effective policing policy; and must
-      demonstrate trainable and evaluable policy components.`
+        definition: `Primary compliance is the “policy” part of compliance. To attain primary compliance, APD must have in place operational policies and procedures designed to guide officers, supervisors and managers in the performance of the tasks outlined in the CASA. As a matter of course, the policies must be reflective of the requirements of the CASA; must comply with national standards for effective policing policy; and must demonstrate trainable and evaluable policy components.`
       },
       this.subscriber
     );
@@ -164,6 +157,7 @@ class ComplianceList {
       pagesText += ', ';
     }
     pagesText = pagesText.slice(0, -2);
+    // TODO move this to database
     const imrPageOffset = {
       1: 2,
       2: 13,
