@@ -364,7 +364,6 @@ class Term {
       pageY: e.pageY,
       definition: this.definition
     };
-    console.log(data);
     this.subscriber.publish('show-def', data);
   }
 }
