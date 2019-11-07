@@ -166,7 +166,8 @@ class ComplianceList {
       5: 2,
       6: 2,
       8: 2,
-      9: 2
+      9: 2,
+      10: 2
     };
     const pagesAnchor = document.createElement('a');
     pagesAnchor.setAttribute('target', '_blank');
