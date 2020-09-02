@@ -14,8 +14,9 @@ jobs:
           name: show dist contents
           command: ls -al ~/workspace/dist
       - persist_to_workspace:
-          root: .
-          paths: dist
+        root: ~/
+        paths:
+          - workspace/dist
   deploy-prod:
     working_directory: ~/workspace
     docker:
