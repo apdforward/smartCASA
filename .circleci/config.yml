@@ -16,31 +16,6 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: dist
-  deploy-dev:
-    working_directory: ~/workspace
-    docker:
-      - image: 'circleci/python'
-    steps:
-      - attach_workspace:
-          at: ~/workspace
-      - run:
-          name: show dist contents
-          command: ls ~/workspace/dist
-      - run:
-          name: install awscli
-          command: sudo pip install awscli
-      - run:
-          name: sync
-          command: aws s3 sync dist s3://dev.smartcasa.org --acl public-read
-      - run:
-          name: set cache-control
-          command: aws s3 cp s3://dev.smartcasa.org/ s3://dev.smartcasa.org/ --recursive --include "*" --exclude "*.json" --exclude "*.html" --metadata '{"cache-control":"max-age=31536000"}'
-      - run:
-          name: set cache-control for search index
-          command: aws s3 cp s3://dev.smartcasa.org/lunr-index.json s3://dev.smartcasa.org/lunr-index.json --metadata '{"cache-control":"max-age=3600"}'
-      - run:
-          name: set cache-control for index
-          command: aws s3 cp s3://dev.smartcasa.org/index.html s3://dev.smartcasa.org/index.html --metadata '{"cache-control":"public, must-revalidate, proxy-revalidate, max-age=0"}'
   deploy-prod:
     working_directory: ~/workspace
     docker:
@@ -73,19 +48,8 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy-dev:
-          filters:
-            branches:
-              only: master
-          requires:
-            - build
-      - manual-check:
-          type: approval
-          requires:
-            - deploy-dev
+
       - deploy-prod:
           filters:
             branches:
               only: master
-          requires:
-            - manual-check
