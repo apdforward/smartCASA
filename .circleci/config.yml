@@ -15,7 +15,7 @@ jobs:
           command: ls -al ~/workspace/dist
       - persist_to_workspace:
           root: ~/
-          paths: worksapce/dist
+          paths: workspace/dist
   deploy-prod:
     working_directory: ~/workspace
     docker:
